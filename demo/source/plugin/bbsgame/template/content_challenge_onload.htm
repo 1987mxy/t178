@@ -1,0 +1,227 @@
+<style>
+.clr{clear:both;overflow:hidden;height:0;}
+a.closeBtn{position:absolute;top:10px;right:10px;display:block;width:60px;padding:4px 0;text-align:center;background:#fff;border:1px solid #85B6E2;color:#333;}
+a.closeBtn:hover{color:#fff;border:1px solid #85B6E2;background:#85B6E2;}
+
+.example{border:1px dashed #ccc;padding:40px;margin-top:10px;zoom:1;}
+.example .description{color:#85B6E2;float:left;padding:10px 20px 0 80px;font-size:20px;}
+.example .tigger{display:block;width:80px;padding:10px;text-align:center;background:#fff;border:1px solid #999;color:#333;cursor:pointer;float:left;}
+.example select{margin-top:10px;}
+.blk{width:500px;position:relative;}
+.blk .pop_head, .blk .head-right, .blk .foot, .blk .foot-right{background:url(images/pop_up_bg.png);overflow:hidden;height:4px;}
+.blk .pop_head{padding-left:4px;}
+.blk .head-right{background-position:right top;}
+.blk .foot{padding-left:4px;background-position:left bottom;_height:3px;}
+.blk .foot-right{background-position:right bottom;}
+.blk .pop_main{border-left:2px solid #85B6E2;border-right:2px solid #85B6E2;position:relative;background:#fff;}
+.blk .pop_main h2{font:bold 16px "Microsoft YaHei";padding:10px 20px 2px;color:#85B6E2;}
+.blk .pop_main ul{padding:20px;zoom:1;overflow:hidden;font-size:12px;}
+.blk .pop_main ul li{float:left;width:100px;text-align:center;line-height:30px;margin-bottom:10px;}
+.blk .pop_main ul li a{color:#333;display:block;}
+.blk .pop_main ul li a:hover{background:#85B6E2;color:#fff;font-weight:bold;font-size:14px;}
+
+
+/* 自定义样式 */
+.t5 .blk{width:700px;}
+.t5 .blk h2{color:#aaa;}
+.t5 .blk .pop_main ul li a{color:#aaa;}
+.t5 .blk .pop_head, .t5 .blk .pop_head-right, .t5 .blk .foot, .t5 .blk .foot-right{background:url(images/pop_up_bg2.png);}
+
+/**/
+* html .popup_iframe{
+	width:expression(this.previousSibling.style.width);
+	height:expression(this.previousSibling.style.height);
+}
+</style>
+<!--[IF lte IE 7]>
+<style>
+.cnt_personal, .cnt_mine,.cnt_national, .cnt_sitenal { background-position-y:80px;}
+</style>
+<![ENDIF]-->
+
+<div id="ctrl_leitai_onload" style="width:99.7%; border:1px solid #F7F7F7;">
+		<div style="margin:20px 20px 0 20px;">
+		<div class="leitai_title">
+			<ul style="display:inline-block;vertical-align: middle;">
+				<li id="leitai_all" class="$all_select"><a href="javascript:void(0);">全部擂台</a></li>
+				<li id="leitai_sitenal"><a href="javascript:void(0);">本站擂台</a></li>
+				<li id="leitai_personal"><a href="javascript:void(0);">个人擂台</a></li>
+				<li id="leitai_national"><a href="javascript:void(0);">全国擂台</a></li>
+				<li id="leitai_mine"><a href="javascript:void(0);">我的擂台</a></li>
+				<li id="leitai_partake"><a href="javascript:void(0);">我参与的擂台</a></li>				
+				<li id="leitai_take" class="{$take_select}"><a href="javascript:void(0);">发起擂台</a></li>
+			</ul>
+		</div>
+		<div class="leitai_cnt">
+			<div id="leitai_all_onload">
+				<ul style='overflow:hidden;'>
+<!--{if !empty($allPkLists)}-->
+<!--{eval $classTypes=array("1"=>"cnt_national","2"=>"cnt_sitenal","3"=>"cnt_personal");}-->
+<!--{loop $allPkLists $key $pk}-->
+<!--{eval $liclass = $classTypes[$pk[type]];}-->
+<!--{eval $credits = $pk['case']*$pk['number'];}-->
+<!--{if $pk[type]<3}-->
+					<li class="{$liclass}">
+						<div class="leitai_all_title">{$pk[name]} （结束：<b>{$pk['endtime']}</b>）
+<!--{if $pk[endtime]!='已结束'}-->
+						<a title='挑战擂台' href='plugin.php?id=bbsgame&action=game&mode=challenge&pk_id={$pk[id]}&gid={$pk[gid]}'>挑战</a>
+<!--{/if}-->
+	
+						</div>
+						<div class=" leitai_cnt_info" >
+							<a href="javascript:void(0);" onClick="return pkgameJoinChallenge($pk[id],'$pk[name]','{$pk[username]}','{$_G[uid]}');">
+								<div class="challenge_cover">
+									<p class="cover_top" style="">{$pk[desc]}</p>
+									<p class="cover_bottom" style="">挑战TA</p>
+								</div>
+								<img title='' alt="挑战{$windid}" src="{$pk[img]}" width="78" hight="78">
+							</a>
+							<p >擂主：{$pk[username]}<br>总奖金：{$credits}<br>参赛人数：{$pk[number]}<br>开始时间：{$pk['ctime']}</p>
+						</div>
+					</li>
+<!--{else}-->
+					<li class="{$liclass}">
+						<div class="leitai_all_title">{$pk[name]}（结束：<b>{$pk['endtime']}</b>）
+<!--{if $pk[endtime]!='已结束'}-->
+						<a title='挑战擂台' href='plugin.php?id=bbsgame&action=game&mode=challenge&pk_id={$pk[id]}&gid={$pk[gid]}'>挑战</a>
+<!--{/if}-->
+						</div>
+						<div class="leitai_cnt_info">
+							<a href="javascript:void(0);" onClick="return pkgameJoinChallenge($pk[id],'$pk[name]','{$pk[username]}','{$_G[uid]}');">
+								<div class="challenge_cover">
+									<p class="cover_top" style="">{$pk[desc]}</p>
+									<p class="cover_bottom" style="">挑战TA</p>
+								</div>
+								<img alt="挑战{$windid}" src="{$pk[img]}" width="78" hight="78">
+							</a>
+							<p style="">擂主：{$pk[username]}<br>总奖金：{$credits}<br>开始时间：
+							{$pk['ctime']}<br>参赛人数：{$pk['number']}<br>税率：{$pk[rate]}&nbsp;&nbsp;费用：{$pk['case']}</p>
+						</div>
+					</li>
+<!--{/if}-->
+<!--{/loop}-->
+<!--{/if}-->
+				</ul>
+				<div id="cnt_page">{$pageCss}</div>
+			</div>
+			<div id="leitai_sitenal_onload" style="display:none;"><div class='challenge_list'></div><div class='load_tag'><a onclick="return loadMore('sitenal');" href="javascript:void(0);">[加载更多]</a></div></div>
+			<div id="leitai_personal_onload" style="display:none;"><div class='challenge_list'></div><div class='load_tag'><a onclick="return loadMore('personal');" href="javascript:void(0);">[加载更多]</a></div></div>
+			<div id="leitai_national_onload" style="display:none;"><div class='challenge_list'></div><div class='load_tag'><a onclick="return loadMore('national');" href="javascript:void(0);">[加载更多]</a></div></div>
+			<div id="leitai_mine_onload" style="display:none;"><div class='challenge_list'></div><div class='load_tag'><a onclick="return loadMore('mine');" href="javascript:void(0);">[加载更多]</a></div></div>
+			<div id="leitai_partake_onload" style="display:none;">
+				<div class='partake_title'>
+					擂台规则：<p style="margin:10px;">1.所有参赛者会被扣除相应的参赛费用包括擂主擂主的创建擂台费(20)，并加到擂台总奖金中<br>
+2.总奖金的20%为税费,总奖金的10%为擂主所得（擂台创建者）。剩下的70%按{$challenge_pkerCreditPercent}
+比例分给前{$challenge_pkerCreditNum}名成功挑战者。<br>3.如果比赛结束时参加者小于3人，没收擂主的创建擂台费(20)。其他的返还给参加者。<br></p>
+				</div>
+				<div class='partake_cnt' style='position:relative;'>
+					<table width=700>
+						<tr><th>游戏名称</th><th>擂台名</th><th>擂主</th><th>擂主得分</th><th>参与人数</th><th>累计奖励</th><th>终止时间</th><th>状态</th><th>排行榜</th><th>操作</th></tr>
+<!--{if !empty($partakePkLists)}-->
+<!--{loop $partakePkLists $key $pk}-->
+						<tr><td>{$pk[gamename]}</td><td>{$pk[pkname]}</td><td>{$pk[username]}</td><td>{$pk[score]}</td><td>{$pk[number]}</td><td>{$pk[totalreward]}</td><td>{$pk[endtime]}</td>
+							<td>{$pk[status]}</td><td><button id='ele_{$pk[id]}' onclick="ckeckChallengeRanking({$pk[id]})" >查看</button></td>
+							<td><a href="plugin.php?id=bbsgame&action=game&gid=$pk[gid]&mode=challenge&pk_id={$pk[id]}">继续打擂</a></td>
+						</tr>
+<!--{/loop}-->
+<!--{/if}-->
+					</table>
+					<div class='ranking'>
+						<table style='border-collapse: collapse;'>
+							<thead>
+								<tr class="ranking_header">
+									<th>排名</th>
+									<th>用户名</th>
+									<th>得分</th>
+								</tr>
+							</thead>
+							<tbody id='raking_list'>
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="leitai_take_onload" style="display:none;">
+<!--{if !$_G[uid]}-->
+ 		<p style='text-align:center'>请先<a style='color:blue'; href='login.php'>登录</a></p>
+<!--{else}-->
+			<form action="pkgamepost.php" method="post">
+				<input type="hidden" name="action" value="challenge" />
+				<input type="hidden" name="gid" value="{$gameInfo['gid']}">
+				<input type="hidden" name="act" value="add"/>
+				<table>
+					<tr><td colspan="2">擂台规则：<div style="margin:10px;">1.所有参赛者会被扣除相应的参赛费用包括擂主擂主的创建擂台费({$pkgame_challenge_case_num}{$challenge_ctype})，并加到擂台总奖金中<br>
+2.参赛费用为{$GLOBALS[challenge_min_score]}-{$GLOBALS[challenge_max_score]}{$challenge_ctype}之间<br>3.总奖金的20%为税费,总奖金的10%为擂主所得（擂台创建者）。剩下的70%按{$challenge_pkerCreditPercent}
+比例分给前{$challenge_pkerCreditNum}名成功挑战者。<br>4.如果比赛结束时参加者小于{$challenge_pkerCreditNum}人，没收擂主的创建擂台费({$pkgame_challenge_case_num}{$challenge_ctype})。其他的返还给参加者。<br></div></td></tr>
+
+					<tr><td width="20%" align="center">擂台游戏：</td><td>
+<!--{if $_GET['gid']}-->
+						<img width="78" src="{$gameInfo[img]}" style="margin-right:10px;">{$gameInfo[name]}
+<!--{else}-->
+						<select name="gid">
+<!--{if $pkGame[0]['gid']}-->
+<!--{loop $pkGame $k $v}-->
+							<option value="{$v['gid']}">{$v['name']}</option>
+<!--{/loop}-->
+<!--{/if}-->
+						</select>
+<!--{/if}-->
+					</td></tr>
+					<tr><td align="center">擂台名称：</td><td><input name="pkname" type=""></td></tr>
+					<tr><td align="center">参赛费用：</td><td><input name="case" type="">$challenge_ctype</td></tr>
+					<tr><td align="center">结束时间：</td><td><input name="endtime" type="" onfocus="HS_setDate(this)"></td></tr>
+					<tr><td align="center">想说的话：</td><td><textarea name="desc"></textarea></td></tr>
+					<tr><td colspan="2" align="center"><input type="submit" value="提交"></td></tr>
+				</table>
+			</form>
+<!--{/if}-->
+			</div>
+		</div>
+		</div>
+	</div>
+
+<script>
+var jq = jQuery.noConflict();
+function ckeckChallengeRanking(pk_id) {
+	if (pk_id) {
+		jq.ajax({url:'plugin.php?id=bbsgame&action=check&c_r=1&s=0&p=10&AJAX=1&pid='+pk_id+"&nowtime="+new Date().getTime(),type:"get",dataType:'json',success:function(data){toggleRankingDialog(data)}});
+	}
+	else{
+		alert('擂台标示为空');
+	}
+}
+
+function toggleRankingDialog(data){
+	var append = '';
+	if (data.ret) {
+		var list = data.list;
+		for (var i in list) {
+			var j = parseInt(i) + 1;
+			append += '<tr><td>'+j+'</td>'+
+					'<td>'+list[i].act_username+'</td>'+
+					'<td>'+list[i].act_score+'</td></tr>';
+		}
+	}
+	jq("#raking_list").html(append);
+}
+
+sitenal_page = personal_page = national_page = mine_page = 0;
+function loadMore(type) {
+	if(type == 'sitenal') {
+		page = ++sitenal_page;
+	}
+	else if(type == 'personal') {
+		page = ++personal_page;
+	}
+	else if(type == 'national') {
+		page = ++national_page;
+	}
+	else if(type == 'mine') {
+		page = ++mine_page;
+	}
+	loadChallengeWithType(type,page);
+	return false;
+}
+
+</script>

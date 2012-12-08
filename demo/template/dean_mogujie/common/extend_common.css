@@ -1,0 +1,65 @@
+@charset "utf-8";
+/* CSS Document */
+
+#controlcontent{height:60px;}
+.clear{clear:both;}
+.pieceBd{display:none;}
+#foot_wrap.full { background-color:#e8ebce; }
+#foot_wrap { min-height:130px; _height:130px;background:url(/template/dean_mogujie/images/foot_bg.png)  repeat-x 0 0 #fff ; }
+#foot { height:158px; padding-top:75px; margin:0 auto; }
+#foot .yaya { position:absolute; left:405px; top:25px; }
+#foot li { float:left; display:inline; }
+#foot .fl { color:#333; font-size:12px; border:0; float:left;}
+#foot .fl b { line-height:20px; font-size:16px; font-weight:bolder;color:#444}
+#foot .logos { margin-right:15px; *margin-right:10px; padding-left:15px; border-left:1px dashed #c5c5c5}
+#foot .links { margin-right:20px; margin-left:20px;}
+#foot .links ul { width:100px; margin-top:5px; }
+#foot .links li { width:100px; background: url(/template/dean_mogujie/images/dot.gif) no-repeat 0 center;padding-left:6px; }
+#foot .links li a { line-height:20px; color:#909090; padding-left:5px; *padding-left:0;}
+#foot .links li a.light { color:#e28000; }
+#foot .links li a:hover { color:#e28000; }
+#foot .foot_right .links { margin-right:13px; }
+#foot .foot_right .followus { margin-right:35px; *margin-right:40px;}
+#foot .followus li a { padding:3px 0 3px 20px; line-height:24px; }
+#foot .followus .sina { background:url(/template/dean_mogujie/images/icons_share.png) no-repeat 0 -199px; *background-position:0 -201px;}
+#foot .followus .qqzone { background:url(/template/dean_mogujie/images/icons_share.png) no-repeat 0 -369px; }
+#foot .followus .douban { background:url(/template/dean_mogujie/images/icons_share.png) no-repeat 0 -117px; *background-position:0 -120px;}
+#foot_wrap .foot-links{width:960px; margin:0 auto;padding:5px;border-bottom:1px dashed #999; border-top:1px dashed #999;color:#999}#foot_wrap .foot-links span{ color:#999}
+#foot_wrap .foot-links a{ color:#999}
+#foot_wrap .copyright { width:960px;margin:0 auto; text-align:center;  color:#999999; font-size:12px;padding:15px 0; }#foot_wrap .copyright p{ color:#999}
+#foot_wrap .copyright a { color:#999999; }
+#info_bar { background:#fff url(/template/dean_mogujie/images/head_bg.png) repeat-x bottom center; height:85px; _overflow:hidden; }
+#info_bar .logo { margin-top:9px; }
+#info_bar .logo_a { margin:7px 0 0 5px; }
+#info_bar .l { float:right; display:inline; margin-top:35px }
+#info_bar .l li { float:left; padding:14px 0 0 15px; }
+#info_bar .l li a { font-size:12px; color:#ff6699; padding-right:15px;  white-space:nowrap; }
+#info_bar .l li.login {margin:0;padding:10px 0px 0 0;}
+#info_bar .l li.login a{ height:0; padding:0;padding-top:28px; width:89px; background:url(/template/dean_mogujie/images/login.gif) no-repeat 0 0;display:block;overflow:hidden;}
+#info_bar .l li.f { padding-left:0; padding-left:15px }
+#info_bar .l li.o_l { padding:16px 0 0 0; border:none; }
+#info_bar .l li.o_l a { font-size:12px; padding-right:0; color:#000;border:none; line-height:16px; }
+#info_bar .l li.o_l img { margin:0 3px 0 15px; line-height:16px; vertical-align:middle; }
+#info_bar .l li.o_l .more { padding-left:10px; }
+#info_bar .l li.o_l .more img { margin-left:2px; padding-top:0\9; }
+#info_bar .my_btn { margin-top:2px; float:left; }
+#info_bar .mb_bd { background:url(/template/dean_mogujie/images/btn_xxhome_bg.png) left no-repeat; height:46px; position:relative; float:left; display:block; }
+#info_bar .mb_bd:hover .mb_name { text-decoration:underline; }
+#info_bar .mb_avt { position:absolute; left:5px; top:11px; }
+#info_bar .mb_name { padding-left:34px; line-height:45px; font-weight:bold; font-size:14px; padding-right:5px; }
+#info_bar .mb_rb { background:url(/template/dean_mogujie/images/btn_xxhome_bg.png) right no-repeat; height:46px; width:142px; display:block; float:left; }
+#info_bar .mb_rb .myalbum { left:15px; position:relative; top:13px; font-weight:bold; padding-left:17px; font-size:12px;}
+#info_bar .mb_rb .myfavs { left:34px; *left:28px; position:relative; top:13px; font-weight:bold; padding-left:17px; font-size:12px;}#info_bar .my_shotcuts { float:left; white-space:nowrap; padding-top:15px; }
+#info_bar .my_shotcuts a { white-space:nowrap; margin-left:15px; float:left; font-size:12px; line-height:20px; }
+#info_bar .my_shotcuts a.h { color:#f39; font-weight:bold; padding-left:12px; background:url(/img/new_spot.gif) left no-repeat; }
+#info_bar .my_shotcuts .publish { padding-left:13px; background:url(/template/dean_mogujie/images/icon_pub.png) left no-repeat; }
+#info_bar .my_shotcuts .space { padding-left:13px; background:url(/template/dean_mogujie/images/icon_space.png) left no-repeat; }
+#nav_bar { background:#ff6699 url(/template/dean_mogujie/images/head_nav_bg.png) repeat-x 0 0; height:38px; overflow:hidden; }
+#nav_bar li { float:left; height:16px; line-height:16px; padding:0 15px; margin-top:13px; border-left:1px dotted #fff;}
+#nav_bar .fm960{ height:38px;}
+#nav_bar li a { float:left; line-height:35px; color:#fff; font-weight:bold; font-size:14px; margin-top:-10px; }
+#nav_bar li a:hover { text-decoration:underline; }
+#nav_bar li a.c { background:url(/template/dean_mogujie/images/head_nav_c.png) center 30px no-repeat; }
+#nav_bar li .cat { font-size:12px; color:#fff; line-height:35px; margin-top:-10px; border:none; font-weight:normal; padding:0 0 0 10px; }
+#nav_bar li .cat.c { background:url(/template/dean_mogujie/images/head_nav_c.png) center 30px no-repeat; }
+#nav_bar li.f { border-left:none; }

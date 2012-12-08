@@ -1,0 +1,79 @@
+@charset "utf-8";
+/* CSS Document */
+a{ text-decoration:none}
+.content{width:100%; margin-left:auto; margin-right:auto;overflow: hidden;margin-bottom: 20px;}
+.pk_left{ float:left; width:71%; margin-left:auto; margin-right:auto;}
+.wtf_bolder_con{width:99.5height: 320px; margin:0 auto; position:relative;}
+.w100 {width:100%;}
+.h320{height: 320px; }
+.h70{height:70px; }
+.oh { overflow:hidden;}
+.cr { color: red;}
+
+.wtf_bolders_con{ height:168px;}
+.wtf_bolderm_con{border-left:#ffb400 1px solid;border-right:#ffb400 1px solid;height:1px;height:270px; }
+.wtf_bolderp_con{ overflow:hidden }
+
+.wtf_bolderf_up{ overflow:hidden;height:1px;background-color:#a5d75b; width:99%;margin-left:auto; margin-right:auto;}
+.wtf_bolderf_up1{ overflow:hidden;width:99.1%;border-left:#a5d75b 1px solid;border-right:#a5d75b 1px solid;height:1px;margin-left:auto;margin-right:auto;
+background-color:#def9ce}
+.wtf_bolderf_up2{ overflow:hidden;width:99.2%;border-left:#a5d75b 1px solid;border-right:#a5d75b 1px solid;height:1px;margin-left:auto;margin-right:auto; background-color:#def9ce}
+.wtf_bolderf_up3{ overflow:hidden;width:99.3%;border-left:#a5d75b 1px solid;border-right:#a5d75b 1px solid;height:1px;margin-left:auto;margin-right:auto;background-color:#def9ce}
+.wtf_bolderf_con{width:99.5%;border-left:#a5d75b 1px solid;border-right:#a5d75b 1px solid;height:1px;height:148px; }
+.wtf_bolderf_up4{ overflow:hidden;width:99.3%;border-left:#a5d75b 1px solid;border-right:#a5d75b 1px solid;height:1px;margin-left:auto;margin-right:auto;}
+.wtf_bolderf_up5{ overflow:hidden;width:99.2%;border-left:#a5d75b 1px solid;border-right:#ffb400 1px solid;height:1px;margin-left:auto;margin-right:auto;}
+.wtf_bolderf_up6{ overflow:hidden;width:99.1%;border-left:#a5d75b 1px solid;border-right:#a5d75b 1px solid;height:1px;margin-left:auto;margin-right:auto;}
+.wtf_bolderf_down{ overflow:hidden;height:1px;background-color:#a5d75b; width:99%; margin:0px; padding:0px; margin-left:auto; margin-right:auto;}
+
+.pk_title{ background-image:url(../images/2/game_img_03.jpg); background-repeat:repeat-x; height:33px;}
+.game_kp{ float:right; width:480px; line-height:33px;}
+.kp_xx{ background-image:url(../images/2/game_kp.gif); background-repeat:no-repeat; width:75px; height:23px; float:left;color:#ff6600; margin-left:10px; font-size:13px; line-height:23px; text-align:center;}
+
+.kp_xxs{ background-image:url(../images/2/game_kp.gif); background-repeat:no-repeat; width:75px; height:23px; float:right;color:#ff6600; margin-right:10px; font-size:13px; line-height:23px; text-align:center;}
+.min_mj{ background-image:url(../images/2/mini_13.jpg);width:75px; height:23px; float:left; margin-left:10px;color:#ffb400; font-size:13px; line-height:23px; text-align:center; text-decoration:none}
+.kp_mj{ background-image:url(../images/2/game_kp.gif);background-position: -225px 0px; width:75px; height:23px; float:left; margin-left:10px;color:#009eff; font-size:13px; line-height:23px; text-align:center;}
+.kp_more{background-image:url(../images/2/game_kp.gif);background-position: -225px 0px; width:75px; height:23px; float:right; margin-right:10px;color:#009eff; font-size:13px; line-height:23px; text-align:center;}
+.min_more{background-image:url(../images/2/mini_13.jpg);width:75px; height:23px; float:right; margin-right:10px;color:#ffb400; font-size:13px; line-height:23px; text-align:center;}
+.pk_right{ float:right; width:28%; margin-right:1px;}
+.pk_king_title{ background:url(../images/2/king_03.jpg) no-repeat center; height:30px;border-top: 1px dashed #CCC;}
+.pk_con{ }
+.pkk_con{ width:175px; margin-left:auto; margin-right:auto;}
+.pk_img{ float:left; text-align:center; font-size:12px; margin: 5px 10px;}
+.jf_sxians{ width:1px;height:130px; float:left; margin-left:10px; margin-right:10px; background-image:url(../images/1/xuxian_03.jpg); background-repeat:repeat-y;}
+.jifen_contents{ margin:5px auto;}
+
+.pk_add{ width:100%; overflow:hidden; margin-top:10px;}
+.scoreT{ border: 1px solid #C9C9C9; overflow:hidden; padding-bottom:10px; margin-top:10px;}
+.score_title{ background-image:url(../images/2/score_03.jpg); height:33px; background-repeat:repeat-x;}
+.img_title{ margin-left:20px;}
+.score_sxian{ width:1px;height:130px; float:left; margin-left:10px; margin-right:10px; background-image:url(../images/2/jf_win_11.jpg); background-repeat:repeat-y;}
+.mini_title{ background-image:url(../images/2/mini_07_02.jpg); background-repeat:repeat-x; height:30px;}
+.con_left{ float:left; width:71%}
+
+.list_font_title{ color:#649d0f; font-size:14px; text-align:center}
+.pos{ line-height: 54px;display: inline-block;width: 20%;}
+.dk_num{ line-height:28px;min-width: 25%;display: inline-block; text-align:center}
+.game_name{ display: inline-block;width: 40%;}
+.game_rank{ width:98%; margin-left:auto; margin-right:auto}
+.rank_1{ height:50px; background-color:#def9ce; margin:0; padding:0; border-bottom:#b1ce87 1px dashed}
+.rank_2{ height:54px; background-color:#eeffe5; margin:0; padding:0; border-bottom:#b1ce87 1px dashed}
+.rank_3{ height:54px; background-color:#f8fef5; margin:0; padding:0; border-bottom:#b1ce87 1px dashed}
+#last2 {}
+.rank_all{ height:40px; background-color:#FFF; margin:0 auto; padding:0; border-bottom:#b1ce87 1px dashed; width:98%;}
+.rank_all .pos {line-height: 40px;}
+.rank_font{ font-size:14px; margin-left:10px;line-height:40px; height:40px; margin-top:0}
+.rank_font_top3 {display: inline-block;width:47%;font-size: 14px;margin-left: 10px;
+line-height: 28px;margin-top: 0;text-align:center;
+}
+.rank_name { margin-right: 20px; min-width:40px;}
+.rank_num{ margin-left:20px; color:#F00;line-height:40px; margin-top:0;display: inline-block;
+overflow: hidden; width:20%;}
+.rank_num1{margin-left:30px;vertical-align:middle}
+.rank_num2{vertical-align:middle; margin-left:10px;}
+.rank_num3{ margin-left:32px;}
+.ph_title{ width:141px; height:23px; background-image:url(../images/2/rank_13.jpg); float:right; margin-right:5px; text-decoration:none;}
+.zn_ph{ color:#FFF; font-size:16px; font-weight:bold; background-image:url(../images/2/bg_13.jpg); width:68px; height:21px; line-height:23px; float:left; text-align:center; margin-top:1px; text-decoration:none;}
+.z_ph{ color:#000; font-size:14px; text-align:center; text-decoration:none; line-height:23px; float:left; width:70px;}
+.zn_phs{ color:#FFF; font-size:16px; font-weight:bold; background-image:url(../images/2/z_ph_13.jpg); width:69px; height:23px; line-height:23px; float:left; text-align:center; text-decoration:none;}
+.tac { text-align:center;}
+.bn { border:none;}

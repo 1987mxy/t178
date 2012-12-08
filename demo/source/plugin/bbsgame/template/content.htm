@@ -1,0 +1,348 @@
+<!--{template common/header}-->
+<link rel="stylesheet" type="text/css" href="source/plugin/bbsgame/style/main.css"/>
+<script src="source/plugin/bbsgame/js/jquery-1.7.min.js"></script>
+<script src="source/plugin/bbsgame/js/dialog.js"></script>
+<script type="text/javascript" src="source/plugin/bbsgame/js/main.js"></script>
+<script type="text/javascript" src="source/plugin/bbsgame/js/calenderJS.js" defer="defer"></script>
+<!--{eval $time=time();}-->
+<script defer src="http://stat.97sng.com/js/stat.js?pid={$pid}&gid=main&t={$time}&url={$_SERVER[HTTP_HOST]}"></script>
+<script type="text/javascript">
+	var jq = jQuery.noConflict();
+ 	function change_nz(num,obj){
+		obj.className="_zns";
+		switch(num){
+			case 1:
+				jq("#_zns").attr("class","rank_zn");
+				jq("#_zn").attr("class","rank_zns");
+				jq("#ph_tb1").css("display","");
+				jq("#ph_tb2").css("display","none");
+				break;
+			case 2:
+				jq("#_zns").attr("class","rank_zns");
+				jq("#_zn").attr("class","rank_zn");
+				jq("#ph_tb1").css("display","none");
+				jq("#ph_tb2").css("display","");
+				break;
+		}
+	} 
+</script>
+<!--[if lte IE 7]> 
+<style type="text/css" media="screen"> 
+.popTop .adel { margin-top:-15px;}
+</style> 
+<![endif]-->
+<div id='pkgame_container'>
+	<div id="dialogelem" >
+		<div class='popTop' style='text-align:left;width:320px;'>提示信息：<a class='adel' onclick='hideResult();' href='javascript:void(0);'>关闭</a></div>
+         <div class="_popout">
+			<table cellspacing="0" cellpadding="0" border="0">
+			  <tbody>
+					<tr>
+					  <td class="bgcorner1"></td>
+					  <td class="pobg1"></td>
+					  <td class="bgcorner2"></td>
+					</tr>
+					<tr>
+					  <td class="pobg4"></td>
+					  <td>
+					  <div id="_box_container" class="popoutContent">
+							<div class="_popLogin" style="">
+									<div style="width:328px;">
+											<form action="member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes" method="post">
+											  <input type='hidden' name='action' value='login'>
+											  <div class="p20">
+													<table>
+													  <tbody>
+															<tr>
+															  <td width="60"><select name="lgt" id="_uname2">
+																	  <option value="username">用户名</option>
+																	  <option value="uid">UID</option>
+																	</select>
+															  </td>
+															  <td><input style="width:115px;" id="_poppwuser" class="input input_wa" type="text" name="username">
+															  </td>
+															  <td><label id="ustatue" style="color:#FF0000"></label>
+															  </td>
+															</tr>
+															<tr>
+															  <td><label for="pwpwd">密　码</label>
+															  </td>
+															  <td><input style="width:115px;" id="_pwpwd" class="input input_wa" type="password" name="password">
+															  </td>
+															  <td><label id="pwstatue" style="color:#FF0000"></label>
+															  </td>
+															</tr>
+															<tr>
+															  <td>&nbsp;</td>
+															  <td><span class="btn2" style="margin:0 10px 0 0;"> <span>
+																	<button type="submit">登录</button></span></span>
+																<a href='member.php?mod=register' target='_blank'>注册</a></td>
+															</tr>
+													  </tbody>
+													</table>
+											  </div>
+											  <div class="c"></div>
+											</form>
+									</div>
+							</div>
+							<div class="_popResult" style="width: 288px;min-height: 90px;font-size: 18px;padding: 20px;display:none;">
+								
+							</div>
+						 </div>
+						</td>
+					  <td class="pobg2"></td>
+					</tr>
+					<tr>
+			  </tbody>
+			</table>
+          </div>
+        </div>
+<div id="game_content_content">
+	<div class="content_top"><a href="index.php?m=bbs" style="margin-left:10px">{$db_bbsname}</a> > <a href="plugin.php?id=bbsgame">{$ng_name}</a> > <a href="javascript:void(0);">{$anchor}</a></div>
+<div id="pkgame_ctrlpannel">
+	<div class="ctrl_title">
+		<ul>
+<!--{if $gid}-->
+			<li id="ctrl_game" class="$game_select"><a href="plugin.php?id=bbsgame&action=game&gid=$gid">游戏</a></li>
+<!--{/if}-->
+			<li id="ctrl_zhanshu" class="$zhanshu_select" style="position:relative;">
+<!--{if $newPknoticeNum}-->
+				<div class='zhanshu_note'>{$newPknoticeNum}</div>
+<!--{/if}-->
+				<a href="plugin.php?id=bbsgame&action=pk&gid=$gid">挑战书</a></li>
+			<li id="ctrl_leitai" class="$leitai_select"><a href="plugin.php?id=bbsgame&action=challenge&gid=$gid">擂台赛</a></li>
+			<li id="ctrl_played" class="$iplayed_select"><a href="plugin.php?id=bbsgame&action=iplayed&gid=$gid">我玩过</a></li>
+		</ul>
+	</div>
+	<p style="border:2px #06A2CE solid;"></p>
+<!--{if $_GET['action']=='game'}-->
+<!--{eval @include template('bbsgame:content_game_onload');}-->
+<!--{elseif $_GET['action']=='pk'}-->
+<!--{eval @include template('bbsgame:content_pk_onload');}-->
+<!--{elseif $_GET['action']=='challenge'}-->
+<!--{eval @include template('bbsgame:content_challenge_onload');}-->
+<!--{elseif $_GET['action']=='iplayed'}-->
+<!--{eval @include template('bbsgame:content_iplayed_onload');}-->
+<!--{/if}-->  
+<div id='ivset'></div>
+<script>
+var jq = jQuery.noConflict();
+function loadChallengeWithType(type,page) {
+	if (typeof session_username == 'undefined') {
+		session_username = '';
+	}
+	if (typeof page == 'undefined') {
+		page = 0;
+	}
+	var pageSize = 10;
+	jq.ajax({
+		type:"get",
+		url:'plugin.php?id=bbsgame&action=challenge&AJAX=1&r_c_t='+type+"&page="+page, 
+		dataType:'json',
+		success:function(result) {
+				result = eval(result);
+				if (result.list != null) {
+					var list = result.list;
+					var append = '<ul>';
+					if(type == 'personal') {
+						for (var i in list){
+							var _partake = '';
+							if(list[i].endtime != '已结束')
+								_partake = '<a title="挑战擂台" href="plugin.php?id=bbsgame&action=game&mode=challenge&pk_id='+list[i].id+'&gid='+list[i].gid+'">挑战</a>';
+							append += '<li class="cnt_'+type+'" >'+
+									'<div class="leitai_all_title">'+list[i].name+' （结束：'+list[i].endtime+'）'+_partake+'</div>'+
+									'<div class=" leitai_cnt_info" >'+
+										'<a href="javascript:void(0);" onClick="return pkgameJoinChallenge('+list[i].id+',\''+list[i].name+'\',\''+list[i].username+'\',\''+session_username+'\');">'+
+											'<div class="challenge_cover">'+
+												'<p class="cover_top" style="">'+list[i].pkname+'</p>'+
+												'<p class="cover_bottom" style="">'+list[i].username+'</p>'+
+											'</div>'+
+											'<img alt="挑战'+list[i].username+'" src="'+list[i].img+'" width="78" hight="78">'+
+										'</a>'+
+										'<p style="">擂主：'+list[i].username+'<br>总奖金：'+(list[i].casenum * list[i].number)+'<br>税率：'+list[i].rate+'结束时间：'+list[i].endtime+'<br>费用：'+list[i].casenum+'&nbsp;&nbsp;参赛人数：'+list[i].number+'</p>'+
+									'</div>'+
+							'</li>';
+						}
+					}
+					else {
+						for (var i in list){
+							var _partake = '';
+							if(list[i].endtime != '已结束')
+								_partake = '<a title="挑战擂台" href="plugin.php?id=bbsgame&action=game&mode=challenge&pk_id='+list[i].id+'&gid='+list[i].gid+'">挑战</a>';
+							append += '<li class="cnt_'+type+'" >'+
+									'<div class="leitai_all_title">'+list[i].name+' （结束：'+list[i].endtime+'）'+_partake+'</div>'+
+									'<div class=" leitai_cnt_info" >'+
+										'<a href="javascript:void(0);" onClick="return pkgameJoinChallenge('+list[i].id+',\''+list[i].name+'\',\''+list[i].username+'\',\''+session_username+'\');">'+
+											'<div class="challenge_cover">'+
+												'<p class="cover_top">'+list[i].pkname+'</p>'+
+												'<p class="cover_bottom" >'+list[i].username+'</p>'+
+											'</div>'+
+											'<img alt="挑战'+list[i].username+'" src="'+list[i].img+'" width="78" hight="78">'+
+										'</a>'+
+										'<p >擂主：'+list[i].username+'<br>总奖金：'+(list[i].casenum * list[i].number)+'<br>参赛人数：'+list[i].number+'<br>结束时间：'+list[i].endtime+'</p>'+
+									'</div>'+
+							'</li>';
+						}
+					}
+					jq("#leitai_"+type+"_onload .challenge_list").append(append+'</ul>');
+					jq(".leitai_cnt_info a").hover(
+							function(){
+								jq(this).children(".challenge_cover").animate({"bottom": "0"},300);
+							},
+							function(){
+								jq(this).children(".challenge_cover").animate({"bottom": "-100px"},300);
+							}
+					);
+					if (list.length < pageSize) {
+						jq("#leitai_"+type+"_onload .load_tag").html("已无再多结果");
+					}
+					else{
+						jq("#leitai_"+type+"_onload .load_tag").html('<a onclick="return loadMore(\''+type+'\');" href="javascript:void(0);">[加载更多]</a>');							
+					}
+				}
+				else {
+					jq("#leitai_"+type+"_onload .load_tag").html("已无再多结果");
+				}
+
+		}
+		//beforeSend:challengeLoading()
+	});
+}
+
+function loadPkWithType(type,page) {
+	if (typeof session_username == 'undefined') {
+		session_username = '';
+	}
+	if (typeof page == 'undefined') {
+		page = 0;
+	}
+	var pageSize = 10;
+	jq.ajax({
+		type:"get",
+		url:'plugin.php?id=bbsgame&action=pk&AJAX=1&r_p_t='+type+'&page='+page+'&nowtime='+new Date().getTime(), 
+		dataType:'json',
+		success:function(result) {
+				result = eval(result);
+				if (result.ret == 1){
+					if (result.list != null) {
+						var list = result.list;
+						var bottomcnt = '继续PK';
+						if(type == 'pkme') {
+							bottomcnt = '接受挑战';
+						}
+						var append = '<ul>';
+						for (var i in list) {
+							append += '<li>'+
+								'<div class=\'pk_cnt_info\' style="float:left; width:15%;">'+
+								'<a href="plugin.php?id=bbsgame&gid='+list[i].gid+'&mode=pk&pk_id='+list[i].pkid+'">'+
+									'<div class="pk_cover" style="bottom: -97px; ">'+
+										'<p class="cover_top"></p>'+
+										'<p class="cover_bottom">'+bottomcnt+'</p>'+
+									'</div>'+
+									'<img src="'+list[i].img+'">'+
+									'</a>'+
+								'</div>'+
+								'<div style="float:right; width:85%;background:#C2EEFC">'+
+									'<div style="height:98px; overflow:hidden;">'+
+										'<div class="pkuser_a">'+
+											'<img class="pkuser_ico" src="'+list[i].act_usericon+'">'+
+											'<p><img src="source/plugin/bbsgame/images/3/dao.gif"></p>'+
+											'<p>'+list[i].act_username+'</p>'+
+											'<p>'+list[i].act_score+'</p>'+
+										'</div>'+
+										'<div class="pk_pk"><img src="source/plugin/bbsgame/images/3/pk.png"></div>'+
+										'<div class="pkuser_b">'+
+											'<img class="pkuser_ico" src="'+list[i].def_usericon+'">'+
+											'<p><img src="source/plugin/bbsgame/images/3/dun.gif"></p>'+
+											'<p>'+list[i].def_username+'</p>'+
+											'<p>'+list[i].def_score+'</p>'+
+										'</div>'+
+										'<div class="pk_result">'+
+											list[i].result
+										'</div>'+
+									'</div>'+
+								'</div>'+
+							'</li>';
+						}
+						append += '</ul>';
+						jq("#zhanshu_"+type+"_onload .pklist").append(append);
+						jq(".pk_cnt_info a").hover(
+								function(){
+									jq(this).children(".pk_cover").animate({"bottom": "0"},300);
+								},
+								function(){
+									jq(this).children(".pk_cover").animate({"bottom": "-97px"},300);
+								}
+						);
+						if (list.length < pageSize) {
+							jq("#zhanshu_"+type+"_onload .load_tag").html("已无再多结果");
+						}
+						else{
+							jq("#zhanshu_"+type+"_onload .load_tag").html('<a onclick="return loadMore(\''+type+'\');" href="javascript:void(0);">[加载更多]</a>');							
+						}
+					}
+					else {
+						jq("#zhanshu_"+type+"_onload .load_tag").html("已无再多结果");
+					}
+					
+				}
+				else if (result.ret == 0) {
+					if (result.msg) {
+						jq("#zhanshu_"+type+"_onload .load_tag").html(result.msg);
+					}
+					else {
+						
+					}
+				}
+		},
+		beforeSend:function(){
+			jq("#zhanshu_"+type+"_onload .load_tag").html("请稍等，正在努力加载...");
+		}
+	});
+	
+}
+
+jq(document).ready(function(){
+
+	var init = [{"id":'zhanshu_act',"event":[{"obj":window,"fn":"loadMore('act')"}]},
+	            {"id":'zhanshu_def',"event":[{"obj":window,"fn":"loadMore('def')"}]},
+	            {"id":'zhanshu_all'},{"id":"zhanshu_new"},
+	            {"id":'zhanshu_pkme',"event":[{"obj":window,"fn":"loadMore('pkme')"}]},
+	            {"id":'leitai_all'},
+	            {"id":'leitai_sitenal',"event":[{"obj":window,"fn":"loadMore('sitenal')"}]},
+	            {"id":'leitai_personal',"event":[{"obj":window,"fn":"loadMore('personal')"}]},
+	            {"id":'leitai_national',"event":[{"obj":window,"fn":"loadMore('national')"}]},
+	            {"id":'leitai_mine',"event":[{"obj":window,"fn":"loadMore('mine')"}]},
+	            {"id":'leitai_partake'},
+	            {"id":'leitai_take'}
+	           ];
+	var len = init.length;
+	for(var i = 0;i<len;i++){
+/* 		var config = {"pkgame_left":"hide","pkgame_right":"hide"};
+		if(init[i] === 'ctrl_game') {
+			config = {"pkgame_left":"show","pkgame_right":"show"};
+		} */
+		initEventListener(init[i].id, jq, init[i].event);
+	}
+
+	jq(".played_cnt tr").hover(
+		function(){
+			jq(this).css({
+				"background":"#F1F1F1"
+				});
+		},function(){
+			jq(this).css("background","");
+	});
+	clipBoard("cpbtnswf");
+	clipBoard("cpbtnhtml");
+	new contentModule().getIv();
+<!--{if $windid}-->
+	session_username = '{$windid}';
+<!--{/if}-->
+<!--{if $take_select}-->
+jq("#leitai_take").show().click();
+<!--{/if}-->
+});
+//document.write('<script language=\"javascript\" type=\"text/javascript\" src=\"http:\/\/stat.97sng.com\/js\/stat.js?pid={$pid}&gid={$gid}&t='+(new Date().getTime())+'\"><\/script>');
+</script>
+<!--{template common/footer}-->

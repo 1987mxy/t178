@@ -1,0 +1,46 @@
+<!--{if $im_imconfig[im_enable]==true}-->
+    <script language="javascript" type="text/javascript">
+		var siteMsgInfoArray=[];
+		<!--{if $_G[member][newprompt]}-->
+			siteMsgInfoArray.push({name:"{lang remind}",url:"{$_G[siteurl]}home.php?mod=space&do=notice",msgnumber:$_G[member][newprompt]});
+		<!--{elseif $_G[member][newpm]}-->
+			siteMsgInfoArray.push({name:"{lang pm_center}",url:"{$_G[siteurl]}home.php?mod=space&do=pm",msgnumber:$_G[member][newpm]});
+		<!--{/if}-->
+		var tbMenuMyApp =[];
+		<!--{if $_G['uid']}-->
+		<!--{if !$my_userapp}-->
+		    <!--{if $_G['my_menu']}-->
+				{eval $my_userapp = $_G['my_menu'];}
+		    <!--{else}-->
+				{eval @include_once DISCUZ_ROOT.'./source/function/function_home.php'; getuserapp();$my_userapp = $_G['my_menu'];}
+			<!--{/if}-->
+		<!--{/if}-->
+		{eval $appkey = 0;}
+		tbMenuMyApp.push({groupname:"&#31449;&#20869;&#24212;&#29992;",menuitems:[<!--{loop $my_userapp $myappdata}-->
+		 <!--{if $appkey<3}-->
+		 {title:"$myappdata['appname']",url:"{$_G[siteurl]}userapp.php?script=user&id=$myappdata['appid']&from=leftmenu",icon:"http://appicon.manyou.com/icons/$myappdata['appid']"},
+		 {eval $appkey++;}
+		 <!--{/if}-->
+		 <!--{/loop}-->]});
+		 tbMenuMyApp.push(
+		 	{
+		 		groupname:"",menuitems:[
+		 			{title:"{lang friends}",url:"{$_G[siteurl]}home.php?mod=space&do=friend",icon:"{STATICURL}image/feed/friend.gif"},
+		 			{title:"{lang thread}",url:"{$_G[siteurl]}home.php?mod=space&do=thread&view=me",icon:"{STATICURL}image/feed/thread.gif"},
+		 			{title:"{lang favorite}",url:"{$_G[siteurl]}home.php?mod=space&do=favorite&view=me",icon:"{STATICURL}image/feed/favorite.gif"},
+		 			{title:"{lang magic}",url:"{$_G[siteurl]}home.php?mod=magic",icon:"{STATICURL}image/feed/magic.gif"},
+		 			{title:"{lang medals}",url:"{$_G[siteurl]}home.php?mod=medal",icon:"{STATICURL}image/feed/medal.gif"},
+		 			{title:"{lang task}",url:"{$_G[siteurl]}home.php?mod=task",icon:"{STATICURL}image/feed/task.gif"},
+		 		]
+		 	}
+		 );
+		<!--{/if}-->
+		var nt = nt || {};
+		nt.script = "http://{$im_imconfig[im_wdkresource_server]}/imfunction_utf8.js";
+		nt.siteid = "$im_imconfig[im_siteid]";
+		nt.uid = "$_G[uid]";
+		nt.uname = "$_G[username]";
+		nt.sid = "$_G[im_sid]";
+    </script>
+<script language="JavaScript" type="text/JavaScript" src="{$_G[siteurl]}{$ntalker_root}loader_ntalker.js"></script>
+<!--{/if}-->

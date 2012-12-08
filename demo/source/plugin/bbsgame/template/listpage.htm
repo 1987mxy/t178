@@ -1,0 +1,84 @@
+<!--{template common/header}-->
+<link rel="stylesheet" type="text/css" href="source/plugin/bbsgame/style/bolderCss.css"/>
+<link rel="stylesheet" type="text/css" href="source/plugin/bbsgame/style/main.css"/>
+
+<script type="text/javascript" src="source/plugin/bbsgame/js/jquery-1.7.min.js"></script>
+<script type="text/javascript">
+	var jq = jQuery.noConflict();
+
+	function change_nz(num,obj){
+		obj.className="_zns";
+		switch(num){
+			case 1:
+				jq("#_zns").attr("class","_zn");
+				jq("#_zn").attr("class","_zns");
+				jq("#ph_tb1").css("display","");
+				jq("#ph_tb2").css("display","none");
+				break;
+			case 2:
+				jq("#_zns").attr("class","_zns");
+				jq("#_zn").attr("class","_zn");
+				jq("#ph_tb1").css("display","none");
+				jq("#ph_tb2").css("display","");
+				break;
+		}
+	}
+	function change_page(obj){
+		obj.className="page_change";
+	}
+	function unchange_page(obj){
+		obj.className="page_fonts";
+	}
+</script>
+<div style="width:100%; overflow:hidden;">
+<div id="game_content_content">
+    <div style="font-size:14px; line-height:24px; border-top:#c9c9c9 1px solid; margin-top:10px;"><span style="color:#c9c9c9">查询：</span><a href="plugin.php?id=bbsgame&list=jl&k=J_subm1">奖励积分游戏</a>&nbsp;&nbsp;<a href="plugin.php?id=bbsgame&list=pk&k=P_subm1">积分PK游戏</a>&nbsp;&nbsp;<!--a href="plugin.php?id=bbsgame&list=xyx&k=">小游戏</a--></span></div>
+<!--{if is_array($catergories)}-->
+    <div style="font-size:14px; line-height:24px;"><span style="color:#c9c9c9">分类：</span>
+<!--{loop $catergories $k $v}-->
+<a href="plugin.php?id=bbsgame&list=$list&k=$k" style="width:50px; height:24px; line-height:24px; padding-right:5px;">$v</a>
+<!--{/loop}-->
+<!--{/if}-->
+<!--[IF lte IE 7]>
+<style>
+.list_img { margin: 20px 8px 0 15px;}
+</style>
+<![ENDIF]-->
+  <div class="list_content">
+    	<div class="list_up"></div>
+        <div class="list_up1"></div>
+        <div class="list_up2"></div>
+        <div class="list_up3"></div>
+        <div class="list_con">
+        	<div class="tj_title"><img style=" margin:6px 0 0 30px;" src="$titleImg" /></div>
+            <div class="lists_content">
+<!--{eval $i=0;}-->
+<!--{loop $games $k $game}-->
+<!--{eval $style='';}-->
+<!--{eval $i++;}-->
+<!--{if $list=='xyx'}-->
+<!--{eval $href=$game['href']}-->
+<!--{else}-->
+<!--{eval $href='plugin.php?id=bbsgame&action=game&gid='.$game['gid'];}-->
+<!--{/if}-->
+                     <div class="list_img" $style><a href="$href"><img src="$game['img']" width="77" height="78" /></a>
+                     <div>$game['name']</div></div>
+<!--{if ($i+9)%9==0}-->
+                     <div class="clearfloat"></div>
+                     <div style=" height:1px; width: 98%; margin:10px auto; border-bottom:#c9c9c9 1px dashed;"></div>
+<!--{/if}-->
+<!--{/loop}-->
+</div>
+<div style="padding-top:10px; width:50%;overflow:hidden; margin:10px auto">$pageCss</div>
+            	<div style="width:100%; float:left; margin-top:10px; overflow:hidden">
+				<!--<div class="pages"><div class="page_font">首页</div><div class="page_font">上一页</div><div class="page_fonts" onmouseover="change_page(this)" onmouseout="unchange_page(this)">1</div><div class="page_fonts" onmouseover="change_page(this)" onmouseout="unchange_page(this)">2</div><div class="page_fonts" onmouseover="change_page(this)" onmouseout="unchange_page(this)">3</div><div class="page_fonts" onmouseover="change_page(this)" onmouseout="unchange_page(this)">4</div><div class="page_fonts" onmouseover="change_page(this)" onmouseout="unchange_page(this)">5</div><div class="page_font">下一页</div><div class="page_font">尾页</div></div>-->
+				</div>
+   	  </div>
+        <div class="list_up4"></div>
+        <div class="list_up5"></div>
+        <div class="list_up6"></div>
+        <div class="list_down"></div>
+    </div>
+</div>
+</div>
+<!--{template common/footer}-->

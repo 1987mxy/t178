@@ -1,0 +1,229 @@
+<!--{template common/header}-->
+<link type="text/css" href="/template/dean_mogujie/css/style.css" rel="stylesheet" />
+<link type="text/css" href="/template/dean_mogujie/css/style1.css" rel="stylesheet" />
+<style id="diy_style" type="text/css"></style>
+<script type="text/javascript" src="/template/dean_mogujie/js/jquery-1.7.js"></script>
+	<div id="body_wrap">
+    
+		<div id="body" class="fm960 clearfix">
+				<div class="fl" id="content_body">
+                    <div id="content_top">
+                        <div class="piece" >
+                            <div class="piece_hd" >
+                                <b class="hl"></b>
+                                <b class="hr"></b>
+                            </div>
+                            <div class="piece_bd group-top">
+                                <div class="fl top-slide">
+                                    <!--[diy=diyhd]--><div id="diyhd" class="area"></div><!--[/diy]-->
+                                </div>
+                                <div class="top-reco fr" >
+                                    <ul class="reco_group">
+                                      <!--[diy=diytop1]--><div id="diytop1" class="area"></div><!--[/diy]-->
+                                      <div class="clear"></div>
+                                    </ul>
+                                    <div class="clear"></div>
+                                    <ul class="reco_topic">
+                                       <!--[diy=diytop2]--><div id="diytop2" class="area"></div><!--[/diy]-->
+                                       <div class="clear"></div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="piece_ft" >
+                                <b class="fl"></b>
+                                <b class="fr"></b>
+                            </div>
+                        </div>
+                    </div>
+				<div id="content_body_wrap" class="fl">
+				    <!--活跃小组-->               
+                    <div class="piece piece_wb" >
+                        <div class="piece_hd" >
+                            <b class="hl"></b>
+                            <b class="hr"></b>
+                        </div>
+						<div class="piece_bd">
+							<h2 class="active_group_title" >活跃小组</h2>
+							<ul class="active_group_list clear_in" >
+								<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
+							</ul>
+						</div>
+						<div class="piece_ft" >
+							<b class="fl"></b>
+							<b class="fr"></b>
+						</div>
+					</div>
+					 <!--活跃小组--> 
+					
+					<div id="allGroup" class="piece piece_wb" >
+						<script type="text/javascript">
+                            var jq = jQuery.noConflict();
+							
+							jq(function(){
+								jq(".allGroupNav li a").each(function(xxx){
+										jq(this).click(function(){
+											jq(".allGroupNav li a ").removeClass("c");
+											jq(this).addClass("c");
+											jq(".pieceBd").hide();
+											jq(".pieceBd").eq(xxx).show();
+										})	
+									});
+							});
+                        </script>
+						<ul class="allGroupNav" >
+                            <li class="all"><a class="c">全部</a></li>
+                            <li class="new"><a>新晋</a></li>
+							<li class="beaut"><a>扮美</a></li>
+							<li class="life"><a>生活</a></li>
+                            <li class="shoping"><a>购物</a></li>
+							<li class="brand"><a>品牌</a></li>
+                        </ul>
+                        <div class="pieceBd piece_bd" style="display:block;">
+                            <div class="allGroup_sort" id="cate1" >
+                                <h3 class="allGroup_subtitle" >新晋</h3>
+                                <ul class="allGroup_list" >
+                                    <!--[diy=diy2]--><div id="diy2" class="area"></div><!--[/diy]-->  
+                                    
+                                </ul>
+                             </div>
+                             <div class="allGroup_sort" id="cate2" >
+                                <h3 class="allGroup_subtitle" >扮美</h3>
+                                <ul class="allGroup_list" >
+                                    <!--[diy=diy3]--><div id="diy3" class="area"></div><!--[/diy]--> 
+                                    
+                                </ul>
+                                <a class="more-group" href="#"  title="查看更多>>">查看更多>></a>
+                              </div>
+                              <div class="allGroup_sort" id="cate3" >
+                                 <h3 class="allGroup_subtitle" >生活</h3>
+                                <ul class="allGroup_list" >
+                                    <!--[diy=diy4]--><div id="diy4" class="area"></div><!--[/diy]--> 
+                                </ul>
+                                <a class="more-group" href="#"  title="查看更多>>">查看更多>></a>
+                              </div> 
+							 <div class="allGroup_sort" id="cate5" >
+                                 <h3 class="allGroup_subtitle" >购物</h3>
+                                <ul class="allGroup_list" >
+                                    <!--[diy=diy5]--><div id="diy5" class="area"></div><!--[/diy]--> 
+                                </ul>
+                                <a class="more-group" href="#"  title="查看更多>>">查看更多>></a>
+                              </div> 
+                              <div class="allGroup_sort" id="cate6" >
+                                 <h3 class="allGroup_subtitle" >品牌</h3>
+                                <ul class="allGroup_list" >
+                                    <!--[diy=diy6]--><div id="diy6" class="area"></div><!--[/diy]--> 
+                                </ul>
+                                <a class="more-group" href="#"  title="查看更多>>">查看更多>></a>
+                              </div> 
+                        </div>
+                        <div class="piece_bd pieceBd">
+                        	 <h3 class="allGroup_subtitle" >&nbsp;</h3>
+                        	 <ul class="allGroup_list" >
+                        		<!--[diy=diytab2]--><div id="diytab2" class="area"></div><!--[/diy]-->
+                            </ul>
+                            
+                        </div>
+                        <div class="piece_bd pieceBd">
+                        	 <h3 class="allGroup_subtitle" >&nbsp;</h3>
+                         	<ul class="allGroup_list" >
+                        		<!--[diy=diytab3]--><div id="diytab3" class="area"></div><!--[/diy]-->
+                          	</ul>  
+                        </div>
+                        <div class="pieceBd piece_bd">
+                        	 <h3 class="allGroup_subtitle" >&nbsp;</h3>
+                         	<ul class="allGroup_list" >
+                        		<!--[diy=diytab4]--><div id="diytab4" class="area"></div><!--[/diy]-->
+                            </ul>
+                        </div>
+                        <div class="pieceBd piece_bd">
+                        	 <h3 class="allGroup_subtitle" >&nbsp;</h3>
+                             <ul class="allGroup_list" >
+                                <!--[diy=diytab5]--><div id="diytab5" class="area"></div><!--[/diy]-->
+                             </ul>
+                        </div>
+                        <div class="pieceBd piece_bd">
+                        	 <h3 class="allGroup_subtitle" >&nbsp;</h3>
+                             <ul class="allGroup_list" >
+                                <!--[diy=diytab6]--><div id="diytab6" class="area"></div><!--[/diy]-->
+                             </ul>
+                        </div>
+                        <div class="piece_ft" >
+                            <b class="fl"></b>
+                            <b class="fr"></b>
+                        </div>
+                    </div>
+                </div>
+                
+				<!--右侧部分-->
+				<div id="right_side" class="fr">
+					
+					<div class="piece piece_ws" >
+						<div class="piece_hd" >
+							<b class="hl"></b>
+							<b class="hr"></b>
+						</div>
+						<div class="piece_bd">
+							<div class="apply_group_box" ><a href="forum.php?mod=group&action=create"  class="apply_group"></a></div>
+						</div>
+						<div class="piece_ft" >
+							<b class="fl"></b>
+							<b class="fr"></b>
+						</div>
+					</div>
+
+					<div class="piece piece_ws" >
+						<div class="piece_hd" >
+							<b class="hl"></b>
+							<b class="hr"></b>
+						</div>
+						<div class="piece_bd">
+							<h3>小组热门帖子</h3>
+							<ul class="new_topic_list hot_group_event">
+								<!--[diy=diy7]--><div id="diy7" class="area"></div><!--[/diy]-->
+							</ul>
+						</div>
+						<div class="piece_ft" >
+							<b class="fl"></b>
+							<b class="fr"></b>
+						</div>
+					</div>
+
+					<div class="piece piece_ws" >
+                        <div class="piece_hd" >
+                            <b class="hl"></b>
+                            <b class="hr"></b>
+                        </div>
+                        <div class="piece_bd">
+                            <h3>优秀小组长</h3> 
+                            <ul class="group_leader_list" id="cms_565" >
+                            	<!--[diy=diy8]--><div id="diy8" class="area"></div><!--[/diy]-->
+                            </ul>
+                        </div>
+                        <div class="piece_ft" >
+                            <b class="fl"></b>
+                            <b class="fr"></b>
+                        </div>
+                    </div>
+
+					<div class="piece piece_ws" >
+						<div class="piece_hd" >
+							<b class="hl"></b>
+							<b class="hr"></b>
+						</div>
+						<div class="piece_bd">
+							<h3>优秀会员</h3>
+							<ul class="deanList">
+								<!--[diy=diy9]--><div id="diy9" class="area"></div><!--[/diy]-->
+							</ul>
+						</div>
+						<div class="piece_ft" >
+							<b class="fl"></b>
+							<b class="fr"></b>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+<!--{template common/footer}-->

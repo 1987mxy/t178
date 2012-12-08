@@ -1,0 +1,170 @@
+<!--{if !$_G['inajax']}-->
+	
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" />
+	<!--{if $_G['config']['output']['iecompatible']}--><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE{$_G['config']['output']['iecompatible']}" /><!--{/if}-->
+	<title><!--{if !empty($navtitle)}-->$navtitle - <!--{/if}--><!--{if empty($nobbname)}--> $_G['setting']['bbname'] - <!--{/if}--> Powered by Discuz!</title>
+	$_G['setting']['seohead']
+
+	<meta name="keywords" content="{if !empty($metakeywords)}{echo dhtmlspecialchars($metakeywords)}{/if}" />
+	<meta name="description" content="{if !empty($metadescription)}{echo dhtmlspecialchars($metadescription)} {/if}{if empty($nobbname)},$_G['setting']['bbname']{/if}" />
+	<meta name="generator" content="Discuz! $_G['setting']['version']" />
+	<meta name="author" content="Discuz! Team and Comsenz UI Team" />
+	<meta name="copyright" content="2001-2012 Comsenz Inc." />
+	<meta name="MSSmartTagsPreventParsing" content="True" />
+	<meta http-equiv="MSThemeCompatible" content="Yes" />
+	<base href="{$_G['siteurl']}" />
+	<!--{csstemplate}-->
+	<script type="text/javascript">var STYLEID = '{STYLEID}', STATICURL = '{STATICURL}', IMGDIR = '{IMGDIR}', VERHASH = '{VERHASH}', charset = '{CHARSET}', discuz_uid = '$_G[uid]', cookiepre = '{$_G[config][cookie][cookiepre]}', cookiedomain = '{$_G[config][cookie][cookiedomain]}', cookiepath = '{$_G[config][cookie][cookiepath]}', showusercard = '{$_G[setting][showusercard]}', attackevasive = '{$_G[config][security][attackevasive]}', disallowfloat = '{$_G[setting][disallowfloat]}', creditnotice = '<!--{if $_G['setting']['creditnotice']}-->$_G['setting']['creditnames']<!--{/if}-->', defaultstyle = '$_G[style][defaultextstyle]', REPORTURL = '$_G[currenturl_encode]', SITEURL = '$_G[siteurl]', JSPATH = '$_G[setting][jspath]';</script>
+	<script type="text/javascript" src="{$_G[setting][jspath]}common.js?{VERHASH}"></script>
+	<!--{if empty($_GET['diy'])}--><!--{eval $_GET['diy'] = '';}--><!--{/if}-->
+	<!--{if !isset($topic)}--><!--{eval $topic = array();}--><!--{/if}-->
+
+	
+	
+	
+	
+	<meta name="application-name" content="$_G['setting']['bbname']" />
+	<meta name="msapplication-tooltip" content="$_G['setting']['bbname']" />
+	<!--{if $_G['setting']['portalstatus']}--><meta name="msapplication-task" content="name=$_G['setting']['navs'][1]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['portal']) ? 'http://'.$_G['setting']['domain']['app']['portal'] : $_G[siteurl].'portal.php'};icon-uri={$_G[siteurl]}{IMGDIR}/portal.ico" /><!--{/if}-->
+	<meta name="msapplication-task" content="name=$_G['setting']['navs'][2]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['forum']) ? 'http://'.$_G['setting']['domain']['app']['forum'] : $_G[siteurl].'forum.php'};icon-uri={$_G[siteurl]}{IMGDIR}/bbs.ico" />
+	<!--{if $_G['setting']['groupstatus']}--><meta name="msapplication-task" content="name=$_G['setting']['navs'][3]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['group']) ? 'http://'.$_G['setting']['domain']['app']['group'] : $_G[siteurl].'group.php'};icon-uri={$_G[siteurl]}{IMGDIR}/group.ico" /><!--{/if}-->
+	<!--{if helper_access::check_module('feed')}--><meta name="msapplication-task" content="name=$_G['setting']['navs'][4]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['home']) ? 'http://'.$_G['setting']['domain']['app']['home'] : $_G[siteurl].'home.php'};icon-uri={$_G[siteurl]}{IMGDIR}/home.ico" /><!--{/if}-->
+	<!--{if $_G['basescript'] == 'forum' && $_G['setting']['archiver']}-->
+		<link rel="archives" title="$_G['setting']['bbname']" href="{$_G[siteurl]}archiver/" />
+	<!--{/if}-->
+	<!--{if !empty($rsshead)}-->$rsshead<!--{/if}-->
+	<!--{if widthauto()}-->
+		<link rel="stylesheet" id="css_widthauto" type="text/css" href="data/cache/style_{STYLEID}_widthauto.css?{VERHASH}" />
+		<script type="text/javascript">HTMLNODE.className += ' widthauto'</script>
+	<!--{/if}-->
+	<!--{if $_G['basescript'] == 'forum' || $_G['basescript'] == 'group'}-->
+		<script type="text/javascript" src="{$_G[setting][jspath]}forum.js?{VERHASH}"></script>
+	<!--{elseif $_G['basescript'] == 'home' || $_G['basescript'] == 'userapp'}-->
+		<script type="text/javascript" src="{$_G[setting][jspath]}home.js?{VERHASH}"></script>
+	<!--{elseif $_G['basescript'] == 'portal'}-->
+		<script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
+	<!--{/if}-->
+	<!--{if $_G['basescript'] != 'portal' && $_GET['diy'] == 'yes' && check_diy_perm($topic)}-->
+		<script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
+	<!--{/if}-->
+	<!--{if $_GET['diy'] == 'yes' && check_diy_perm($topic)}-->
+	<link rel="stylesheet" type="text/css" id="diy_common" href="data/cache/style_{STYLEID}_css_diy.css?{VERHASH}" />
+	<!--{/if}-->
+</head>
+
+<body id="nv_{$_G[basescript]}" class="pg_{CURMODULE}{if $_G['basescript'] === 'portal' && CURMODULE === 'list' && !empty($cat)} {$cat['bodycss']}{/if}" onkeydown="if(event.keyCode==27) return false;">
+	<div id="append_parent"></div><div id="ajaxwaitid"></div>
+	<!--{if $_GET['diy'] == 'yes' && check_diy_perm($topic)}-->
+		<!--{template common/header_diy}-->
+	<!--{/if}-->
+	<!--{if check_diy_perm($topic)}-->
+		<!--{block diynav}-->
+		
+		
+		<!--{/block}-->
+	<!--{/if}-->
+	<!--{if CURMODULE == 'topic' && $topic && empty($topic['useheader']) && check_diy_perm($topic)}-->
+		$diynav
+	<!--{/if}-->
+	<!--{if empty($topic) || $topic['useheader']}-->
+		<!--{if $_G['setting']['mobile']['allowmobile'] && (!$_G['setting']['cacheindexlife'] && !$_G['setting']['cachethreadon'] || $_G['uid']) && ($_GET['diy'] != 'yes' || !$_GET['inajax']) && ($_G['mobile'] != '' && $_G['cookie']['mobile'] == '' && $_GET['mobile'] != 'no')}-->
+		
+		<!--{/if}-->
+
+	
+
+		<!--{if !IS_ROBOT}-->
+			<!--{if $_G['uid'] && !empty($_G['style']['extstyle'])}-->
+			
+			<!--{/if}-->
+
+			
+		<!--{/if}-->
+
+		<!--{ad/headerbanner/wp a_h}-->
+		
+
+
+
+		<!--{hook/global_header}-->
+	<!--{/if}-->
+
+	<div id="wp" class="wp">
+	
+	
+	<div id="ct" class="wp cl w">
+		<!--{if !$param[login]}-->
+			<div class="nfl">
+		<!--{else}-->
+			<div class="nfl" id="main_succeed" style="display: none">
+				<div class="f_c altw">
+					<div class="alert_right">
+						<p id="succeedmessage"></p>
+						<p id="succeedlocation" class="alert_btnleft"></p>
+						<p class="alert_btnleft"><a id="succeedmessage_href">{lang message_forward}</a></p>
+					</div>
+				</div>
+			</div>
+			<div class="nfl" id="main_message">
+		<!--{/if}-->
+<!--{else}-->
+	<!--{template common/header_ajax}-->
+<!--{/if}-->
+<!--{if $param[msgtype] == 1 || $param[msgtype] == 2 && !$_G[inajax]}-->
+		<div class="f_c altw">
+			<div id="messagetext" class="$alerttype">
+				<p>$show_message</p>
+				<!--{if $url_forward}-->
+					<!--{if !$param[redirectmsg]}-->
+						<p class="alert_btnleft"><a href="$url_forward">{lang message_forward}</a></p>
+					<!--{else}-->
+						<p class="alert_btnleft"><a href="$url_forward">{lang attach_forward}</a></p>
+					<!--{/if}-->
+				<!--{elseif $allowreturn}-->
+				<script type="text/javascript">
+					if(history.length > (BROWSER.ie ? 0 : 1)) {
+						document.write('<p class="alert_btnleft"><a href="javascript:history.back()">{lang message_go_back}</a></p>');
+					} else {
+						document.write('<p class="alert_btnleft"><a href="./">[ $_G['setting']['bbname'] {lang homepage} ]</a></p>');
+					}
+				</script>
+				<!--{/if}-->
+			</div>
+			<!--{if $param[login]}-->
+				<div id="messagelogin"></div>
+				<script type="text/javascript">ajaxget('member.php?mod=logging&action=login&infloat=yes&frommessage', 'messagelogin');</script>
+			<!--{/if}-->
+		</div>
+<!--{elseif $param[msgtype] == 2}-->
+		<h3 class="flb"><em>{lang board_message}</em><!--{if $_G[inajax]}--><span><a href="javascript:;" class="flbc" onclick="hideWindow('$_GET['handlekey']');" title="{lang close}">{lang close}</a></span><!--{/if}--></h3>
+		<div class="c altw">
+			<div class="$alerttype">$show_message</div>
+		</div>
+		<p class="o pns">
+			<!--{if $param['closetime']}-->
+				<span class="z xg1">$param['closetime'] {lang message_closetime}</span>
+			<!--{elseif $param['locationtime']}-->
+				<span class="z xg1">$param['locationtime'] {lang message_locationtime}</span>
+			<!--{/if}-->
+			<!--{if $param[login]}-->
+				<button type="button" class="pn pnc" onclick="hideWindow('$_GET['handlekey']');showWindow('login', 'member.php?mod=logging&action=login');"><strong>{lang login}</strong></button>
+				<!--{if !$_G['setting']['bbclosed']}-->
+					<button type="button" class="pn pnc" onclick="hideWindow('$_GET['handlekey']');window.open('member.php?mod={$_G[setting][regname]}');"><em>$_G['setting']['reglinkname']</em></button>
+				<!--{/if}-->
+				<button type="button" class="pn" onclick="hideWindow('$_GET['handlekey']');"><em>{lang cancel}</em></button>
+			<!--{elseif !$param['closetime'] && !$param['locationtime']}-->
+				<button type="button" class="pn pnc" id="closebtn" onclick="hideWindow('$_GET['handlekey']');"><strong>{lang confirms}</strong></button>
+				<script type="text/javascript" reload="1">if($('closebtn')) {$('closebtn').focus();}</script>
+			<!--{/if}-->
+		</p>
+<!--{else}-->$show_message<!--{/if}-->
+<!--{if !$_G['inajax']}-->
+		</div>
+	</div>
+	
+<!--{else}-->
+	<!--{template common/footer_ajax}-->
+<!--{/if}-->

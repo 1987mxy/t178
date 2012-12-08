@@ -1,0 +1,289 @@
+<!--[IF lte IE 7]>
+<style>
+.tj_img { margin:8px 1px 0px 11px}
+.game_load_title { overflow:hidden;}
+.game_gz,.leitaitake { margin-top:0px;}
+</style>
+<![ENDIF]-->
+<div id="ctrl_game_onload">
+	<div class="content_top pk_prompt">
+<!--{if $playedStatistics}-->
+	温馨提示： <a style="color:#4983ED" href='u.php?uid={$_G['uid']}'>{$_G['username']}</a>，您曾在{$gameInfo['name']}得到最高分{$playedStatistics['max']}，最低分{$playedStatistics['min']}分。
+<!--{if $fightUser['uid']}-->
+<!--{if $mode=='challenge'}-->
+	<br>参加的擂台赛：<font color=#4983ED>{$gameInfo['name']}</font> 擂台，擂主：<a style='color:#4983ED' href='u.php?uid={$fightUser[uid]}'>{$fightUser['username']}</a>
+	&nbsp;&nbsp;&nbsp;TA的最高得分：<font color=#4983ED>{$fightUser['score']}</font>，
+<!--{else}-->
+	<br>正在PK： <a style='color:#4983ED' href='u.php?uid={$fightUser[uid]}'>{$fightUser['username']}</a>&nbsp;&nbsp;&nbsp;TA 的成绩：<font color=#4983ED>{$fightUser['score']}</font>， 
+<!--{/if}-->
+<!--{if $fightUser['uid']!=$_G['uid']}-->
+	您的最高得分<font color=#4983ED>{$myscore}</font>
+<!--{/if}-->
+<!--{/if}-->
+<!--{/if}-->
+	</div>
+	<div style=" background-image:url(source/plugin/bbsgame/images/1/game_con_03.jpg); background-repeat:repeat-x; overflow:hidden;width:100%;">
+          <span class="game_con_top1" style='display:block;'></span>
+          <span class="game_con_top2"></span>
+          <div style="clear:both; float:none"></div>
+          <div class="game_con_left"></div>
+          <div class="game_con_right"></div>
+          <div class="game_load_title">
+		<div class="game_gz">
+			<div class="game_rule" id="game_rule"></div>
+			<div class="game_recommend" id="game_recommend"></div>
+		</div>
+		<div class="leitaitake"><a href="plugin.php?id=bbsgame&gid=$gid&action=challenge&act=take"></a></div>
+		<img src="source/plugin/bbsgame/images/1/list_03.jpg" style=" margin-top:10px; margin-left:30px;" />&nbsp;&nbsp;<strong>{$gameInfo['name']}</strong></div>
+          <div id="_game" class="wtf_game">
+		<div style="width:100%; height:500px; overflow:hidden">
+			<div class="fixscroll">
+				<div id="pkgamecntflash" style='width:100%; height:480px; overflow:hidden;'>
+					<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="640" height="100%" id="pigPark" align="middle">
+					<param name="allowScriptAccess" value="always" />
+					<param name="allowFullScreen" value="false" />
+					<param name="movie" value="{$gameInfo[shellUrl]}" />
+					<param name="quality" value="high" />
+					<param name="wmode" value="transparent" />
+					<embed src="{$gameInfo[shellUrl]}" wmode="transparent" allowScriptAccess="always" width="640" height="100%" quality="high" name="pigPark" align="middle" allowScriptAccess="always" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+					</object>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+<!--{if !isset($_GET['step'])}-->
+ 			<div class="game_roule" id="game_rule_cnt">
+            	<div class="rule_win">
+                	<img style="margin-top:5px; margin-bottom:5px;" src="source/plugin/bbsgame/images/1/list_10.jpg"/>
+                	<div class="rule_font">开始游戏消耗{$gameInfo[useup]}{$gameInfo['money']}，游戏积分达到{$gameInfo[rate0]}，奖励{$gameInfo[rate1]}{$gameInfo['useup_ctype']}</div>
+                    <div class="dish_rule"></div>
+                    <img style="margin-top:10px; margin-bottom:5px;" src="source/plugin/bbsgame/images/1/list_13.jpg"/>
+                	<div class="rule_font" id="objective" style="height:85px;">{$gameInfo['objective']}</div>
+                    <div class="dish_rule"></div>
+                    <img style="margin-top:10px; margin-bottom:5px;" src="source/plugin/bbsgame/images/1/list_15.jpg"/>
+                	<div class="rule_font" id="operation" style="height:145px;">{$gameInfo['operation']}</div>
+                    <div class="dish_rule"></div>
+                </div>
+            </div>
+			<div class="game_roule" id="game_recommend_cnt" style="display:none">
+			 <div class="rule_win">
+<!--{loop $recommendGames $k $game}-->
+                     <div class="tj_img"><a href="plugin.php?id=bbsgame&action=game&gid={$game[gid]}"><img src="{$game[img]}" width="77" height="78" /></a>
+                     <div>{$game['name']}</div></div>
+<!--{/loop}-->
+                </div>
+            </div>
+<!--{/if}-->
+			<div style="clear:both; float:none"></div>
+            <span class="game_con_buttom1"></span>
+            <div class="game_con_bottom"><span class="game_con_bottom2"></span></div>
+        </div>
+    </div>
+	<div class="clearfloat"></div>
+</div>
+<!--{if !isset($_GET['step'])}-->
+<div id="pkgame_left">
+    <div class="tuijian">
+        <div class="tuijian_con">
+        	<div class="tj_title" style="color: #1187AE; font-size:14px; line-height:33px; padding-left:5px;">其他用户还喜欢玩这些...<a href='plugin.php?id=bbsgame&action=list&list=jl' style="float:right; padding-right:20px;">更多...</a></div>
+            	<div class="tj_content">
+<!--{loop $recommendGames $k $game}-->
+                     <div class="tj_img"><a href="plugin.php?id=bbsgame&action=game&gid={$game[gid]}"><img src="{$game[img]}" width="77" height="78" /></a>
+                     <div>{$game['name']}</div></div>
+<!--{/loop}-->
+                     <div class="clearfloat"></div>
+             	</div>
+        	</div>
+    </div>
+	<div class="pkgame_reyi" style=" ">
+		<div class="pkgame_reyipost" style="">
+			<form action="pkgamepost.php?act=add&action=reply" method="post">
+			<input type="hidden" value="{$gid}" name="gid">
+			<div class="reyipost_cnt">
+				<textarea name="content" id="txtContent" style=""></textarea>
+				<div id="pkgamecntlogin" style=""><div style="margin:35px auto; width:120px;">游客，你需要<a href="javascript:replylogin();">登录</a></div></div>
+				<div class="reyipost_cnt_bottom" style=" ">
+					<span style=" vertical-align:bottom; float:left;" id="important_ac"><a href="javascript:;" onclick="changeMore(1)">
+						<img src="source/plugin/bbsgame/images/3/postfun.gif" border="0"></a>
+					</span>
+					<img style='vertical-align: middle;' id='pkgame_vcode' onclick='changeVcode(this)' src='source/plugin/bbsgame/pkwtf.php?vcode=vcode'>
+					<input type='text' name='vcode' style='width: 40px; margin-right:5px;' />				
+					<input class="submit" type="submit" value="" style="text-indent: -999px; border:none; width:80px; height:30px;">
+				</div>
+			   <div style=" display:none;" id="important_b">
+<!--{eval for($i = 1; $i < 46; $i++) {}-->
+				  <img src="source/plugin/bbsgame/images/pic/brow{$i}.gif" onclick="InsertPic(this.src);"/>
+<!--{if $i%13==0}-->
+				<br />
+<!--{/if}-->
+<!--{eval }}-->
+			  </div>
+			</div>
+			</form>
+			<img style="position:absolute; top:-4px; left:10px;" src="source/plugin/bbsgame/images/3/reyibtn.gif">
+		</div>
+		<a name="list"></a>
+		<div class="pkgame_reyilist" style="border-top:1px #ccc solid;">
+			<div class="reyilist_tile"></div>
+			<div class="reyilist_cnt">
+			<ul>
+<!--{loop $replylist $key $reply}-->
+				<li>
+					<p class="reyilist_cnt_title" style="">{$reply['username']}
+<!--{if $admintoken}-->
+					<a title="屏蔽" class="admintoken" onclick="return confirm('确认要屏蔽词条留言吗？')?true:false;" href="pkgamepost.php?action=reply&act=validate&rid={$reply['id']}&gid={$gid}">×</a>
+<!--{/if}-->
+					</p>
+					<p style="text-indent:10px;">{$reply['content']}</p>
+					<p class="reyilist_cnt_posttime" style="text-align:right; width:100%; height:20px;">发表于：{$reply['ctime']}</p>
+				</li>
+<!--{/loop}-->
+			</ul>
+			</div>
+			<div id="cnt_page">{$pageCss}</div>
+		</div>
+	</div>
+</div>
+<div id="pkgame_right">
+    <div class="rank">
+        <div class="ph_con">
+        	<div class="tj_title">
+			<div class="blue_bold">
+				<span class="rank_name"><p style="margin-left:20px;">排行榜</p></span>
+<!--{if $nationalActive}-->
+				<div class="rank_zn" style='width:28%' id="_zns" onclick="change_nz(2,this)">活动排行</div>
+<!--{else}-->
+ 				<div class="rank_zn" id="_zns" onclick="change_nz(2,this)">总排行</div>
+<!--{/if}-->
+				<div class="rank_zns" id="_zn" onclick="change_nz(1,this)">站内</div>
+            </div>
+			</div>
+          <table style=" " id="ph_tb1">
+          	<tr><th>名次</th><th>姓名</th><th>积分</th><th>挑战</th></tr>
+<!--{eval $class = 't_ones';}-->
+<!--{eval $red = "style='color:red'";}-->
+<!--{loop $pkRankingUser $k $user}-->
+<!--{eval $tyle = '';}-->
+<!--{eval $j=$k+1;}-->
+<!--{if $j>3}-->
+<!--{eval $class = '';}-->
+<!--{/if}-->
+<!--{if $j==count($pkRankingUser)}-->
+<!--{eval $style = 'border-bottom:none';}-->
+<!--{/if}-->
+			<tr class="t_mcs tr_list {$class}" style="$style">
+            	<td>{$j}</td>
+                <td ><p class="td_name"><a {$red} href="plugin.php?id=bbsgame&action=iplayed&uid={$user[uid]}">{$user['username']}</a></p></td>
+                <td>{$user['score']}</td>
+				<td><a href="javascript:void(0);" onclick="pkgamePkSomeOne($user[uid], '$user[username]', $uid, $gameInfo[gid],'$gameInfo[name]')">挑战TA</a></td>
+            </tr>
+<!--{/loop}--> 
+          </table>
+          <table style=" width:100%; margin:0px; padding:0px; display:none;" id="ph_tb2">
+          	<tr><th>名次</th><th>姓名</th><th>积分</th></tr>
+          </table>
+        </div>
+    </div>
+	<div class="pkgame_share" style="background:#FAFAFA; padding:15px; margin-top:5px; border:#E8E8EA 1px solid;">
+		<div class="share_title" style=" font-size:18px; height:18px; line-height:18px; color:#1187AE; margin-bottom:10px;">分享有礼</div>
+		<div class="share_cnt">
+			<div class="shareAll" style='padding-bottom:20px; overflow:hidden;'>
+				<!-- <a href="javascript:void(0)" onclick="window.open('http://share.jianghu.taobao.com/share/addShare.htm?title='+encodeURIComponent(document.title.substring(0,76))+'&amp;url='+encodeURIComponent(location.href)+'&amp;content=','_blank','scrollbars=no,width=600,height=450,left=75,top=20,status=no,resizable=yes'); void 0" title="淘江湖">淘江湖</a> -->
+				<!-- 分享到新浪 -->
+				<a href="javascript:(function(){window.open('http://v.t.sina.com.cn/share/share.php?title='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href)+'&source=bookmark','_blank','width=450,height=400');})()" title="新浪微博" style="background-position:0 -20px;">新浪</a>
+				<!-- 分享到新浪 -->
+				<a href="javascript:void(0)" onclick="window.open( 'http://v.t.qq.com/share/share.php?url='+encodeURIComponent(document.location)+'&amp;appkey=&amp;site=&amp;title='+encodeURI(document.title),'', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );" title="QQ微博" style="background-position:0 -40px;">QQ微博</a>
+				<a href="javascript:void(0);" onclick="window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+encodeURIComponent(document.location.href));return false;" title="QQ空间" style="background-position:0 -60px;">QQ空间</a>
+				<a href="javascript:d=document;t=d.selection?(d.selection.type!='None'?d.selection.createRange().text:''):(d.getSelection?d.getSelection():'');void(kaixin=window.open('http://www.kaixin001.com/~repaste/repaste.php?&rurl='+escape(d.location.href)+'&rtitle='+escape(d.title)+'&rcontent='+escape(d.title),'kaixin'));kaixin.focus();" title="开心" style="background-position:0 -80px;">开心</a>
+				<a href="javascript:void((function(s,d,e){if(/renren\.com/.test(d.location))return;var f='http://share.renren.com/share/buttonshare?link=',u=d.location,l=d.title,p=[e(u),'&title=',e(l)].join('');function%20a(){if(!window.open([f,p].join(''),'xnshare',['toolbar=0,status=0,resizable=1,width=626,height=436,left=',(s.width-626)/2,',top=',(s.height-436)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent));" title="人人" style="background-position:0 -100px;">人人</a>
+				<a href="javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://www.douban.com/recommend/?url='+e(d.location.href)+'&title='+e(d.title)+'&sel='+e(s)+'&v=1',x=function(){if(!window.open(r,'douban','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r+'&r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()" title="豆瓣" style="background-position:0 -120px;">豆瓣</a>
+				<a onclick="(function(){var url = 'link=http://news.163.com/&amp;source='+ encodeURIComponent('网易新闻')+ '&amp;info='+ encodeURIComponent(document.title) + ' ' + encodeURIComponent(document.location.href);window.open('http://t.163.com/article/user/checkLogin.do?'+url+'&amp;'+new Date().getTime(),'newwindow','height=330,width=550,top='+(screen.height-280)/2+',left='+(screen.width-550)/2+', toolbar=no, menubar=no, scrollbars=no,resizable=yes,location=no, status=no');})()" href="javascript:void(0);" title="网易微博" style="background-position:0 -140px;">网易微博</a>
+				<a href="javascript:void(0);" onclick="window.open('http://apps.hi.baidu.com/share/?title='+encodeURIComponent(document.title.substring(0,76))+'&amp;url='+encodeURIComponent(location.href));return false;" title="百度空间" style="background-position:0 -180px;">百度</a>
+				<a href="javascript:void(0);" onclick="window.open('http://xianguo.com/service/submitfav/?link='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title));return false;" title="鲜果" style="background-position:0 -200px;">鲜果</a>
+				<a href="javascript:void(0);" onclick="window.open('http://bai.sohu.com/share/blank/add.do?link='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title));return false;" title="白社会" style="background-position:0 -220px;">白社会</a>
+				<a href="javascript:void(0);" onclick="window.open('http://space.feixin.10086.cn/api/share?title='+encodeURIComponent(document.title)+'&amp;url='+encodeURIComponent(location.href));return false;" title="飞信" style="background-position:0 -240px;">飞信</a>
+			</div>
+			<p>分享给站外好友（视频地址）</p>
+			<p style="margin-bottom:20px;"><textarea onfocus="this.select();" >{$gameInfo[swf]}</textarea><button class="cpbtnswf" style="color: #78A6F1">复制</button></p>
+			<p>把视频贴到BLOG或BBS上（html代码）</p>
+			<p><textarea onfocus="this.select();" >{$theurl}</textarea><button class="cpbtnhtml" style="color: #78A6F1">复制</button></p>
+		</div>
+	</div>
+</div>
+<!--{/if}-->
+<div style="clear:both"></div>
+</div>
+<script>
+var jq = jQuery.noConflict();
+
+var gid  = {$gameInfo[gid]};
+var swf = "{$gameInfo[swf]}";
+var mode = "{$mode}";
+var pk_id = "{$pk_id}";
+var c_cnf = [
+<!--{loop $_G['setting']['extcredits'] $k $v}-->
+{"key":"extcredits{$k}","value":"{$v['title']}"},
+<!--{/loop}-->
+];
+jq(document).ready(function(){
+	
+	var operation = document.getElementById('operation');
+	if(operation.scrollHeight > operation.offsetHeight) operation.style.overflowY = 'scroll';
+	var objective = document.getElementById('objective');
+	if(objective.scrollHeight > objective.offsetHeight) objective.style.overflowY = 'scroll';
+	var cm = new contentModule();
+	cm.ranking({$gameInfo['gid']}, '{$gameInfo[name]}',{$nationalActive});
+	jq("#btn_up").click(function(){
+		cm.scrollPkList('up');
+	});
+	jq("#btn_down").click(function(){
+		cm.scrollPkList('down');
+	});
+	jq("#game_rule").click(function(){
+		jq("#game_rule_cnt").hide();
+		jq("#game_recommend_cnt").show();
+	});
+	jq("#game_rule").click(function(){
+		jq(this).css({"background-position":"-5px -4px"});
+		jq("#game_recommend").css("background-position","-104px -4px");
+		jq("#game_rule_cnt").show();
+		jq("#game_recommend_cnt").hide();
+	});
+	jq("#game_recommend").click(function(){
+		jq(this).css({"background-position":"-104px -48px"});
+		jq("#game_rule").css("background-position","-5px -48px");
+		jq("#game_rule_cnt").hide();
+		jq("#game_recommend_cnt").show();
+	});
+});
+<!--{if $mode_type=='擂台赛'}-->
+jq("body").css("background","url(source/plugin/bbsgame/images/3/leitai.jpg) repeat-x top center");
+<!--{/if}-->
+
+function InsertPic(picpath)
+{
+	var editor = document.getElementById('txtContent'); 
+	var BQstr = picpath.replace(/.*\/(brow\d+\.gif)/g,"[S:$1]");
+	var textVar = editor.value 
+	editor.value = textVar + BQstr;
+	changeMore(2);
+}
+
+function changeMore(obj) {
+	if(obj == 1) {
+		jq("#important_s").hide();
+		jq("#important_b").show();
+		jq("#important_ac").html("<a href=\"javascript:;\" onclick=\"changeMore(2)\"><img src=\"source/plugin/bbsgame/images/3/postfun.gif\" border=\"0\"></a>");
+	} else {
+		jq("#important_s").show();
+		jq("#important_b").hide();
+		jq("#important_ac").html("<a href=\"javascript:;\" onclick=\"changeMore(1)\"><img src=\"source/plugin/bbsgame/images/3/postfun.gif\" border=\"0\"></a>");
+	}
+}
+</script>
+<!--{if $mode_type}-->
+<div id="pk_status">
+当前模式：$mode_type
+</div>
+<!--{/if}-->

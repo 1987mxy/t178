@@ -1,0 +1,391 @@
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" />
+	<!--{if $_G['config']['output']['iecompatible']}--><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE{$_G['config']['output']['iecompatible']}" /><!--{/if}-->
+	<title><!--{if !empty($navtitle)}-->$navtitle - <!--{/if}--><!--{if empty($nobbname)}--> $_G['setting']['bbname'] - <!--{/if}--> Powered by Discuz!</title>
+	$_G['setting']['seohead']
+
+	<meta name="keywords" content="{if !empty($metakeywords)}{echo dhtmlspecialchars($metakeywords)}{/if}" />
+	<meta name="description" content="{if !empty($metadescription)}{echo dhtmlspecialchars($metadescription)} {/if}{if empty($nobbname)},$_G['setting']['bbname']{/if}" />
+	<meta name="generator" content="Discuz! $_G['setting']['version']" />
+	<meta name="author" content="Discuz! Team and Comsenz UI Team" />
+	<meta name="copyright" content="2001-2012 Comsenz Inc." />
+	<meta name="MSSmartTagsPreventParsing" content="True" />
+	<meta http-equiv="MSThemeCompatible" content="Yes" />
+	<base href="{$_G['siteurl']}" />
+	<!--{csstemplate}-->
+	<script type="text/javascript">var STYLEID = '{STYLEID}', STATICURL = '{STATICURL}', IMGDIR = '{IMGDIR}', VERHASH = '{VERHASH}', charset = '{CHARSET}', discuz_uid = '$_G[uid]', cookiepre = '{$_G[config][cookie][cookiepre]}', cookiedomain = '{$_G[config][cookie][cookiedomain]}', cookiepath = '{$_G[config][cookie][cookiepath]}', showusercard = '{$_G[setting][showusercard]}', attackevasive = '{$_G[config][security][attackevasive]}', disallowfloat = '{$_G[setting][disallowfloat]}', creditnotice = '<!--{if $_G['setting']['creditnotice']}-->$_G['setting']['creditnames']<!--{/if}-->', defaultstyle = '$_G[style][defaultextstyle]', REPORTURL = '$_G[currenturl_encode]', SITEURL = '$_G[siteurl]', JSPATH = '$_G[setting][jspath]';</script>
+	<script type="text/javascript" src="{$_G[setting][jspath]}common.js?{VERHASH}"></script>
+	<!--{if empty($_GET['diy'])}--><!--{eval $_GET['diy'] = '';}--><!--{/if}-->
+	<!--{if !isset($topic)}--><!--{eval $topic = array();}--><!--{/if}-->
+
+
+
+	<meta name="application-name" content="$_G['setting']['bbname']" />
+	<meta name="msapplication-tooltip" content="$_G['setting']['bbname']" />
+	<!--{if $_G['setting']['portalstatus']}--><meta name="msapplication-task" content="name=$_G['setting']['navs'][1]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['portal']) ? 'http://'.$_G['setting']['domain']['app']['portal'] : $_G[siteurl].'portal.php'};icon-uri={$_G[siteurl]}{IMGDIR}/portal.ico" /><!--{/if}-->
+	<meta name="msapplication-task" content="name=$_G['setting']['navs'][2]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['forum']) ? 'http://'.$_G['setting']['domain']['app']['forum'] : $_G[siteurl].'forum.php'};icon-uri={$_G[siteurl]}{IMGDIR}/bbs.ico" />
+	<!--{if $_G['setting']['groupstatus']}--><meta name="msapplication-task" content="name=$_G['setting']['navs'][3]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['group']) ? 'http://'.$_G['setting']['domain']['app']['group'] : $_G[siteurl].'group.php'};icon-uri={$_G[siteurl]}{IMGDIR}/group.ico" /><!--{/if}-->
+	<!--{if helper_access::check_module('feed')}--><meta name="msapplication-task" content="name=$_G['setting']['navs'][4]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['home']) ? 'http://'.$_G['setting']['domain']['app']['home'] : $_G[siteurl].'home.php'};icon-uri={$_G[siteurl]}{IMGDIR}/home.ico" /><!--{/if}-->
+	<!--{if $_G['basescript'] == 'forum' && $_G['setting']['archiver']}-->
+		<link rel="archives" title="$_G['setting']['bbname']" href="{$_G[siteurl]}archiver/" />
+	<!--{/if}-->
+	<!--{if !empty($rsshead)}-->$rsshead<!--{/if}-->
+	<!--{if widthauto()}-->
+		<link rel="stylesheet" id="css_widthauto" type="text/css" href="data/cache/style_{STYLEID}_widthauto.css?{VERHASH}" />
+		<script type="text/javascript">HTMLNODE.className += ' widthauto'</script>
+	<!--{/if}-->
+	<!--{if $_G['basescript'] == 'forum' || $_G['basescript'] == 'group'}-->
+		<script type="text/javascript" src="{$_G[setting][jspath]}forum.js?{VERHASH}"></script>
+	<!--{elseif $_G['basescript'] == 'home' || $_G['basescript'] == 'userapp'}-->
+		<script type="text/javascript" src="{$_G[setting][jspath]}home.js?{VERHASH}"></script>
+	<!--{elseif $_G['basescript'] == 'portal'}-->
+		<script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
+	<!--{/if}-->
+	<!--{if $_G['basescript'] != 'portal' && $_GET['diy'] == 'yes' && check_diy_perm($topic)}-->
+		<script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
+	<!--{/if}-->
+	<!--{if $_GET['diy'] == 'yes' && check_diy_perm($topic)}-->
+	<link rel="stylesheet" type="text/css" id="diy_common" href="data/cache/style_{STYLEID}_css_diy.css?{VERHASH}" />
+	
+	<!--{/if}-->
+
+	<link rel="stylesheet" type="text/css" href="./im/reg.css" />
+</head>
+
+<body >
+	<div id="append_parent"></div><div id="ajaxwaitid"></div>
+
+
+
+
+	<div id="reg_all" class="reg_all">
+
+
+
+<script type="text/javascript">
+	var strongpw = new Array();
+	<!--{if $_G['setting']['strongpw']}-->
+		<!--{loop $_G['setting']['strongpw'] $key $val}-->
+		strongpw[$key] = $val;
+		<!--{/loop}-->
+	<!--{/if}-->
+	var pwlength = <!--{if $_G['setting']['pwlength']}-->$_G['setting']['pwlength']<!--{else}-->0<!--{/if}-->;
+</script>
+
+
+
+<div  >
+	<div class="nfl" id="main_succeed" style="display: none">
+		<div class="f_c altw">
+			<div class="alert_right">
+				<p id="succeedmessage"></p>
+				<p id="succeedlocation" class="alert_btnleft"></p>
+				<p class="alert_btnleft"><a id="succeedmessage_href">{lang message_forward}</a></p>
+			</div>
+		</div>
+	</div>
+	<div class="mn">
+
+<div class="bm" id="main_message">
+
+	<div class="bm_h bbs" id="main_hnav">
+		<span class="y">
+
+		<!--{if !empty($_GET['infloat']) && !isset($_GET['frommessage'])}--><a href="javascript:;" class="flbc" onclick="hideWindow('register')" title="{lang close}">{lang close}</a><!--{/if}-->
+			<!--{hook/register_side_top}-->
+		
+			
+			
+		
+		</span>
+		<h3 id="layer_reginfo_t" class="xs2">
+		<script type="text/javascript" src="{$this->setting[jspath]}register.js?{VERHASH}"></script>
+		<font style="color:red;">[首页引入注册，页面需要重新设计]</font>
+			<!--{if $_GET[action] != 'activation'}-->$this->setting['reglinkname']<!--{else}-->{lang index_activation}<!--{/if}-->
+
+
+	----<!--{if $_GET[action] == 'activation'}-->
+				{lang login_inactive}
+			<!--{else}-->
+				<a href="member.php?mod=logging&action=login&referer={echo rawurlencode($dreferer)}" onclick="showWindow('login', this.href);hideWindow('register');return false;" class="xi2">{lang login_now}</a>
+			<!--{/if}-->
+	
+		</h3>
+			
+	</div>
+
+	<p id="returnmessage4"></p>
+
+	<!--{if $this->showregisterform}-->
+	<form method="post" autocomplete="off" name="register" id="registerform" enctype="multipart/form-data" onsubmit="checksubmit();return false;" action="member.php?mod=$regname">
+		<div id="layer_reg" class="bm_c">
+			<input type="hidden" name="regsubmit" value="yes" />
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<input type="hidden" name="referer" value="$dreferer" />
+			<input type="hidden" name="activationauth" value="{if $_GET[action] == 'activation'}$activationauth{/if}" />
+			<!--{if $_G['setting']['sendregisterurl']}-->
+				<input type="hidden" name="hash" value="$_GET[hash]" />
+			<!--{/if}-->
+			<div class="mtw">
+				<div id="reginfo_a">
+					<!--{hook/register_top}-->
+					<!--{if $sendurl}-->
+						<div class="rfm">
+							<table>
+								<tr>
+									<th><span class="rq">*</span><label for="{$this->setting['reginput']['email']}">{lang email}:</label></th>
+									<td>
+										<input type="text" id="{$this->setting['reginput']['email']}" name="$this->setting['reginput']['email']" autocomplete="off" size="25" tabindex="1" class="px" required /><br /><em id="emailmore">&nbsp;</em>
+										<input type="hidden" name="handlekey" value="sendregister"/>
+									</td>
+									<td class="tipcol"><i id="tip_{$this->setting['reginput']['email']}" class="p_tip">{lang register_email_tips}</i><kbd id="chk_{$this->setting['reginput']['email']}" class="p_chk"></kbd></td>
+								</tr>
+							</table>
+							<table>
+								<tr>
+									<th>&nbsp;</th>
+									<td class="tipwide">
+										{lang register_validate_email_tips}
+									</td>
+								</tr>
+							</table>
+							<script type="text/javascript">
+								function succeedhandle_sendregister(url, msg, values) {
+									showDialog(msg, 'notice');
+								}
+							</script>
+						</div>
+					<!--{else}-->
+						<!--{if $invite}-->
+							<!--{if $invite['uid']}-->
+							<div class="rfm">
+								<table>
+									<tr>
+										<th>{lang register_from}:</th>
+										<td><a href="home.php?mod=space&uid=$invite[uid]" target="_blank">$invite[username]</a></td>
+									</tr>
+								</table>
+							</div>
+							<!--{else}-->
+							<div class="rfm">
+								<table>
+									<tr>
+										<th><label for="invitecode">{lang invite_code}:</label></th>
+										<td>$_GET[invitecode]<input type="hidden" id="invitecode" name="invitecode" value="$_GET[invitecode]" /></td>
+									</tr>
+								</table>
+							</div>
+							<!--{eval $invitecode = 1;}-->
+							<!--{/if}-->
+						<!--{/if}-->
+
+						<!--{if empty($invite) && $this->setting['regstatus'] == 2 && !$invitestatus}-->
+						<div class="rfm">
+							<table>
+								<tr>
+									<th><span class="rq">*</span><label for="invitecode">{lang invite_code}:</label></th>
+									<td><input type="text" id="invitecode" name="invitecode" autocomplete="off" size="25" onblur="checkinvite()" tabindex="1" class="px" required /><!--{if $this->setting['inviteconfig']['buyinvitecode'] && $this->setting['inviteconfig']['invitecodeprice'] && ($this->setting[ec_tenpay_bargainor] || $this->setting[ec_tenpay_opentrans_chnid] || $this->setting[ec_account])}--><p><a href="misc.php?mod=buyinvitecode" target="_blank" class="xi2">{lang register_buyinvitecode}</a></p><!--{/if}--></td>
+									<td class="tipcol"><i id="tip_invitecode" class="p_tip"><!--{if $this->setting['inviteconfig']['invitecodeprompt']}-->$this->setting[inviteconfig][invitecodeprompt]<!--{/if}--></i><kbd id="chk_invitecode" class="p_chk"></kbd></td>
+								</tr>
+							</table>
+						</div>
+						<!--{eval $invitecode = 1;}-->
+						<!--{/if}-->
+
+						<!--{if $_GET[action] != 'activation'}-->
+							<div class="rfm">
+								<table>
+									<tr>
+										<th><span class="rq">*</span><label for="{$this->setting['reginput']['username']}">{lang username}:</label></th>
+										<td><input type="text" id="{$this->setting['reginput']['username']}" name="" class="px" tabindex="1" autocomplete="off" size="25" maxlength="15" required /></td>
+										<td class="tipcol"><i id="tip_{$this->setting['reginput']['username']}" class="p_tip">{lang register_username_tips}</i><kbd id="chk_{$this->setting['reginput']['username']}" class="p_chk"></kbd></td>
+									</tr>
+								</table>
+							</div>
+
+							<div class="rfm">
+								<table>
+									<tr>
+										<th><span class="rq">*</span><label for="{$this->setting['reginput']['password']}">{lang password}:</label></th>
+										<td><input type="password" id="{$this->setting['reginput']['password']}" name="" size="25" tabindex="1" class="px" required /></td>
+										<td class="tipcol"><i id="tip_{$this->setting['reginput']['password']}" class="p_tip">{lang register_password_tips}<!--{if $_G['setting']['pwlength']}-->, {lang register_password_length_tips1} $_G['setting']['pwlength'] {lang register_password_length_tips2}<!--{/if}--></i><kbd id="chk_{$this->setting['reginput']['password']}" class="p_chk"></kbd></td>
+									</tr>
+								</table>
+							</div>
+
+							<div class="rfm">
+								<table>
+									<tr>
+										<th><span class="rq">*</span><label for="{$this->setting['reginput']['password2']}">{lang password_confirm}:</label></th>
+										<td><input type="password" id="{$this->setting['reginput']['password2']}" name="" size="25" tabindex="1" value="" class="px" required /></td>
+										<td class="tipcol"><i id="tip_{$this->setting['reginput']['password2']}" class="p_tip">{lang register_repassword_tips}</i><kbd id="chk_{$this->setting['reginput']['password2']}" class="p_chk"></kbd></td>
+									</tr>
+								</table>
+							</div>
+
+							<div class="rfm">
+								<table>
+									<tr>
+										<th><span class="rq">*</span><label for="{$this->setting['reginput']['email']}">{lang email}:</label></th>
+										<td><input type="text" id="{$this->setting['reginput']['email']}" name="" autocomplete="off" size="25" tabindex="1" class="px" value="$hash[0]" required /><br /><em id="emailmore">&nbsp;</em></td>
+										<td class="tipcol"><i id="tip_{$this->setting['reginput']['email']}" class="p_tip">{lang register_email_tips}</i><kbd id="chk_{$this->setting['reginput']['email']}" class="p_chk"></kbd></td>
+									</tr>
+								</table>
+							</div>
+						<!--{/if}-->
+
+						<!--{if $_GET[action] == 'activation'}-->
+						<div id="activation_user" class="rfm">
+							<table>
+								<tr>
+									<th>{lang username}:</th>
+									<td><strong>$username</strong></td>
+								</tr>
+							</table>
+						</div>
+						<!--{/if}-->
+
+						<!--{if $this->setting['regverify'] == 2}-->
+						<div class="rfm">
+							<table>
+								<tr>
+									<th><span class="rq">*</span><label for="regmessage">{lang register_message}:</label></th>
+									<td><input id="regmessage" name="regmessage" class="px" autocomplete="off" size="25" tabindex="1" required /></td>
+									<td class="tipcol"><i id="tip_regmessage" class="p_tip">{lang register_message1}</i></td>
+								</tr>
+							</table>
+						</div>
+						<!--{/if}-->
+
+						<!--{if empty($invite) && $this->setting['regstatus'] == 3}-->
+						<div class="rfm">
+							<table>
+								<tr>
+									<th><label for="invitecode">{lang invite_code}:</label></th>
+									<td><input type="text" name="invitecode" autocomplete="off" size="25" id="invitecode"{if $this->setting['regstatus'] == 2} onblur="checkinvite()"{/if} tabindex="1" class="px" /></td>
+								</tr>
+							</table>
+						</div>
+						<!--{eval $invitecode = 1;}-->
+						<!--{/if}-->
+
+						<!--{loop $_G['cache']['fields_register'] $field}-->
+							<!--{if $htmls[$field['fieldid']]}-->
+							<div class="rfm">
+								<table>
+									<tr>
+										<th><!--{if $field['required']}--><span class="rq">*</span><!--{/if}--><label for="$field['fieldid']">$field[title]:</label></th>
+										<td>$htmls[$field['fieldid']]</td>
+										<td class="tipcol"><i id="tip_$field['fieldid']" class="p_tip"><!--{if $field['description']}--><!--{echo dhtmlspecialchars($field[description])}--><!--{/if}--></i><kbd id="chk_$field['fieldid']" class="p_chk"></kbd></td>
+									</tr>
+								</table>
+							</div>
+							<!--{/if}-->
+						<!--{/loop}-->
+					<!--{/if}-->
+					<!--{hook/register_input}-->
+
+					<!--{if $secqaacheck || $seccodecheck}-->
+						<!--{block sectpl}--><div class="rfm"><table><tr><th><span class="rq">*</span><sec>: </th><td><sec><br /><sec></td></tr></table></div><!--{/block}-->
+						<!--{subtemplate common/seccheck}-->
+					<!--{/if}-->
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div id="layer_reginfo_b">
+			<div class="rfm mbw bw0">
+				<table width="100%">
+					<tr>
+						<th>&nbsp;</th>
+						<td>
+							<span id="reginfo_a_btn">
+								<!--{if $_GET[action] != 'activation'}--><em>&nbsp;</em><!--{/if}-->
+									<button class="pn pnc" id="registerformsubmit" type="submit" name="regsubmit" value="true" tabindex="1"><strong><!--{if $_GET[action] == 'activation'}-->{lang activation}<!--{else}-->{lang submit}<!--{/if}--></strong></button>
+								<!--{if $bbrules}-->
+									<input type="checkbox" class="pc" name="agreebbrule" value="$bbrulehash" id="agreebbrule" checked="checked" /> <label for="agreebbrule">{lang agree}<a href="javascript:;" onclick="showBBRule()">{lang rulemessage}</a></label>
+								<!--{/if}-->
+							</span>
+						</td>
+						<td><!--{if $this->setting['sitemessage'][register]}--><a href="javascript:;" id="custominfo_register" class="y"><img src="{IMGDIR}/info_small.gif" alt="{lang faq}" /></a><!--{/if}--></td>
+					</tr>
+				</table>
+			</div>
+			<!--{if !empty($_G['setting']['pluginhooks']['register_logging_method'])}-->
+				<div class="rfm bw0 {if empty($_GET['infloat'])} mbw{/if}">
+					<hr class="l" />
+					<table>
+						<tr>
+							<th>{lang login_method}:</th>
+							<td><!--{hook/register_logging_method}--></td>
+						</tr>
+					</table>
+				</div>
+			<!--{/if}-->
+		</div>
+	</form>
+	<!--{/if}-->
+	<!--{hook/register_bottom}-->
+</div>
+<div id="layer_regmessage"class="f_c blr nfl" style="display: none">
+	<div class="c"><div class="alert_right">
+		<div id="messageleft1"></div>
+		<p class="alert_btnleft" id="messageright1"></p>
+	</div>
+</div>
+
+<div id="layer_bbrule" style="display: none">
+<div class="c" style="width:700px;height:350px;overflow:auto">$bbrulestxt</div>
+<p class="fsb pns cl hm">
+	<button class="pn pnc" onclick="$('agreebbrule').checked = true;hideMenu('fwin_dialog', 'dialog');{if $this->setting['sitemessage'][register] && ($bbrules && $bbrulesforce)}showRegprompt();{/if}"><span>{lang agree}</span></button>
+	<button class="pn" onclick="location.href='$_G[siteurl]'"><span>{lang disagree}</span></button>
+</p>
+</div>
+
+<script type="text/javascript">
+<!--{if $bbrules && $bbrulesforce}-->
+	showBBRule();
+<!--{/if}-->
+<!--{if $this->showregisterform}-->
+	<!--{if $sendurl}-->
+	addMailEvent($('{$this->setting['reginput']['email']}'));
+	<!--{else}-->
+	addFormEvent('registerform', <!--{if $_GET[action] != 'activation' && !($bbrules && $bbrulesforce) && !empty($invitecode)}-->1<!--{else}-->0<!--{/if}-->);
+	<!--{/if}-->
+	<!--{if $this->setting['sitemessage'][register]}-->
+		function showRegprompt() {
+			showPrompt('custominfo_register', 'mouseover', '<!--{echo trim($this->setting['sitemessage'][register][array_rand($this->setting['sitemessage'][register])])}-->', $this->setting['sitemessage'][time]);
+		}
+		<!--{if !($bbrules && $bbrulesforce)}-->
+			showRegprompt();
+		<!--{/if}-->
+	<!--{/if}-->
+	function showBBRule() {
+		showDialog($('layer_bbrule').innerHTML, 'info', '<!--{echo addslashes($this->setting['bbname']);}--> {lang rulemessage}');
+		$('fwin_dialog_close').style.display = 'none';
+	}
+<!--{/if}-->
+</script>
+
+	</div></div>
+</div>
+
+<!--{eval updatesession();}-->
+
+	</div>
+
+<span id="scrolltop" onclick="window.scrollTo('0','0')">{lang scrolltop}</span>
+<script type="text/javascript">_attachEvent(window, 'scroll', function(){showTopLink();});checkBlind();</script>
+
+</body>
+</html>

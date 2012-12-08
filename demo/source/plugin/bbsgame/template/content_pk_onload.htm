@@ -1,0 +1,170 @@
+<div id="ctrl_zhanshu_onload">
+		<div class="zhanshu_title">
+			<ul>
+				<li id="zhanshu_all" class="zhanshu_selected"><a href="javascript:void(0);">全部</a></li>
+				<li id="zhanshu_def"><a href="javascript:void(0);">我的应战史</a></li>
+				<li id="zhanshu_act"><a href="javascript:void(0);">我的挑战史</a></li>
+				<li id="zhanshu_pkme"><a href="javascript:void(0);">收到战书
+<!--{if $newPknoticeNum}-->
+				({$newPknoticeNum})
+<!--{/if}-->
+				</a></li>
+				<li id="zhanshu_new"><a href="javascript:void(0);">发起挑战</a></li>
+			</ul>
+			显示挑战：
+		</div>
+		<div class="zhanshu_cnt">
+			<div id="zhanshu_all_onload" style="">
+				<ul>
+<!--{if $pklistsPkall}-->
+<!--{loop $pklistsPkall $key $pk}-->
+<!--{eval $pk['img']=PIC_HOST."/".preg_replace('/_120.jpg/', '.jpg', $pk['img']);}-->
+					<li>
+						<div class='pk_cnt_info'>
+						<a href="plugin.php?id=bbsgame&action=game&gid={$pk['gid']}&mode=pk&pk_id={$pk['pkid']}">
+										<div class="pk_cover" style="bottom: -97px; ">
+											<p class="cover_top">{$pk[desc]}</p>
+											<p class="cover_bottom">挑战！</p>
+										</div>
+										<img onerror='this.src="source/plugin/bbsgame/images/404/404_tips.png"' src="{$pk['img']}">
+									</a>
+						</div>
+						<div class='pk_cnt_pkinfo'>
+								<div class="pkuser_a">
+									<img class="pkuser_ico" src="{$pk[act_usericon]}">
+									<p><img src="source/plugin/bbsgame/images/3/dao.gif"></p>
+									<p>{$pk['act_username']}</p>
+									<p>{$pk['act_score']}</p>
+								</div>
+								<div class="pk_pk"><img src="source/plugin/bbsgame/images/3/pk.png"><br>{$pk['endtime']}</div>
+								<div class="pkuser_b">
+									<img class="pkuser_ico" src="{$pk[def_usericon]}">
+									<p><img src="source/plugin/bbsgame/images/3/dun.gif"></p>
+									<p>{$pk['def_username']}</p>
+									<p>{$pk['def_score']}</p>
+								</div>
+								<div class="pk_result">
+									{$pk['result']}
+								</div>
+						</div>
+					</li>
+<!--{/loop}-->
+<!--{else}-->
+					<li style='text-align:center'>暂无战书，快去挑战别人吧。</li>
+<!--{/if}-->
+ 					
+				</ul>
+				<div id="cnt_page">{$pageCss}</div>
+			</div>
+			<div id="zhanshu_act_onload" style="display:none;"><div class='pklist'></div><div class='load_tag'><a onclick="return loadMore('act');" href="javascript:void(0);">[加载更多]</a></div></div>
+			<div id="zhanshu_def_onload" style="display:none;"><div class='pklist'></div><div class='load_tag'><a onclick="return loadMore('def');" href="javascript:void(0);">[加载更多]</a></div></div>
+			<div id="zhanshu_pkme_onload" style="display:none;"><div class='pklist'></div><div class='load_tag'><a onclick="return loadMore('pkme');" href="javascript:void(0);">[加载更多]</a></div></div>
+			<div id="zhanshu_new_onload" style='display:none'>
+<!--{if empty($_G[uid])}-->
+ 		<p style='text-align:center'>请先<a style='color:blue'; href='login.php'>登录</a></p>
+<!--{else}-->
+			<form action="pkgamepost.php" method="post">
+				<input type="hidden" name="action" value="pk" />
+				<input type="hidden" name="act" value="add"/>
+				<table>
+					<tr><td colspan="2">发起挑战书规则：<div style="margin:10px;">1.发起挑战方可设置参赛费用，并会被扣除参赛费用；接受挑战方在确认之后，也将被扣除参赛费用<br>
+							2.挑战双方中胜利者将赢得双倍铜币奖励；<br>
+							3.如挑战结果为平局，所有参赛费用将归发起挑战方所有<br>
+							4.如接受挑战方在规定时间内没有确认挑战，参赛费用将返还给挑战方。<br></div>
+						</td>
+					</tr>
+					<tr>
+						<td width="20%" align="center">挑战游戏：</td>
+						<td>
+							<select name="gid" value="">
+							
+<!--{if $gameList}-->
+<!--{loop $gameList $k $g}-->
+ 								<option value='{$g[gid]}'>{$g[name]}</option>
+<!--{/loop}-->
+<!--{/if}-->
+							</select>*
+						</td>
+					</tr>
+					<tr><td align="center">挑 战 谁：</td>
+						<td><input name="def_user" type="text" value=''>
+							<select id='selectPkUser' name='def_uid_ass' value="">
+								<option value=0></option>
+<!--{if $friendsList}-->
+<!--{loop $friendsList $k $f}-->
+ 							<option value='{$f[fusername]}'>{$f[fusername]}</option>
+<!--{/loop}-->
+<!--{/if}-->
+						</select>* 可以手动输入用户名
+					</td></tr>
+					<tr><td align="center">参赛费用：</td>
+						<td><input name="case" type="">
+							<select name="casetype" value="">
+<!--{if $_G['setting']['extcredits']}-->
+<!--{loop $_G['setting']['extcredits'] $k $t}-->	
+ 							<option value='extcredits{$k}'>{$t['title']}</option>
+<!--{/loop}-->
+<!--{/if}-->
+						</select>*
+						</td>
+					</tr>
+					<tr><td align="center">结束时间：</td><td><input name="endtime" type="" onfocus="HS_setDate(this)">*</td></tr>
+					<tr><td align="center">想说的话：</td><td><textarea name="act_content"></textarea>*</td></tr>
+					<tr><td colspan="2" align="center"><input type="submit" value="提交"></td></tr>
+				</table>
+			</form>
+<!--{/if}-->
+			</div>
+		</div>
+	</div>
+<script>
+var jq = jQuery.noConflict();
+
+act_page = def_page = pkme_page = 0;
+function loadMore(type) {
+		if(type == 'act') {
+			page = ++act_page;
+		}
+		else if(type == 'def') {
+			page = ++def_page;
+		}
+		else if(type == 'pkme') {
+			page = ++pkme_page;
+		}
+		loadPkWithType(type,page);
+		return false;
+}
+
+function refusePk(pk_id) {
+	if (pk_id){
+		var dialog = new DialogApp();
+		var host = getHostPath();
+		jq.ajax({
+			type:"post",
+			url:host+'pkgamepost.php?act=refuse&action=pk&time='+Math.random()*10000,
+			data:{"pid":pk_id},
+			dataType:'json',
+			success:function(result){
+						dialog.show();
+						jq("._popLogin").hide();
+						if(result['ret']) 
+						{
+							message = result['msg'];
+							clearTimeout(hideResult);
+							setTimeout(function(){location.reload();},1000)
+						} else {
+							message = result['msg'];
+							setTimeout(hideResult ,5000);
+						}
+						jq("._popResult").html(message);
+						jq("._popResult").show();
+			}
+		});
+	}
+}
+jq(document).ready(function(){
+	jq("#selectPkUser").change(function(){
+		jq("input[name=def_user]").val(this.options[this.selectedIndex].value);
+	});
+});
+</script>

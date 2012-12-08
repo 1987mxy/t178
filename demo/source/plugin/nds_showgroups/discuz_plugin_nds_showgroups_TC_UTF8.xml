@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[X2]]></item>
+	<item id="Time"><![CDATA[2011-06-02 09:46]]></item>
+	<item id="From"><![CDATA[NDS.西域數碼工作室 (http://www.nwds.cn/dx2/)]]></item>
+	<item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[1]]></item>
+			<item id="adminid"><![CDATA[1]]></item>
+			<item id="name"><![CDATA[群組名稱顯示]]></item>
+			<item id="identifier"><![CDATA[nds_showgroups]]></item>
+			<item id="description"><![CDATA[本插件可以實現在帖子內容頁個人信息欄中顯示該用戶加入的群組名稱列表。用戶可以選擇顯示顏色和位置。]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[nds_showgroups/]]></item>
+			<item id="copyright"><![CDATA[NDS.西域數碼工作室]]></item>
+			<item id="version"><![CDATA[2.1]]></item>
+			<item id="__modules">
+				<item id="0">
+					<item id="name"><![CDATA[nds_showgroups]]></item>
+					<item id="menu"><![CDATA[]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[11]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[X2]]></item>
+                <item id="license"><![CDATA[[list]感謝你選擇使用本插件。安裝本插件之前，請仔細閱讀以下所有內容
+
+[b]安裝注意事項[/b]
+[1]本插件為Discuz! X2 新內核插件，綠色安裝及綠色使用，可適用于Discuz! X2、 X1.5、 X1站點
+[2]是否更改Discuz!原有數據庫︰否
+[3]是否新增數據庫︰否
+[4]是否需要手動修改Discuz!文件︰否
+
+[b]授權協議[/b]
+[1]本插件由NDS.西域數碼工作室（WWW.NWDS.CN)設計開發，插件作者是singcee。
+[2]本插件采用: 署名-非商業性使用-相同方式共享 2.5 中國大陸許可協議 。
+[3]本插件為免費公開發布，嚴禁修改任何版權說明、進行任何二次開發、轉載後不保留原版權、進行出租/出售/抵押或發放許可證。
+[4]您必須按照作者或者許可人指定的方式對作品進行署名。 
+[5]非商業性使用 

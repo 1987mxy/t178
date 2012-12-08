@@ -1,0 +1,13 @@
+var host = 'http://www.97sng.com/public/img/';
+//document.write('<div id="ng_ng_open"style="width:690px; border:#336e8c 5px solid;background-color:#ebf6fc;position:fixed; display:none">'+
+//			'<div style=" height:33px; width:680px; background-color:#197fc1; margin-top:5px; margin-left:auto; margin-right:auto;">'+
+//				'<img src="'+host+'ment_03.jpg" width="62" height="15" style="margin-top:10px; margin-left:10px;" /></div>'+
+//			'<div id="ments" style=" text-align:left; padding:0 20px; margin-left:auto; margin-right:auto; background-image:url('+host+'bg_07.jpg); background-repeat:repeat;line-height:32px;"></div><a href="http://og.97ng.com/index.php?do=resgistNew&usd=74" target="_blank">'+
+//			'<img id="closeDIV" src="'+host+'ment_07.jpg" width="72" height="22" style=" float:right; margin:10px; border:none;" /></a></div>');
+//document.write('<script>function ng_ng_showWindow(a,b,c){jq("#ng_ng_open").css("display","");document.getElementById("ments").innerHTML=c;document.getElementById("ng_ng_open").style.left=(document.body.clientWidth-a>0?document.body.clientWidth-a:0)/2+"px";document.getElementById("ng_ng_open").style.top="100px";document.getElementById("ng_ng_open").style.zIndex=10001;document.getElementById("ng_ng_open").style.width=a;document.getElementById("ng_ng_open").style.border="3px solid #0099ff";}jq(document).ready(function(){jq("#bu_ton").click(function(){jq("#fugai").css("display",""),ng_ng_showWindow(700,200,ng_ng_openhtml)}),jq("#closeDIV").click(function(){jq("#ng_ng_open").css("display","none"),jq("#fugai").css("display","none")})})</script>');
+document.write('<script>function ng_ng_showWindow(a,b,c){jq("#ng_ng_open").css("display","");document.getElementById("ments").innerHTML=c;document.getElementById("ng_ng_open").style.left=(document.body.clientWidth-a>0?document.body.clientWidth-a:0)/2+"px";document.getElementById("ng_ng_open").style.top="100px";document.getElementById("ng_ng_open").style.zIndex=10001;document.getElementById("ng_ng_open").style.width=a;document.getElementById("ng_ng_open").style.border="3px solid #0099ff";}</script>');
+
+var ng_ng_openhtml = "官方下载地址：<a href='http://www.97sng.com/download' target='_blank'>www.97sng.com</a><br>官方联系方式：QQ:168360500<br>新增功能：<br>1.好友之间发起挑战书<br>2.挑战擂台赛<br>3.多人在线互动游戏";
+var html="<div style='over-flow:hidden;margin: 0 auto;text-align: center;cursor: pointer;cursor: pointer;cursor: pointer; cursor:pointer'>"+
+				"<a href='http://og.97ng.com/index.php?do=resgistNew&usd=74' target='_blank'><img usemap='#gonggao' src='"+host+"version2.gif'></a></div>";
+document.write(html);

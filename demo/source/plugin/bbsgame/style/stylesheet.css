@@ -1,0 +1,29 @@
+@charset "utf-8";
+/*********???*********/
+.bIndex { width:980px; }
+.bIndex .wap .k1{ width:970px; height:320px; background: url(../images/k_1.jpg) no-repeat; margin-left:15px;}
+.bIndex .wap .kl_left{width:620px; float:left;}
+.bIndex .wap .kl_pig{line-height:36px; font-size:14px; font-weight:bold; color:#666;}
+.bIndex .wap .k1 ul{ border:#DCEFF5 1px solid; width:162px; margin-top:10px; margin-left:10px; float:left;}
+.bIndex .wap .k1 .kl_0,.bIndex .wap .k1 .kl_1,.bIndex .wap .k1 .kl_2, .bIndex .wap .k1 .kl_3{ width:158px; height:70px; background: url(../images/ret_03.png) repeat-x; margin:1px; text-align:center; color:#666}
+
+.bIndex .wap .k1 .kl_d{ padding-top:10px;}
+.bIndex .wap .kl_right{float:right; width:304px; height:281px; background:url(../images/ret_02.png) no-repeat; margin-top:10px; padding-right:20px;}
+.bIndex .wap .kl_has{float:left; width:100px; height:100px; text-align:center; margin-top:10px;}
+.bIndex .wap .k2{margin-left:15px; margin-right:15px;}
+.bIndex .wap .k2 .k2_top{ background:url(../images/ret_05.png) repeat-x; width:672px; height:47px;}
+.bIndex .wap .k2 .k2_left{ width:672px;  font-size:16px; line-height:2.7;}
+.bIndex .wap .k2 .k2_con{ border-left:#d0ebfd 1px solid;border-right:#d0ebfd 1px solid;}
+.bIndex .wap .k2 .k2_left .k2_sp1{width:7px; height:47px; background:url(../images/ret_04.png) no-repeat; float:left;}
+.bIndex .wap .k2 .k2_left .k2_sp2{width:7px; height:47px; background:url(../images/ret_06.png) no-repeat; float:right;}
+.b_lis{float:left; width:94px; height:37px; background:url(../images/ret_08.png) no-repeat;margin-left:30px;margin-top:10px; text-align:center; color:#3eb9fa;}
+.b_li{float:left; width:94px; height:37px; background:none;margin-left:30px;margin-top:10px; text-align:center; color:#3eb9fa;}
+.k2_cf1{ width:325px; float:left; height: 130px; margin-top:20px; padding-left:10px;}
+.k2_cf2{ width:325px; float:right; height:130px; margin-top:20px; padding-right:10px;}
+.bIndex .wap .k2_right{ float:right; width:270px;}
+.k2_rb{ background:url(../images/rot_05.png) no-repeat; width:269px; height:230px;}
+.k2_tj{height:50px; margin-bottom:20px;}
+.k2_img{float:left; margin-right:10px;margin-left:10px;}
+.k2_font{font-size:15px; font-weight:bold; color:#666}
+.k2_2{color:#666}
+.k2_font{font-size:12px; line-height: 20px;; float:right;margin-right:5px; width:160px; color:#333; font-weight:normal;}

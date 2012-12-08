@@ -1,0 +1,188 @@
+<style>
+#status { width:100%; height:100%; background:#666666; opacity:0.6; position:absolute; top:0; left:0; color:#FFFFFF; text-align:center; vertical-align:inherit; display:none;}
+#bar { width:200px ;height:30px; line-height:30px; color:#FFFFFF; margin:30% auto; text-align:center;}
+.opselect li { margin-bottom:10px;}
+.button { width:50px; height:20px; background:#A7C5FC; color:#003366}
+</style>
+<script src="source/plugin/bbsgame/js/jquery-1.7.min.js"></script>
+<script src="source/plugin/bbsgame/js/jquery.boxy.js"></script>
+<script src="source/plugin/bbsgame/js/classes.js"></script>
+<link rel='stylesheet' href='source/plugin/bbsgame/style/boxy.css' type='text/css' />
+<link rel='stylesheet' href='source/plugin/bbsgame/style/common.css' type='text/css' />
+<script>
+var arrclass = new Array();
+var arrjob = new Array();
+<!--{loop $gameTypes $k $t}-->
+arrclass[{$k}] = new Class({$t[id]},"{$t[name]}");
+<!--{/loop}-->
+<!--{loop $lists $k $t}-->
+arrjob[{$k}] = new Item({$t['gid']},"{$t['name']}",{$t['type']});
+<!--{/loop}-->
+</script>
+<!--{if $style==1}-->
+<script src="source/plugin/bbsgame/js/bbsgame_class.js"></script>
+<script>
+//config mode
+ var JLJF = [
+{loop $mode[JLJF] $name $m}
+ new mode({games:[{$m[gids]}],types:[{$m[tids]}]},"{$m[name]}","{$name}",14),
+{/loop}
+ ];
+ var JFPK = [
+{loop $mode[JFPK] $name $m}
+ new mode({games:[{$m[gids]}],types:[{$m[tids]}]},"{$m[name]}","{$name}",14),
+{/loop}
+ ];
+</script>
+<form method="post" name="FORM" action="admin.php?action=plugins&operation=config&do={$_GET['do']}&identifier=bbsgame&pmod=adminmain&">
+<input type="hidden" name="action" value="saveexplorer" />
+<h2 class="h1">模块管理</h2>
+<style>
+#invokepieces { width:960px; position:relative; margin:10px;}
+#invoke_flash ,#invoke_m1,#invoke_m2,#invoke_m3,#invoke_m4 { width:120%; height:130px; position:relative;overflow: hidden;}
+.m_manage { height:20px; width:100px;}
+.m_manage a:link,.m_manager a:visited { font-size:12px; font-weight:700; text-decoration:none;}
+.m_manage a:hover { color:#003333}
+.m_area { width:100%; margin-left:120px;}
+.m_area img { display:inline-block; float:left; margin-right: 10px;}
+.m_area li { width:220px; float:left; overflow:hidden; margin-top:10px;}
+.m_area h3 { 
+	font-family: "微软雅黑", Arial, Roman, "宋体";
+	font-weight: 800;
+	margin-top: 5px;
+	height: 20px;
+	line-height: 20px;
+	overflow: hidden;
+}
+.p10 { padding:10px; }
+#block { width:500px; overflow:hidden;}
+</style>
+<script>
+var jq = jQuery.noConflict();
+jq(document).ready(function(){
+	jq(".modeconfig").click(modeconfig);
+	jq(".modeupdate").click(modeupdate);
+	jq(".modeadd").click(modeadd);
+	jq(".modedelete").click(modedelete);
+	jQuery.fn.outerHTML = function() {
+   		return jq('<tr>').append( this.eq(0).clone() ).html();
+ 	};
+});
+</script>
+<div class="admin_table mb10">
+	<table width="100%" cellspacing="0" cellpadding="0">
+		<tr class="tr1 vt" >
+			<td class="td1" id="JFPK">积分PK游戏<br />[<a class="modeadd" href="javascript:void(0);">添加</a>]</td>
+			<td >
+				<table width="100%" cellspacing="0" cellpadding="0">
+					<tr id="P_subm0" style="display:none">
+						<td class="td2"><label>板块名称：</label><input class="input" type="text" name="name" value="" size="14" /></td>
+						<td class="td2">P_subm0@积分PK</td>
+						<td class="td2">[<a href="javascript:void(0);" class="modeconfig">选择游戏</a>]&nbsp;&nbsp;[<a href="javascript:void(0);" class="modeupdate" >更新</a>]</td> 
+						<td class="td2">[<a href="javascript:void(0);" class="modedelete">删除</a>]</td>
+					</tr>
+{loop $mode[JFPK] $k $v}
+					<tr id="{$k}">
+						<td class="td2"><label>板块名称：</label><input class="input" type="text" name="name" value="{$v[name]}" size="14" /></td>
+						<td class="td2">{$k}@积分PK</td>
+						<td class="td2">[<a href="javascript:void(0);" class="modeconfig">选择游戏</a>]&nbsp;&nbsp;[<a href="javascript:void(0);" class="modeupdate" >更新</a>]</td> 
+						<td class="td2">[<a href="javascript:void(0);" class="modedelete">删除</a>]</td>
+					</tr>
+{/loop}
+				</table>
+			</td>
+		</tr>
+
+</table>
+</div>
+<div class="mb10 tac">
+</div>
+<div class="mb10 tac">
+	<span class="btn"><span></span></span>
+</div>
+</form>
+<!--{/if}--><!--{if $style==2}-->
+<style>
+#invokepieces { 
+	width:150px; position:relative; min-height:300px;
+	border:1px #000000 solid; border-bottom:none; margin:20px auto;
+		}
+#invoke_m8 { width:100%; height:100%; overflow:hidden; position:relative; }
+.m_manage { position:absolute; top:0px; right:0;}
+.title {
+	position: absolute;top: 10px;left: 0px;
+	height: 77px;width: 16px; border: 1px black solid;
+}
+.m_area li { width:100%; overflow:hidden; margin-top:10px; margin-left: 20px;}
+.m_area h3 { 
+	font-family: "微软雅黑", Arial, Roman, "宋体";
+	font-weight: 800;
+	margin-top: 5px;
+	height: 20px;
+	line-height: 20px;
+}
+</style>
+<script src="source/plugin/bbsgame/js/bbsgame_class_bak.js"></script>
+<script>
+var jq = jQuery.noConflict();
+ m = new mode(1,"float","#float_got",4);
+
+ var title = { "title": "推送游戏列表" };
+//add listener
+ jq(function() {
+        m.bind();
+ });
+</script>		 
+<h2 class="h1">展示设置</h2>
+<div class="admin_table mb10">
+	<div id="invokepieces">
+		<div id="invoke_float">
+			<div class="title">&nbsp;游戏频道&nbsp;</div>
+			<div class="m_manage"><a href="javascript:void(0);" id="float_got">管理</a></div>
+			<div class="m_area">
+				<ul>
+{if is_array($mode['float'])}
+{loop $mode['float'] $k $game}
+					<li><img src="{$game['img']}"><h3>{$game['name']}</h3></li>
+{/loop}{/if}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<!--{/if}{if $style!=1&&$style!=2}-->
+<form method="post" name="FORM" action="admin.php?action=plugins&operation=config&do={$_GET['do']}&identifier=bbsgame&pmod=adminmain&">
+<input type="hidden" name="action" value="savestyle" />
+<h2 class="h1">风格设置</h2>
+<div class="admin_table mb10">
+	<table width="100%" cellspacing="0" cellpadding="0">
+	<tr class="tr1 vt">
+		<td class="td1" width="100"><b>方案</b></th>
+		<td class="td1"><b>操作</b></th>
+		<td class="td1">&nbsp;&nbsp;<b>开启</b></th>
+	</tr>
+	<tr class="tr1 vt">
+		<td class="td1">模板一<br>独立游戏页面</td>
+		<td class="td2">[<a href="plugin.php?id=bbsgame" target="_blank">访问</a>][<a href="admin.php?action=plugins&operation=config&do={$_GET['do']}&identifier=bbsgame&pmod=adminmain&act=setstyle&style=1">管理</a>]</td>
+		<td class="td2">
+			<ul class="cc list_80 list_A fl">
+				<input type="radio" value="1" $issty1open1 name="issty1open"> 是 <input type="radio" value="0" $issty1open0 name="issty1open" /> 否
+			</ul>
+		</td>
+	</tr>
+	<tr class="tr1 vt">
+		<td class="td1">模板二<br>侧栏浮动框</td>
+		<td class="td2">[<a href="plugin.php?id=bbsgame" target="_blank">访问</a>][<a href="admin.php?action=plugins&operation=config&do={$_GET['do']}&identifier=bbsgame&pmod=adminmain&act=setstyle&style=2">管理</a>]</td>
+		<td class="td2">
+			<ul class="cc list_80 list_A fl">
+				<input type="radio" value="1" $issty2open1 name="issty2open"> 是 <input type="radio" value="0" $issty2open0 name="issty2open" /> 否
+			</ul>
+		</td>
+	</tr>
+</table>
+</div>
+<div class="mb10 tac">
+	<span class="btn"><span><button type="submit">提 交</button></span></span>
+</div>
+</form>
+<!--{/if}-->

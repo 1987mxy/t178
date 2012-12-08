@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[X2]]></item>
+	<item id="Time"><![CDATA[2011-06-02 09:46]]></item>
+	<item id="From"><![CDATA[NDS.西域数码工作室 (http://www.nwds.cn/dx2/)]]></item>
+	<item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[1]]></item>
+			<item id="adminid"><![CDATA[1]]></item>
+			<item id="name"><![CDATA[群组名称显示]]></item>
+			<item id="identifier"><![CDATA[nds_showgroups]]></item>
+			<item id="description"><![CDATA[本插件可以实现在帖子内容页个人信息栏中显示该用户加入的群组名称列表。用户可以选择显示颜色和位置。]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[nds_showgroups/]]></item>
+			<item id="copyright"><![CDATA[NDS.西域数码工作室]]></item>
+			<item id="version"><![CDATA[2.1]]></item>
+			<item id="__modules">
+				<item id="0">
+					<item id="name"><![CDATA[nds_showgroups]]></item>
+					<item id="menu"><![CDATA[]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[11]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[X2]]></item>
+                <item id="license"><![CDATA[[list]感谢你选择使用本插件。安装本插件之前，请仔细阅读以下所有内容
+
+[b]安装注意事项[/b]
+[1]本插件为Discuz! X2 新内核插件，绿色安装及绿色使用，可适用于Discuz! X2、 X1.5、 X1站点
+[2]是否更改Discuz!原有数据库：否
+[3]是否新增数据库：否
+[4]是否需要手动修改Discuz!文件：否
+
+[b]授权协议[/b]
+[1]本插件由NDS.西域数码工作室（WWW.NWDS.CN)设计开发，插件作者是singcee。
+[2]本插件采用: 署名-非商业性使用-相同方式共享 2.5 中国大陆许可协议 。
+[3]本插件为免费公开发布，严禁修改任何版权说明、进行任何二次开发、转载后不保留原版权、进行出租/出售/抵押或发放许可证。
+[4]您必须按照作者或者许可人指定的方式对作品进行署名。 
+[5]非商业性使用 — 您不得将本作品用于商业目的。 
+[6]相同方式共享 — 如果您改变、转换本作品或者以本作品为基础进行创作，您只能采用与本协议相同的许可协议发布基于本作品的演绎作品。 
+[/list]]]></item>
+		<item id="var">
+			<item id="0">
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="title"><![CDATA[群组名称显示位置]]></item>
+				<item id="description"><![CDATA[]]></item>
+				<item id="variable"><![CDATA[showgroupssite]]></item>
+				<item id="type"><![CDATA[select]]></item>
+				<item id="value"><![CDATA[2]]></item>
+				<item id="extra"><![CDATA[1 = 头像下方
+2 = 用户信息下方]]></item>
+			</item>
+			<item id="1">
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="title"><![CDATA[群组名称标题(前后)]]></item>
+				<item id="description"><![CDATA[群组名称显示标题,如果不显示标题请留空。]]></item>
+				<item id="variable"><![CDATA[showgroupstitle]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[群组]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="2">
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="title"><![CDATA[群组名称(前后)标题颜色]]></item>
+				<item id="description"><![CDATA[如果你设置了群组名称标题，在此可以设置该标题的显示颜色。]]></item>
+				<item id="variable"><![CDATA[showgroupstitlesitecolor]]></item>
+				<item id="type"><![CDATA[color]]></item>
+				<item id="value"><![CDATA[#0000CC]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="3">
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="title"><![CDATA[群组名称标题位置(前后)]]></item>
+				<item id="description"><![CDATA[群组名称标题显示位置：
+ 群组 羽毛球爱好者
+ 羽毛球爱好者 成员]]></item>
+				<item id="variable"><![CDATA[showgroupstitlesite]]></item>
+				<item id="type"><![CDATA[select]]></item>
+				<item id="value"><![CDATA[1]]></item>
+				<item id="extra"><![CDATA[1 =  群组名称前面显示
+2 =  群组名称后面显示]]></item>
+			</item>
+			<item id="4">
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="title"><![CDATA[群组名称显示颜色]]></item>
+				<item id="description"><![CDATA[群组名称显示颜色，默认为黑。]]></item>
+				<item id="variable"><![CDATA[showgroupcolor]]></item>
+				<item id="type"><![CDATA[color]]></item>
+				<item id="value"><![CDATA[#FF0000]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="5">
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="title"><![CDATA[群组最多显示数量]]></item>
+				<item id="description"><![CDATA[如果一个用户参加过多的群组可能会影响显示效果，再次可以限制最多显示群组名称的数量。]]></item>
+				<item id="variable"><![CDATA[showgroupsmax]]></item>
+				<item id="type"><![CDATA[number]]></item>
+				<item id="value"><![CDATA[5]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+			<item id="6">
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="title"><![CDATA[群组显示排序方式]]></item>
+				<item id="description"><![CDATA[选择群组名称显示的排序方式，如果限制了群组显示数量，按此排序超过显示数量的群组名称将不被显示。]]></item>
+				<item id="variable"><![CDATA[showgroupsorder]]></item>
+				<item id="type"><![CDATA[select]]></item>
+				<item id="value"><![CDATA[5]]></item>
+				<item id="extra"><![CDATA[1 = 按群组建立时间排序
+2 = 按群组总积分排序
+3 = 按用户的活跃度排序
+4 = 按群组级别排序
+5 = 按加入时间排序]]></item>
+			</item>
+			<item id="7">
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="title"><![CDATA[屏蔽显示的群组编号]]></item>
+				<item id="description"><![CDATA[在此列出你不想要显示的群组的ID编号（数字），多个ID用英文逗号隔开 末尾不要加逗号 如： 12,13,18]]></item>
+				<item id="variable"><![CDATA[showgroupsban]]></item>
+				<item id="type"><![CDATA[text]]></item>
+				<item id="value"><![CDATA[]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+		</item>
+	</item>
+</root>

@@ -1,0 +1,136 @@
+<!--{template common/header}-->
+<link rel="stylesheet" type="text/css" href="source/plugin/bbsgame/style/main.css"/>
+<style>
+#active{
+	padding: 20px;
+	margin: 10px auto;
+	background: #FDFDFD;
+}
+.active_title {
+	line-height: 24px;
+	height: 24px;
+	font-size: 18px;
+	background: #F9FCFF;
+}
+.active_content {
+	padding: 20px;
+}
+.active_content p {
+	margin-bottom:5px;
+	border-bottom:none;
+}
+.active_content span{
+	border-bottom: 1px #E2EFFF solid;
+	text-align: center;
+	display: inline-block;
+	width: 69px;
+	background: #E9E9E9;
+	margin-right:3px;
+}
+.join {
+	color:#FD4F4F; 
+	background:#94BBFF;
+}
+a.join:hover {
+	color:white;
+	background:#979797;;
+}
+#chcnt {
+	width:280px;
+}
+</style>
+<script src="source/plugin/bbsgame/js/jquery-1.7.min.js"></script>
+<script src="source/plugin/bbsgame/js/dialog.js"></script>
+<div id='pkgame_container'>
+	<div id="dialogelem" style="position:fixed; top:240px; left:200px; z-index:999; display:none">
+		<div class='popTop' style='text-align:left;width:320px;'>提示信息：<a class='adel' onclick='hideResult();' href='javascript:void(0);'>关闭</a></div>
+	        <div class="_popout">
+			<table cellspacing="0" cellpadding="0" border="0">
+			  <tbody>
+					<tr>
+					  <td class="bgcorner1"></td>
+					  <td class="pobg1"></td>
+					  <td class="bgcorner2"></td>
+					</tr>
+					<tr>
+					  <td class="pobg4"></td>
+					  <td>
+					  <div id="_box_container" class="popoutContent">
+							<div class="_popLogin" style="">
+									<div style="width:328px;">
+											<form onSubmit="return _login();" method="post">
+											  <input type='hidden' name='action' value='login'>
+											  <div class="p20">
+													<table>
+													  <tbody>
+															<tr>
+															  <td width="60"><select name="lgt" id="_uname2">
+																	  <option value="0">用户名</option>
+																	  <option value="1">UID</option>
+																	</select>
+															  </td>
+															  <td><input style="width:115px;" id="_poppwuser" class="input input_wa" type="text" name="pwuser">
+															  </td>
+															  <td><label id="ustatue" style="color:#FF0000"></label>
+															  </td>
+															</tr>
+															<tr>
+															  <td><label for="pwpwd">密　码</label>
+															  </td>
+															  <td><input style="width:115px;" id="_pwpwd" class="input input_wa" type="password" name="pwpwd">
+															  </td>
+															  <td><label id="pwstatue" style="color:#FF0000"></label>
+															  </td>
+															</tr>
+															<tr>
+															  <td>&nbsp;</td>
+															  <td><span class="btn2" style="margin:0 10px 0 0;"> <span>
+																	<button type="submit">登录</button></span></span>
+																<a href='register.php#breadCrumb' target='_blank'>注册</a></td>
+															</tr>
+													  </tbody>
+													</table>
+											  </div>
+											  <div class="c"></div>
+											</form>
+									</div>
+							</div>
+							<div class="_popResult" style="width: 288px;min-height: 90px;font-size: 18px;padding: 20px;display:none;">
+								
+							</div>
+						 </div>
+						</td>
+					  <td class="pobg2"></td>
+					</tr>
+					<tr>
+			  </tbody>
+			</table>
+	     </div>
+	</div>
+</div>
+<div id="game_content_content">
+	<div class="content_top"><a href="index.php?m=bbs" style="margin-left:10px">{$GLOBALS['db_bbsname']}</a> > <a href="plugin.php?id=bbsgame&">{$GLOBALS[pkgame_name]}</a> > <a href="javascript:void(0);">{$anchor}</a></div>
+<div id="pkgame_ctrlpannel">
+<div id='active'>
+	<div class='active_title'>活动详情</div>
+	<div class='active_content'>
+		<p><span>活动时间：</span>{$siteActive['activetime']}</p>
+		<p><span>擂台名称：</span>{$siteActive['pkname']}&nbsp;
+			<!--a class='join' style="" href="javascript:void(0);" onClick="return pkgameJoinChallenge({$pkgame_active_starttime},'{$siteActive[gamename]}','{$siteActive[gid]}','{$siteActive[username]}','{$_G['uid']}');">参加擂台</a-->
+			<font color="red"><a href="plugin.php?id=bbsgame&action=game&mode=challenge&pk_id={$siteActive['id']}&gid={$siteActive['gid']}">[参加擂台]</a></font>
+		</p>
+		<p><span>擂主：</span>站长</p>
+		<p><span>游戏名称：</span>{$siteActive['gamename']}</p>
+<!--{if $siteAdminReward}-->		
+		<p><span>奖励/奖金：</span>{$siteAdminReward}</p>
+<!--{/if}-->
+		<p><span>奖励规则：</span>
+		<div style="padding:10px 40px;">1.所有参赛者会被扣除相应的参赛费用包括擂主的创建擂台费({$pkgame_active_case})，并加到擂台总奖金中<br>
+		2.总奖金的30%为税费。剩下的70%按{$pkgame_challenge_algorithm_sitenal_pkerPercent}
+比例分给前{$active_pkerCreditNum}名成功挑战者。<br>3.如果比赛结束时参加者小于{$active_pkerCreditNum}人，返还给参加者。</p>
+		</div>
+		<p><span>活动内容：</span></p>
+		<div style="padding:10px 40px;">{$pkgame_active_content}</div>
+	</div>
+</div>
+<!--{template common/footer}-->

@@ -1,0 +1,375 @@
+<!--{template common/header}-->
+<link rel="stylesheet" type="text/css" href="source/plugin/bbsgame/style/bolderCss.css"/>
+<link rel="stylesheet" type="text/css" href="source/plugin/bbsgame/style/main.css"/>
+
+<style type="text/css"> 
+#open{position:absolute;left:expression(eval(document.documentElement.scrollLeft+10));top:expression(eval(document.documentElement.scrollTop+10))}
+</style>
+<!--[IF lte IE 7]>
+<style>
+.content_left { width:39%;}
+.content_right { width:59%;}
+.score_sxian {margin-left: 8px;}
+.game_rank .rank_font_top3 { line-height:54px;}
+.rank_all .rank_font_top3 { line-height:40px;}
+.game_rank .rank_img {margin-top:10px;}
+.rank_all .rank_img {margin-top:5px;}
+</style>
+<![ENDIF]-->
+<script type="text/javascript" src="source/plugin/bbsgame/js/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="source/plugin/bbsgame/js/main.js"></script>
+<script type='text/javascript' src='source/plugin/bbsgame/js/dialog.js'></script>
+<script defer src="http://stat.97sng.com/js/stat.js?pid={$pid}&gid=main&t={$time}&url={$_SERVER[HTTP_HOST]}"></script>
+<script type="text/javascript" src="source/plugin/bbsgame/js/calenderJS.js" defer="defer"></script>
+<script defer type="text/javascript" src="source/plugin/bbsgame/js/jquery.blockUI.js"></script>
+<script type="text/javascript">
+var jq = jQuery.noConflict();
+jq(document).ready(function(){
+	netgameId = -1;
+	pid = {$GLOBALS['pid']};
+	intervalId = setInterval('netgame_slider()',3000);
+	if(typeof(tplModule) == 'object'){
+		tplModule.start();
+		jq("#z_ph").click(function(){
+			tplModule.getRq();
+		});
+		tplModule.getUpdateNotice();
+		tplModule.getIv();
+	}
+	checkCss();
+	jq("[id^=pkgame_netgame]").each(function(){
+		jq(this).click(function(){
+			jq("[class^='pkgame_netgame']").each(function(){
+				jq(this).hide();
+				jq("#"+jq(this).attr("class")).css("background-image","url('source/plugin/bbsgame/images/3/netgamebg1.jpg')");
+			});
+			jq("."+jq(this).attr("id")).show();
+			jq(this).css("background-image","url('source/plugin/bbsgame/images/3/netgamebg2.jpg')");
+		});
+	});
+	jq(".netgame_content").hover(function(){
+			clearInterval(intervalId);
+		},
+		function(){
+			intervalId = setInterval('netgame_slider()',3000);
+		}
+	);
+	jq(".popUserOp").each(function(){
+		jq(this).hover(function(){
+				jq(this).children(".popBtn").show();
+			},
+			function(){
+				jq(this).children(".popBtn").hide();
+			});
+	});
+});
+var c_cnf = [
+<!--{loop $_G['setting']['extcredits'] $k $v}-->
+{"key":"extcredits{$k}","value":"{$v['title']}"},
+<!--{/loop}-->
+];
+</script>
+<div id="pkgame_container">
+	<div id="dialogelem">
+		<div class='popTop' style='text-align:left;width:320px;'>提示信息：<a class='adel' onclick='hideResult();' href='javascript:void(0);'>关闭</a></div>
+         <div class="_popout">
+			<table cellspacing="0" cellpadding="0" border="0">
+			  <tbody>
+					<tr>
+					  <td class="bgcorner1"></td>
+					  <td class="pobg1"></td>
+					  <td class="bgcorner2"></td>
+					</tr>
+					<tr>
+					  <td class="pobg4"></td>
+					  <td>
+					  <div id="_box_container" class="popoutContent">
+							<div class="_popLogin" style="">
+									<div style="width:328px;">
+											<form onSubmit="return _login();" method="post">
+											  <input type='hidden' name='action' value='login'>
+											  <div class="p20">
+													<table>
+													  <tbody>
+															<tr>
+															  <td width="60"><select name="lgt" id="_uname2">
+																	  <option value="0">用户名</option>
+																	  <option value="1">UID</option>
+																	</select>
+															  </td>
+															  <td><input style="width:115px;" id="_poppwuser" class="input input_wa" type="text" name="pwuser">
+															  </td>
+															  <td><label id="ustatue" style="color:#FF0000"></label>
+															  </td>
+															</tr>
+															<tr>
+															  <td><label for="pwpwd">密　码</label>
+															  </td>
+															  <td><input style="width:115px;" id="_pwpwd" class="input input_wa" type="password" name="pwpwd">
+															  </td>
+															  <td><label id="pwstatue" style="color:#FF0000"></label>
+															  </td>
+															</tr>
+															<tr>
+															  <td>&nbsp;</td>
+															  <td><span class="btn2" style="margin:0 10px 0 0;"> <span>
+																	<button type="submit">登录</button></span></span>
+																<a href='register.php#breadCrumb' target='_blank'>注册</a></td>
+															</tr>
+													  </tbody>
+													</table>
+											  </div>
+											  <div class="c"></div>
+											</form>
+									</div>
+							</div>
+							<div class="_popResult" style="width: 288px;min-height: 90px;font-size: 18px;padding: 20px;display:none;">
+								
+							</div>
+						 </div>
+						</td>
+					  <td class="pobg2"></td>
+					</tr>
+					<tr>
+			  </tbody>
+			</table>
+          </div>
+        </div>
+<div class="content_top"><a href="index.php?m=bbs" style="margin-left:10px">{$db_bbsname}</a>
+	 > <a href="plugin.php?id=bbsgame&">{$ng_name}</a></div>
+<div class="top_ad" id="top_ad_change" style="text-align:center">
+	<img src="source/plugin/bbsgame/images/1/banner1.jpg" />
+</div>
+<div class="content">
+	<div class="pk_leftpanel">
+		<div class="netgame_content">
+		<script type='text/javascript' src='http://www.97sng.com/public/bbs/gmain_dz.js'></script>
+		</div>
+		<div class="netgame_bottom">
+			<div id="pkgame_netgame_a"></div>
+			<div id="pkgame_netgame_b"></div>
+		</div>
+	</div>
+
+	<div class="pk_rightpanel" style="width:28%; float:right">
+		<div class="rp_top" style="background:url('source/plugin/bbsgame/images/3/rptopjb.jpg'); overflow:hidden;">
+			<p class='pkgame_record'>
+<!--{if !empty($registerInfo)}-->
+			我的战绩 {$registerInfo['win_num']}胜{$registerInfo['lose_num']}负
+<!--{else}-->	
+			玩游戏赢大奖
+<!--{/if}-->
+			</p>
+			<p><img style='cursor:pointer' onclick='return signIn();' src="source/plugin/bbsgame/images/3/qdyj.gif"></p>
+			<p><a href="plugin.php?id=bbsgame&action=pk"><img src="source/plugin/bbsgame/images/3/zhanshu.gif"></a>&nbsp;&nbsp;&nbsp;<a href="plugin.php?id=bbsgame&action=challenge"><img src="source/plugin/bbsgame/images/3/leitai.gif"></a></p>
+		</div>
+		<div class="rp_bottom">
+			<p class="bottom_title">大家都在玩</p>
+			<ul>
+<!--{if $hotPlayedLists}-->
+<!--{loop $hotPlayedLists $k $hotPlayed}-->
+				<li>
+					<a href='plugin.php?id=bbsgame&action=game&gid={$hotPlayed[gid]}'><img src="{$hotPlayed[img]}" width="48"></a>&nbsp;{$hotPlayed[name]}
+				</li>
+<!--{/loop}-->
+<!--{/if}-->
+			</ul>
+		</div>
+	</div>
+	<div class="clearfloat"></div>
+<!--{if $pkgame_active_ifopen}-->
+	<div class="pk_active">
+		<div class="active_title">
+			<span>站内精彩活动</span>
+			<p><a href="plugin.php?id=bbsgame&action=active" >活动详情>>></a></p>
+		</div>
+<!--{if $siteActive}-->
+		<div class="active_content">
+			<p>游戏名称：《{$siteActive['gamename']}》&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;活动时间：{$siteActive['activetime']}</p>
+			<ul>
+<!--{if $partakeUsers}-->
+<!--{eval $count = count($partakeUsers);}-->
+<!--{eval for($i=0,$j=1;$i<$count;$i++,$j++){}-->
+				<li><img src="source/plugin/bbsgame/images/3/g{$j}.gif"><div style="width:100px; overflow:hidden;">用户名：{$partakeUsers[$i]['act_username']}<br>得分：{$partakeUsers[$i]['act_score']}</div></li>
+<!--{eval }}-->
+<!--{/if}-->
+			</ul>
+		</div>
+<!--{/if}-->
+	</div>
+<!--{/if}-->
+
+	<div class="pk_left">
+	<div class="jf_pk">
+	
+		<div class="jfpk_title">
+			<span style=''>积分pk游戏</span>
+			<p><a href="plugin.php?id=bbsgame&action=list&list=pk">更多>></a></p>
+         </div>
+        <div class="jfpk_content">
+        	<div class="content_left" style="">
+				<div style="overflow:hidden; margin:10px 30px;">
+					<p style="text-align:center;"><img src="source/plugin/bbsgame/images/3/tzpkw.gif"></p>
+					<div class="pk_con" id="pkDiv"></div>
+				</div>
+				<div class="pk_king">
+			<div class="wtf_bolder_con oh">
+				<div class="pk_king_title"></div>
+				<div id="pkking_content"></div>
+			</div>
+		</div>
+			</div>
+			<div class="content_right">     
+			<div class="jifen_contents" id="jf_con{$i}">       	
+<!--{eval $i=0;}-->
+<!--{loop $mode['JFPK'] $k $v}-->
+<!--{eval $j = 0;}-->
+<!--{loop $v['games'] $key $game}-->
+<!--{eval $j++;}-->
+                    	<div class="pk_img" style=""><a href="plugin.php?id=bbsgame&action=game&gid={$game[gid]}"><img alt="{$game['name']}" src="{$game['img']}" width="77" height="78" />
+               	    <div style="height:20px; overflow:hidden">{$game['name']}</div><img onmouseover="change_tz(this)" onmouseout="unchange_tz(this)" src="source/plugin/bbsgame/images/1/n_games_35.jpg" width="58" height="22" /></a></div>
+<!--{/loop}-->
+<!--{/loop}-->
+  		</div>
+			</div>
+    	</div>
+		</div>
+		<div class="clearfloat"></div>
+		<div class="pk_add">
+			<div class="wtf_bolder_con h70 bn oh w100">
+				<script src="source/plugin/bbsgame/js/{$ggjs_file}"></script>
+			</div>
+		<div class="scoreT">
+            <div class="wtf_bolders_con">
+             <div class="scoreT_title">
+			<span>奖励积分游戏</span>
+			<p><a href="plugin.php?id=bbsgame&action=list&list=jl">更多>></a></p>
+         </div>
+              <div class="ji_content">
+<!--{eval $i=0;}-->
+<!--{loop $mode['JLJF'] $k $v}-->
+<!--{loop $v['games'] $key $game}-->
+<!--{eval $i++;}-->
+              		<div class="jf_img">
+						<a href="plugin.php?id=bbsgame&action=game&gid=$game[gid]"><img alt="{$game[name]}" onerror="this.src='source/plugin/bbsgame/images/404/404_tips.png'" src="{$game[img]}" width="78" height="78" />
+						<div style="line-height:24px; height: 24px;">{$game['name']}</div>
+						<img onmouseover="change_tzs(this)" onmouseout="unchange_tzs(this)"  src="source/plugin/bbsgame/images/2/jf_win_15.jpg" width="58" height="22" /></a></div>
+<!--{if $i!=7}-->
+             		<div class="score_sxian"></div>
+<!--{/if}-->
+<!--{/loop}-->
+<!--{/loop}-->
+               </div>
+            </div><!--end _bolders_con-->
+        </div>
+    </div>
+ </div>
+	<div class="pk_right">
+		<div class="pk_useractive">
+			<div class="wtf_bolder_con">
+				<div class="pk_useractive_title"></div>
+				<div id="pk_useractive_content">
+					<ul>
+<!--{if !empty($userActive)}-->
+<!--{loop $userActive $k $v}-->
+ 						<li>
+ 							<div class='jf_fonts'>
+ 								<span class="pk_timer">{$v['addTime']}</span>
+ 								<div style='float:left; width:85%;'>
+	 								<a class='popUserOp' style='position:relative' href='home.php?mod=space&uid={$v[uid]}'>{$v['username']}
+	 									<div class='popBtn'><img onclick="return pkgamePkSomeOne({$v[uid]}, '{$v[username]}', {$_G[uid]}, {$v[gid]},'{$v[gamename]}');" onmouseover="change_tz(this)" onmouseout="unchange_tz(this)" src="source/plugin/bbsgame/images/1/n_games_35.jpg" width="58" height="22" style="cursor: pointer; ">
+	 									</div>
+	 								</a>参与了
+	 								<a class='font-weight:700;' href='plugin.php?id=bbsgame&action=game&gid={$v[gid]}'>{$v['gamename']}</a>，{$v['descripton']}
+ 								</div>
+ 								<div class='clearfloat'></div>
+ 							</div>
+ 						</li>
+<!--{/loop}-->
+<!--{/if}-->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="con_right">
+        	<div class="wtf_bolderp_con">
+	       	  <div class="score_title">
+	                    <a href="javascript:void(0);">
+	                    	<div class="ph_title">
+	                    		<div class="zn_ph" id="zn_ph" onclick="zhannei(this)">站内</div>
+	                    		<span onclick="zpai(this)" id="z_ph" class="z_ph">总排行</span>
+	                    	</div>
+	                    </a>
+	                    <img style="margin-left:10px; margin-top:5px" src="source/plugin/bbsgame/images/2/hot_06.jpg" width="89" height="17" />
+	            </div>
+              <div class="list_font_title"><span class="">排名</span>|<span class="game_name">游戏名称</span>|<span class="dk_num">挑战人数</span></div>
+              <div id="paihang2" style="display:none">
+              <div class="game_rank">
+              		<div class="wtf_bolderf_up"></div>
+                    <div class="wtf_bolderf_up1"></div>
+                    <div class="wtf_bolderf_up2"></div>
+                    <div class="wtf_bolderf_up3"></div>
+                    <div class="wtf_bolderf_con" id='PHtop3'>
+                    </div>
+                    <div class="wtf_bolderf_up4"></div>
+                    <div class="wtf_bolderf_up5"></div>
+                    <div class="wtf_bolderf_up6"></div>
+                    <div class="wtf_bolderf_down"></div>
+              </div>
+			  <div id="last2" style="display:none">
+			   </div>
+			  </div>
+              <div id="paihang1">
+              <div class="game_rank">
+              		<div class="wtf_bolderf_up"></div>
+                    <div class="wtf_bolderf_up1"></div>
+                    <div class="wtf_bolderf_up2"></div>
+                    <div class="wtf_bolderf_up3"></div>
+                    <div class="wtf_bolderf_con">
+<!--{eval $count=count($rankingGame);}-->
+<!--{eval for($i=0,$j=1;$i<$count;$j++,++$i) {}-->
+<!--{if $i+1<=3}-->
+                    	<div class="rank_1"><span class="pos"><img src="source/plugin/bbsgame/images/1/{$j}.gif" class="rank_num1" width="16" height="13" /></span><span class="rank_font_top3"><a href="plugin.php?id=bbsgame&action=game&gid={$rankingGame[$i][gid]}">{$rankingGame[$i][name]}</a></span><span class="dk_num"><font color="red">{$rankingGame[$i][num]}</font>人</span></div>
+<!--{/if}-->
+<!--{/loop}-->
+                    </div>
+                    <div class="wtf_bolderf_up4"></div>
+                    <div class="wtf_bolderf_up5"></div>
+                    <div class="wtf_bolderf_up6"></div>
+                    <div class="wtf_bolderf_down"></div>
+              </div>
+			  </div>
+			<div id="last1">
+<!--{eval $count=count($rankingGame);}-->
+<!--{eval for($i=3,$j=4;$i<$count;$j++,$i++) {}-->
+<!--{if $i==$count-1}--> 
+<!--{eval $style='style="border-bottom:none"';}-->
+<!--{/if}-->
+               <div class="rank_all" {$style}><span class="pos"><img src="source/plugin/bbsgame/images/1/{$j}.gif" class="rank_num3"/></span><span class="rank_font_top3"><a href="plugin.php?id=bbsgame&action=game&gid={$rankingGame[$i][gid]}">{$rankingGame[$i][name]}</a></span><span class="dk_num"><font color="red">{$rankingGame[$i][num]}</font> 人</span></div>
+<!--{/loop}-->
+	       	 	</div>
+			</div>
+	    </div>
+	    <div style='text-align:center; margin:10px auto; border:1px solid #ccc; padding:10px; display:none'>
+	    	<a href=''><img src='source/plugin/bbsgame/images/3/coop_in.jpg'></a>
+	    	<a href=''><img src='source/plugin/bbsgame/images/3/suggest_in.jpg'></a>
+	    </div>
+		<div style='text-align:center; margin:10px auto 0px;'>
+	    	<a href='plugin.php?id=bbsgame&action=postmsg' target='_blank'><img src='source/plugin/bbsgame/images/3/coop_in.gif'></a>
+	    </div>
+	</div>
+	<div id='ivset'></div>
+	<div id='pkgame_notice'></div>
+    <div class="clearfloat"></div>
+    <div class='cop'>
+    	<div class="scoreT_title">
+			<span>互动游戏</span>
+			<p><!--a href="plugin.php?id=bbsgame&action=list&amp;list=jl">更多&gt;&gt;</a--></p>
+         </div>
+	    <iframe style='min-height:220px;height:{$coopIframeHeight}' id='coop' src='http://gamesvs.97sng.com/games/coop/cooperationList.jsp?purl={$coopUrl}' width="103%" frameborder='no' ></iframe>
+		
+	</div>
+	<!--div><a href="plugin.php?id=bbsgame:bbsgame&action=cooperation&coopid=og"><font size="16">欧冠足球</font></a></div-->
+</div>
+</div>
+<!--{template common/footer}-->

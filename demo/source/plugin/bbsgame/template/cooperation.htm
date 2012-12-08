@@ -1,0 +1,19 @@
+<!--{template common/header}-->
+<link rel="stylesheet" type="text/css" href="source/plugin/bbsgame/style/main.css"/>
+<script src="source/plugin/bbsgame/js/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="source/plugin/bbsgame/js/main.js"></script>
+<!--{eval $time=time();}-->
+<script defer src="http://stat.97sng.com/js/stat.js?pid={$pid}&gid={$_GET['coopid']}&t={$time}&url={$_SERVER[HTTP_HOST]}"></script>
+
+<div id='outDiv' style='margin: 0 auto;width:{$outDivConfig[width]}; height:{$outDivConfig[height]}; margin-bottom:30px; position:relative; overflow:hidden;'>
+	<iframe id='innerFrame' frameborder='0' scrolling="no" src='{$iFrameConfig[src]}' style='position:absolute; top:{$iFrameConfig[top]}; left:{$iFrameConfig[left]}; width:{$iFrameConfig[width]};height:{$iFrameConfig[height]};overflow:hidden;'>
+	</iframe>
+</div>
+<div id='ivset'></div>
+<script>
+var jq = jQuery.noConflict();
+jq(document).ready(function(){
+	new contentModule().getIv();
+});
+</script>
+<!--{template common/footer}-->
