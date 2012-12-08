@@ -1,0 +1,6 @@
+/demo/config
+/demo/logs
+/demo/.settings
+.buildpath
+.project
+*.bak
