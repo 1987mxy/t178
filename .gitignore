@@ -1,6 +1,7 @@
 /demo/config
 /demo/logs
 /demo/.settings
+/demo/data
 .buildpath
 .project
 *.bak
