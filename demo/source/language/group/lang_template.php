@@ -204,6 +204,25 @@ $lang = array (
   'orderby_default' => '默认排序',
   'stats_main_threads_count' => '主题数',
   'threads' => '主题',
+  
+  'org' => '公会',
+  'org_notice' => '公告',
+  'org_info' => '公会信息',
+  'org_next_surplus_tcp' => '距下一等级需TCP',
+  'org_capital' => '公会财富值',
+  'org_capital_rank' => '排名',
+  'org_tcp' => '公会TCP',
+  'org_tcp_rank' => '排名',
+  'org_copon' => '公会充值提升',
+  'org_join_game' => '公会入驻游戏',
+  'org_chatroom' => '公会聊天室',
+  'org_work' => '公会打工',
+  'org_store' => '公会商城',
+  'org_member_tcp_contribute_list' => '公会TCP贡献榜',
+  'org_member_capital_list' => '公会财富榜',
+  'org_member_status' => '成员状态',
+  'org_friend_org' => '友情公会',
+  'org_level' => '级公会',
 );
 
 ?>
