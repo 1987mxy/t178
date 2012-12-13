@@ -685,6 +685,20 @@ if(!empty($jioned))showmessage('已加过公会，请退出再加入！', "forum
 		} else {
 			showmessage('group_demise_founder_only');
 		}
+	} elseif($_GET['op'] == 'notice') {				//公会公告
+		if((!empty($_G['forum']['founderuid']) && $_G['forum']['founderuid'] == $_G['uid']) || $_G['adminid'] == 1) {
+
+			if(submitcheck('groupnotice')) {
+				C::t('forum_forumfield')->update($_G['fid'], array('founderuid' => $suid, 'foundername' => $user['username']));
+				C::t('forum_groupuser')->update_for_user($suid, $_G['fid'], NULL, NULL, 1);
+				update_groupmoderators($_G['fid']);
+				//sendpm($suid, lang('group/misc', 'group_demise_message_title', array('forum' => $_G['forum']['name'])), lang('group/misc', 'group_demise_message_body', array('forum' => $_G['forum']['name'], 'siteurl' => $_G['siteurl'], 'fid' => $_G['fid'])), $_G['uid']);
+				
+				showmessage('group_notice_edit_succeed', 'forum.php?mod=group&action=manage&fid='.$_G['fid']);
+			}
+		} else {
+			showmessage('group_demise_founder_only');
+		}
 	} else {
 		showmessage('undefined_action');
 	}

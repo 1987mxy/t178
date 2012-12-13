@@ -1,6 +1,7 @@
 <p class="tbmu">
 	<a href="forum.php?mod=group&action=manage&op=group&fid=$_G[fid]"{if $_GET['op'] == 'group'} class="a"{/if}>{lang group_setup}</a>
 <!--{if !empty($groupmanagers[$_G[uid]]) || $_G['adminid'] == 1}-->
+	<span class="pipe">|</span><a href="forum.php?mod=group&action=manage&op=notice&fid=$_G[fid]"{if $_GET['op'] == 'notice'} class="a"{/if}>{lang group_notice}</a>
 	<span class="pipe">|</span><a href="forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]"{if $_GET['op'] == 'checkuser'} class="a"{/if}>{lang group_member_moderate}</a>
 	<span class="pipe">|</span><a href="forum.php?mod=group&action=manage&op=manageuser&fid=$_G[fid]"{if $_GET['op'] == 'manageuser'} class="a"{/if}>{lang group_member_management}</a>
 <!--{/if}-->
