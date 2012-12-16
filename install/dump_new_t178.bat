@@ -1,0 +1,2 @@
+mysqldump -u root -p t178 t178_my_group t178_my_group_friend t178_my_group_game t178_my_group_member t178_my_group_store t178_my_group_work t178_my_tcp_log>new_t178.sql
+pause

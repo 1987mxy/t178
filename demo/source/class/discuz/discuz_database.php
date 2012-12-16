@@ -95,7 +95,6 @@ class discuz_database {
 	}
 
 	public static function fetch_all($sql, $arg = array(), $keyfield = '', $silent=false) {
-
 		$data = array();
 		$query = self::query($sql, $arg, $silent, false);
 		while ($row = self::$db->fetch_array($query)) {
