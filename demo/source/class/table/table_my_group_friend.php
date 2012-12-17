@@ -30,7 +30,7 @@ class table_my_group_friend extends discuz_table
 		if( empty( $groupid ) ) {
 			return array();
 		}
-		return DB::fetch_all( "SELECT * FROM %t WHERE group_id_a=%d", array( $this -> _table, $groupid ) );
+		return DB::fetch_all( "SELECT * FROM %t WHERE group_id_a=%d AND del_flag=0", array( $this -> _table, $groupid ) );
 	}
 	
 	/**

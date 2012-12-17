@@ -19,6 +19,28 @@ class table_my_tcp_log extends discuz_table
 
 		parent::__construct();
 	}
+	
+	/**
+	 * 获取公会TCP日志
+	 * @access	public
+	 * @param	$groupid	公会ID
+	 * @return	array		公会TCP日志
+	 */
+	public function get_group_tcp_log( $groupid ){
+		if( empty( $groupid ) ) return array();
+		return DB::fetch_all( "SELECT * FROM %t WHERE loggerid=%d", array( $this -> _table, $groupid ) );
+	}
+	
+	/**
+	 * 获取用户TCP日志
+	 * @access	public
+	 * @param	$uid		用户ID
+	 * @return	array		用户TCP日志
+	 */
+	public function get_member_tcp_log( $uid ){
+		if( empty( $uid ) ) return array();
+		return DB::fetch_all( "SELECT * FROM %t WHERE loggerid=%d", array( $this -> _table, $uid ) );
+	}
 }
 
 ?>

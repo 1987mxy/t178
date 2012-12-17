@@ -19,6 +19,18 @@ class table_my_group_work extends discuz_table
 
 		parent::__construct();
 	}
+	
+	/**
+	 * 获取公会打工信息
+	 * @access	public
+	 * @param	$groupid	公会ID
+	 * @return	array		公会打工信息
+	 */
+	public function get_group_work_info( $groupid ){
+		if( empty( $groupid ) ) return array();
+		$group_work_info = DB::fetch_first( "SELECT * FROM %t WHERE groupid=%d", array( $this -> _table, $groupid ) );
+		return $group_work_info;
+	}
 }
 
 ?>
