@@ -43,6 +43,19 @@ class table_my_group_member extends discuz_table
 		DB::query( "UPDATE %t SET tcp=tcp-%d, contributed=contributed+%d WHERE " . DB::field( 'uid', $uid ), array( $this->_table, $tcp, $tcp ) );
 		return DB::affected_rows() ? true : false;
 	}
+	
+	/**
+	 * 获得TCP值奖励
+	 * @access	public
+	 * @param	$uid		用户ID
+	 * @param	$tcp		贡献的TCP值
+	 * @return	boolean		获得TCP操作结果
+	 */
+	public function get_tco( $uid, $tcp ){
+		if( empty( $uid ) || $tcp == 0 ) return false;
+		DB::query( "UPDATE %t SET tcp=tcp+%d WHERE " . DB::field( 'uid', $uid ), array( $this->_table, $tcp ) );
+		return DB::affected_rows() ? true : false;
+	}
 }
 
 ?>

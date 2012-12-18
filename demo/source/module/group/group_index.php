@@ -10,7 +10,6 @@
 if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
-
 $navtitle = '';
 
 $gid = intval(getgpc('gid'));
