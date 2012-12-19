@@ -30,7 +30,7 @@ class table_my_group_friend extends discuz_table
 		if( empty( $groupid ) ) {
 			return array();
 		}
-		return DB::fetch_all( "SELECT * FROM %t WHERE group_id_a=%d AND del_flag=0", array( $this -> _table, $groupid ) );
+		return DB::fetch_all( "SELECT * FROM %t WHERE " . DB::field( 'group_id_a', $groupid ) . " AND " . DB::field( 'del_flag', 0 ), array( $this -> _table ) );
 	}
 	
 	/**
@@ -61,8 +61,8 @@ class table_my_group_friend extends discuz_table
 		if( empty( $group_id_a ) || empty( $group_id_b ) ){
 			return false;
 		}
-		DB::query( "UPDATE %t SET del_flag=1 WHERE group_id_a=%d AND group_id_b=%d", array( $this -> _table, $group_id_a, $$group_id_b ) );
-		DB::query( "UPDATE %t SET del_flag=1 WHERE group_id_a=%d AND group_id_b=%d", array( $this -> _table, $$group_id_b, $group_id_a ) );
+		DB::query( "UPDATE %t SET del_flag=1 WHERE " . DB::field( 'group_id_a', $group_id_a ) . " AND " . DB::field( 'group_id_b', $group_id_b ), array( $this -> _table ) );
+		DB::query( "UPDATE %t SET del_flag=1 WHERE " . DB::field( 'group_id_a', $group_id_b ) . " AND " . DB::field( 'group_id_b', $group_id_a ), array( $this -> _table ) );
 		return true;
 	}
 }

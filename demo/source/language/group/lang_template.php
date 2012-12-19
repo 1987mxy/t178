@@ -208,6 +208,7 @@ $lang = array (
   'group' => '公会',
   'group_notice' => '公告',
   'group_notice_edit_success' => '公会公告编辑成功',
+  'group_notice_founder_only' => '抱歉，只有{_G/setting/navs/3/navname}创始人才能发布公告{_G/setting/navs/3/navname}',
   'group_info' => '公会信息',
   'group_next_surplus_tcp' => '距下一等级需TCP',
   'group_capital' => '公会财富值',

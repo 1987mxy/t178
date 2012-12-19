@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.1.59, for Win32 (ia32)
+﻿-- MySQL dump 10.13  Distrib 5.1.59, for Win32 (ia32)
 --
 -- Host: localhost    Database: t178
 -- ------------------------------------------------------
@@ -105,6 +105,7 @@ DROP TABLE IF EXISTS `t178_my_group_member`;
 CREATE TABLE `t178_my_group_member` (
   `group_memberid` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '公会成员ID',
   `uid` mediumint(8) unsigned NOT NULL COMMENT 'discuz的uid',
+  `username` char(15) NOT NULL COMMENT 'discuz的username',
   `groupid` mediumint(8) unsigned NOT NULL COMMENT '公会ID',
   `tcp` int(10) unsigned DEFAULT '0' COMMENT 'TCP值',
   `contributed` int(10) unsigned DEFAULT '0' COMMENT 'TCP贡献值',

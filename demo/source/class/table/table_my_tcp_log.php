@@ -28,7 +28,7 @@ class table_my_tcp_log extends discuz_table
 	 */
 	public function get_group_tcp_log( $groupid ){
 		if( empty( $groupid ) ) return array();
-		return DB::fetch_all( "SELECT * FROM %t WHERE loggerid=%d", array( $this -> _table, $groupid ) );
+		return DB::fetch_all( "SELECT * FROM %t WHERE " . DB::field( 'loggerid', $groupid ) . " AND " . DB::field( 'logger_type', 'group' ), array( $this -> _table ) );
 	}
 	
 	/**
@@ -39,7 +39,7 @@ class table_my_tcp_log extends discuz_table
 	 */
 	public function get_member_tcp_log( $uid ){
 		if( empty( $uid ) ) return array();
-		return DB::fetch_all( "SELECT * FROM %t WHERE loggerid=%d", array( $this -> _table, $uid ) );
+		return DB::fetch_all( "SELECT * FROM %t WHERE " . DB::field( 'loggerid', $uid ) . " AND " . DB::field( 'logger_type', 'member' ), array( $this -> _table ) );
 	}
 }
 

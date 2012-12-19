@@ -28,7 +28,7 @@ class table_my_group_store extends discuz_table
 	 */
 	public function get_group_store_info( $groupid ){
 		if( empty( $groupid ) ) return array();
-		$group_store_info = DB::fetch_first( "SELECT * FROM %t WHERE groupid=%d", array( $this -> _table, $groupid ) );
+		$group_store_info = DB::fetch_first( "SELECT * FROM %t WHERE " . DB::field( 'groupid', $groupid ), array( $this -> _table ) );
 		return $group_store_info;
 	}
 }

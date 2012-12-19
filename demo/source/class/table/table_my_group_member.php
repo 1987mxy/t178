@@ -51,11 +51,36 @@ class table_my_group_member extends discuz_table
 	 * @param	$tcp		贡献的TCP值
 	 * @return	boolean		获得TCP操作结果
 	 */
-	public function get_tco( $uid, $tcp ){
+	public function get_tcp( $uid, $tcp ){
 		if( empty( $uid ) || $tcp == 0 ) return false;
 		DB::query( "UPDATE %t SET tcp=tcp+%d WHERE " . DB::field( 'uid', $uid ), array( $this->_table, $tcp ) );
 		return DB::affected_rows() ? true : false;
 	}
+	
+	/**
+	 * 获取公会成员TCP贡献榜单
+	 * @access	public
+	 * @param	$groupid	公会ID
+	 * @param	$number		显示数量
+	 * @return	array		公会成员TCP贡献榜单
+	 */
+	public function get_group_contribute_list( $groupid, $number = 10 ){
+		if( empty( $groupid ) ) return array();
+		return DB::fetch_all( "SELECT uid, username, contributed FROM %t WHERE " . DB::field( 'groupid', $groupid ) . " ORDER BY " . DB::order( 'contributed', 'DESC' ) . DB::limit( 0, $number ), array( $this -> _table, $number ) );
+	}
+	
+	/**
+	 * 获取公会财富榜单
+	 * @access	public
+	 * @param	$groupid	公会ID
+	 * @param	$number		显示数量
+	 * @return	array		公会成员财富榜单
+	 */
+	public function get_group_capital_list( $groupid, $number = 10 ){
+		if( empty( $groupid ) ) return array();
+		return DB::fetch_all( "SELECT uid, username, capital FROM %t WHERE " . DB::field( 'groupid', $groupid ) . " ORDER BY " . DB::order( 'capital', 'DESC' ) . DB::limit( 0, $number ), array( $this -> _table, $number ) );
+	}
+	
 }
 
 ?>

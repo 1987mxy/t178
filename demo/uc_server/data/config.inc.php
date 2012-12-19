@@ -1,8 +1,8 @@
 <?php 
 define('UC_DBHOST', 'localhost');
 define('UC_DBUSER', 'root');
-define('UC_DBPW', 'zxt5181982');
-define('UC_DBNAME', 't178demo');
+define('UC_DBPW', '');
+define('UC_DBNAME', 't178');
 define('UC_DBCHARSET', 'utf8');
 define('UC_DBTABLEPRE', 't178_ucenter_');
 define('UC_COOKIEPATH', '/');

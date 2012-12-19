@@ -697,7 +697,7 @@ if(!empty($jioned))showmessage('已加过公会，请退出再加入！', "forum
 				showmessage('group_notice_edit_succeed', 'forum.php?mod=group&action=manage&fid='.$_G['fid']);
 			}
 		} else {
-			showmessage('group_demise_founder_only');
+			showmessage('group_notice_founder_only');
 		}
 	} else {
 		showmessage('undefined_action');

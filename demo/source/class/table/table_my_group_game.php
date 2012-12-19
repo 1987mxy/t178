@@ -28,7 +28,7 @@ class table_my_group_game extends discuz_table
 	 */
 	public function get_group_games( $groupid ){
 		if( empty( $groupid ) ) return array();
-		return DB::fetch_all( "SELECT * FROM %t WHERE groupid=%d", array( $this -> _table, $groupid ) );
+		return DB::fetch_all( "SELECT * FROM %t WHERE " . DB::field( 'groupid', $groupid ), array( $this -> _table ) );
 	}
 	
 	/**
