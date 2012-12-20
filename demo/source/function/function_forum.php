@@ -551,6 +551,10 @@ function loadforum() {
 						}
 					}
 				}
+				
+				//获取公会信息Moxiaoyong		2012-12-20
+				$group_info = C::t('my_group')->get_group_info($fid);
+				$_G['mygroup'] = $group_info;
 			}
 		} else {
 			$fid = 0;

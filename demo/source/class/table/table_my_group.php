@@ -21,6 +21,15 @@ class table_my_group extends discuz_table
 	}
 	
 	/**
+	 * 获取全部已建立的公会ID
+	 * @access	public
+	 * @return	array		已建立的公会ID列表
+	 */
+	public function get_full_groupid(){
+		return DB::fetch_all( "SELECT groupid, fid, `status`, build_time, apply_time FROM %t", array( $this -> _table ) );
+	}
+	
+	/**
 	 * 获取公会信息
 	 * @access	public
 	 * @param	$fid		Discuz的fid
@@ -30,7 +39,8 @@ class table_my_group extends discuz_table
 		if( empty( $fid ) ) {
 			return array();
 		}
-		return DB::fetch_all( "SELECT * FROM %t WHERE " . DB::field( 'fid', $fid ), array( $this -> _table ) );
+		$group_info = DB::fetch_first( "SELECT * FROM %t WHERE " . DB::field( 'fid', $fid ), array( $this -> _table ) );
+		return empty( $group_info ) ? array() : $group_info;
 	}
 	
 	/**
@@ -92,10 +102,42 @@ class table_my_group extends discuz_table
 	 * @param	$tcp		获得TCP值
 	 * @return	boolean		公会TCP值获得操作结果
 	 */
-	public function get_tcp( $fid, $tcp ){
+	public function add_tcp( $fid, $tcp ){
 		if( empty( $fid ) || $tcp == 0 ) return false;
 		DB::query( "UPDATE %t SET tcp=tcp+%d WHERE " . DB::field( 'fid', $fid ), array( $this->_table, $tcp ) );
 		return DB::affected_rows() ? true : false;
+	}
+	
+	/**
+	 * 公会删除
+	 * @access	public
+	 * @param	$groupids	公会ID列表
+	 * @return	boolean		删除操作结果
+	 */
+	public function del_group( $groupids ){
+		if( empty( $groupids ) ) {
+			return false;
+		}
+		$condition = DB::field( 'groupid', $groupids );
+		DB::delete( $this->_table, $condition );
+		return DB::affected_rows() >= count( $groupids ) ? true : false;
+	}
+	
+	/**
+	 * 将Discuz的fids转换成t178的groupids
+	 * @access	public
+	 * @param	$fids	Discuz的fid列表
+	 * @return	array	t178的公会ID列表
+	 */
+	public function fids2groupids( $fids ){
+		if( empty( $fids ) ) {
+			return array();
+		}
+		$groupids = DB::fetch_all( "SELECT groupid FROM %t WHERE " . DB::field( 'fid', $fids ), array( $this -> _table ) );
+		foreach( $groupids as &$groupid ){
+			$groupid = $groupid[ 'groupid' ];
+		}
+		return $groupids;
 	}
 }
 

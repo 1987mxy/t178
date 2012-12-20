@@ -41,11 +41,11 @@ class table_my_group_friend extends discuz_table
 	 * @return	boolean			建立友情公会结果
 	 */
 	public function friend_group( $group_id_a, $group_id_b ){
-		$data = array( '$group_id_a'	=> $group_id_a,
-						'$group_id_b'	=> $group_id_b );
+		$data = array( 'group_id_a'	=> $group_id_a,
+						'group_id_b'	=> $group_id_b );
 		$this -> insert( $data );
-		$data = array( '$group_id_a'	=> $group_id_b,
-						'$group_id_b'	=> $group_id_a );
+		$data = array( 'group_id_a'	=> $group_id_b,
+						'group_id_b'	=> $group_id_a );
 		$this -> insert( $data );
 		return true;
 	}
@@ -63,6 +63,21 @@ class table_my_group_friend extends discuz_table
 		}
 		DB::query( "UPDATE %t SET del_flag=1 WHERE " . DB::field( 'group_id_a', $group_id_a ) . " AND " . DB::field( 'group_id_b', $group_id_b ), array( $this -> _table ) );
 		DB::query( "UPDATE %t SET del_flag=1 WHERE " . DB::field( 'group_id_a', $group_id_b ) . " AND " . DB::field( 'group_id_b', $group_id_a ), array( $this -> _table ) );
+		return true;
+	}
+	
+	/**
+	 * 友情公会删除
+	 * @access	public
+	 * @param	$groupids	公会ID列表
+	 * @return	boolean		删除操作结果
+	 */
+	public function del_group_friend( $groupids ){
+		if( empty( $groupids ) ) {
+			return false;
+		}
+		$condition = DB::field( 'group_id_a', $groupids ) . ' OR ' . DB::field( 'group_id_b', $groupids );
+		DB::delete( $this->_table, $condition );
 		return true;
 	}
 }

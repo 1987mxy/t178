@@ -31,6 +31,21 @@ class table_my_group_store extends discuz_table
 		$group_store_info = DB::fetch_first( "SELECT * FROM %t WHERE " . DB::field( 'groupid', $groupid ), array( $this -> _table ) );
 		return $group_store_info;
 	}
+	
+	/**
+	 * 公会商城删除
+	 * @access	public
+	 * @param	$groupids	公会ID列表
+	 * @return	boolean		删除操作结果
+	 */
+	public function del_group_store( $groupids ){
+		if( empty( $groupids ) ) {
+			return false;
+		}
+		$condition = DB::field( 'groupid', $groupids );
+		DB::delete( $this->_table, $condition );
+		return DB::affected_rows() >= count( $groupids ) ? true : false;
+	}
 }
 
 ?>

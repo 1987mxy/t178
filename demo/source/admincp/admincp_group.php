@@ -491,6 +491,9 @@ var rowtypedata = [
 			C::t('forum_groupcreditslog')->delete_by_fid($fidarray);
 			C::t('forum_groupfield')->delete($fidarray);
 
+			//删除t178公会Moxiaoyong		2012-12-20
+			include_once libfile('function/my_group');
+			close_my_group($fidarray);
 
 			require_once libfile('function/delete');
 			deletedomain($fidarray, 'group');

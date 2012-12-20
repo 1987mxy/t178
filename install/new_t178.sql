@@ -1,4 +1,4 @@
-﻿-- MySQL dump 10.13  Distrib 5.1.59, for Win32 (ia32)
+-- MySQL dump 10.13  Distrib 5.1.59, for Win32 (ia32)
 --
 -- Host: localhost    Database: t178
 -- ------------------------------------------------------
@@ -24,14 +24,16 @@ DROP TABLE IF EXISTS `t178_my_group`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `t178_my_group` (
   `groupid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '公会ID',
-  `fid` mediumint(8) unsigned DEFAULT NULL COMMENT 'discuz_fid',
-  `uid` mediumint(8) unsigned DEFAULT NULL COMMENT 'discuz_uid',
-  `capital` int(10) unsigned DEFAULT NULL COMMENT '公会财富值',
-  `tcp` int(10) unsigned DEFAULT NULL COMMENT '公会TCP值',
-  `level` smallint(5) unsigned DEFAULT NULL COMMENT '公会等级',
+  `fid` mediumint(8) unsigned NOT NULL COMMENT 'discuz_fid',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '公会状态',
+  `capital` int(10) unsigned DEFAULT '0' COMMENT '公会财富值',
+  `tcp` int(10) unsigned DEFAULT '0' COMMENT '公会TCP值',
+  `level` smallint(5) unsigned DEFAULT '1' COMMENT '公会等级',
   `notice` text COMMENT '公会公告',
+  `build_time` int(10) unsigned DEFAULT NULL COMMENT '建立时间',
+  `apply_time` int(10) unsigned DEFAULT NULL COMMENT '申请时间',
   PRIMARY KEY (`groupid`) USING BTREE
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='公会表';
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='公会表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +42,7 @@ CREATE TABLE `t178_my_group` (
 
 LOCK TABLES `t178_my_group` WRITE;
 /*!40000 ALTER TABLE `t178_my_group` DISABLE KEYS */;
+INSERT INTO `t178_my_group` VALUES (7,45,1,0,0,1,'测试',NULL,NULL);
 /*!40000 ALTER TABLE `t178_my_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,7 +82,7 @@ CREATE TABLE `t178_my_group_game` (
   `group_gameid` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '公会入驻游戏ID',
   `groupid` mediumint(8) unsigned NOT NULL COMMENT '公会ID',
   `gameid` mediumint(8) unsigned NOT NULL COMMENT '游戏ID',
-  `status` smallint(5) unsigned NOT NULL COMMENT '入驻状态',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '入驻状态',
   `join_time` int(10) unsigned DEFAULT NULL COMMENT '入驻时间',
   `apply_time` int(10) unsigned NOT NULL COMMENT '入驻申请时间',
   PRIMARY KEY (`group_gameid`) USING BTREE
@@ -108,11 +111,12 @@ CREATE TABLE `t178_my_group_member` (
   `username` char(15) NOT NULL COMMENT 'discuz的username',
   `groupid` mediumint(8) unsigned NOT NULL COMMENT '公会ID',
   `tcp` int(10) unsigned DEFAULT '0' COMMENT 'TCP值',
+  `capital` decimal(7,2) DEFAULT '0.00' COMMENT '财富值',
   `contributed` int(10) unsigned DEFAULT '0' COMMENT 'TCP贡献值',
   `referrer` mediumint(8) unsigned DEFAULT NULL COMMENT '推荐人ID',
   `signin_time` int(10) unsigned DEFAULT NULL COMMENT '签到时间',
   PRIMARY KEY (`group_memberid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='公会成员表';
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='公会成员表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,6 +125,7 @@ CREATE TABLE `t178_my_group_member` (
 
 LOCK TABLES `t178_my_group_member` WRITE;
 /*!40000 ALTER TABLE `t178_my_group_member` DISABLE KEYS */;
+INSERT INTO `t178_my_group_member` VALUES (7,47,'test01',7,0,'0.00',0,NULL,NULL);
 /*!40000 ALTER TABLE `t178_my_group_member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +141,7 @@ CREATE TABLE `t178_my_group_store` (
   `store_name` varchar(64) NOT NULL COMMENT '公会商城名称',
   `groupid` mediumint(8) unsigned NOT NULL COMMENT '公会ID',
   PRIMARY KEY (`group_storeid`) USING BTREE
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='公会商城表';
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='公会商城表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,6 +150,7 @@ CREATE TABLE `t178_my_group_store` (
 
 LOCK TABLES `t178_my_group_store` WRITE;
 /*!40000 ALTER TABLE `t178_my_group_store` DISABLE KEYS */;
+INSERT INTO `t178_my_group_store` VALUES (3,'测试1商城',7);
 /*!40000 ALTER TABLE `t178_my_group_store` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +165,7 @@ CREATE TABLE `t178_my_group_work` (
   `group_workid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '公会打工ID',
   `groupid` mediumint(8) unsigned NOT NULL COMMENT '公会ID',
   PRIMARY KEY (`group_workid`) USING BTREE
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='公会打工表';
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='公会打工表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,6 +174,7 @@ CREATE TABLE `t178_my_group_work` (
 
 LOCK TABLES `t178_my_group_work` WRITE;
 /*!40000 ALTER TABLE `t178_my_group_work` DISABLE KEYS */;
+INSERT INTO `t178_my_group_work` VALUES (3,7);
 /*!40000 ALTER TABLE `t178_my_group_work` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,6 +204,31 @@ LOCK TABLES `t178_my_tcp_log` WRITE;
 /*!40000 ALTER TABLE `t178_my_tcp_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `t178_my_tcp_log` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `t178_my_group_signing`
+--
+
+DROP TABLE IF EXISTS `t178_my_group_signing`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t178_my_group_signing` (
+  `group_signingid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '公会签到ID',
+  `groupid` int(10) unsigned NOT NULL COMMENT '公会ID',
+  `uid` mediumint(8) unsigned NOT NULL COMMENT 'Discuz的uid',
+  `date` date NOT NULL COMMENT '签到日期',
+  PRIMARY KEY (`group_signingid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='公会签到表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t178_my_group_signing`
+--
+
+LOCK TABLES `t178_my_group_signing` WRITE;
+/*!40000 ALTER TABLE `t178_my_group_signing` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t178_my_group_signing` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -207,4 +239,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-12-17  2:02:00
+-- Dump completed on 2012-12-21  2:58:08

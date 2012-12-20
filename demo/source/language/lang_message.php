@@ -1050,6 +1050,16 @@ $lang = array (
 
   'magics_thunder_message' => '{magicname} 发布成功 ',
 
+  //t178公会文字库Moxiaoyong		2012-12-20
+  'group_notice_edit_succeed' => '公会公告编辑成功',
+  'group_notice_failed' => '{_G/setting/navs/3/navname}公告含有敏感词语',
+  'group_notice_founder_only' => '抱歉，只有{_G/setting/navs/3/navname}创始人才能发布公告',
+  'group_contribute_tcp_succeed' => '谢谢您为{_G/setting/navs/3/navname}公会捐献的TCP',
+  'group_tcp_shortage' => '您的TCP不足',
+  'group_contribute_tcp_to_other' => '您不能为其他公会捐献TCP',
+  'group_signing_from_other' => '您无法在其他公会签到',
+  'group_had_signing' => '今天已签到',
+  'group_signing_succeed' => '签到成功',
 );
 
 ?>

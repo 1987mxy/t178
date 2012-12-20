@@ -54,10 +54,25 @@ class table_my_group_game extends discuz_table
 	 */
 	public function reject_join_application( $groupid ){
 		if( empty( $groupid ) ) return false;
-		$data = array( 'status' => 2 );
+		$data = array( 'status' => 3 );
 		$condition = array( 'groupid' => $groupid );
 		DB::update( $this -> _table, $data, $condition );
 		return DB::affected_rows() ? true : false;
+	}
+	
+	/**
+	 * 公会入驻游戏删除
+	 * @access	public
+	 * @param	$groupids	公会ID列表
+	 * @return	boolean		删除操作结果
+	 */
+	public function del_group_game( $groupids ){
+		if( empty( $groupids ) ) {
+			return false;
+		}
+		$condition = DB::field( 'groupid', $groupids );
+		DB::delete( $this->_table, $condition );
+		return true;
 	}
 }
 

@@ -136,6 +136,7 @@
 			</table>
 		</form>
 	</div>
+<!-- 公会公告编辑Moxiaoyong	2012-12-20 -->
 <!--{elseif $_GET['op'] == 'notice'}-->
 	<div class="bm bw0">
 		<form enctype="multipart/form-data" action="forum.php?mod=group&action=manage&op=notice&fid=$_G[fid]" name="manage" method="post" autocomplete="off">
@@ -143,124 +144,23 @@
 			<table cellspacing="0" cellpadding="0" class="tfm vt" summary="{lang group_admin_panel}">
 				<tbody>
 					<tr>
-						<th>&nbsp;</th>
-						<td><strong class="rq"><em id="returnmessage4"></em></strong></td>
-					</tr>
-					<!--{if !empty($specialswitch['allowchangename']) && ($_G['uid'] == $_G['forum']['founderuid'] || $_G['adminid'] == 1)}-->
-					<tr>
-						<th><span class="rq">*</span>{lang group_name}:</th>
-						<td><input type="text" id="name" name="name" class="px" size="36" tabindex="1" value="$_G[forum][name]" autocomplete="off" tabindex="1" /></td>
-					</tr>
-					<!--{/if}-->
-					<!--{if !empty($specialswitch['allowchangetype']) && ($_G['uid'] == $_G['forum']['founderuid'] || $_G['adminid'] == 1)}-->
-					<tr>
-						<th><span class="rq">*</span>{lang group_category}:</th>
+						<th>{lang group_notice}</th>
 						<td>
-							<select name="parentid" tabindex="2" class="ps" onchange="ajaxget('forum.php?mod=ajax&action=secondgroup&fupid='+ this.value, 'secondgroup');">
-								$groupselect[first]
-							</select>
-							<em id="secondgroup"><!--{if $groupselect['second']}--><select id="fup" name="fup" class="ps" >$groupselect[second]</select><!--{/if}--></em>
-						</td>
-					</tr>
-					<!--{/if}-->
-					<tr>
-						<th>{lang group_description}</th>
-						<td>
-							<script type="text/javascript">
-								var allowbbcode = allowimgcode = parsetype = 1;
-								var allowhtml = forumallowhtml = allowsmilies = 0;
-							</script>
-							<script type="text/javascript" src="{$_G[setting][jspath]}bbcode.js?{VERHASH}"></script>
-							<div id="descriptionpreview"></div>
 							<div class="tedt">
-								<div class="bar">
-									<div class="y"><a href="javascript:;" onclick="$('descriptionpreview').innerHTML = bbcode2html($('descriptionmessage').value)">{lang group_description_preview}</a></div>
-									<!--{eval $seditor = array('description', array('bold', 'color', 'img', 'link'));}-->
-									<!--{subtemplate common/seditor}-->
-								</div>
 								<div class="area">
-									<textarea id="descriptionmessage" name="descriptionnew" class="pt" rows="8">$_G[forum][descriptionnew]</textarea>
+									<textarea name="notice" class="pt" rows="8">$_G[mygroup][notice]</textarea>
 								</div>
 							</div>
 					</tr>
 					<tr>
-						<th>{lang group_perm_visit}</th>
-						<td>
-							<label class="lb"><input type="radio" name="gviewpermnew" class="pr" value="1" $gviewpermselect[1] />{lang group_perm_all_user}</label>
-							<label class="lb"><input type="radio" name="gviewpermnew" class="pr" value="0" $gviewpermselect[0] />{lang group_perm_member_only}</label>
-						</td>
-					</tr>
-					<tr>
-						<th>{lang group_join_type}</th>
-						<td>
-							<label class="lb"><input type="radio" name="jointypenew" class="pr" value="0" $jointypeselect[0] />{lang group_join_type_free}</label>
-							<label class="lb"><input type="radio" name="jointypenew" class="pr" value="2" $jointypeselect[2] />{lang group_join_type_moderate}</label>
-							<label class="lb"><input type="radio" name="jointypenew" class="pr" value="1" $jointypeselect[1] />{lang group_join_type_invite}</label>
-							<!--{if !empty($specialswitch['allowclosegroup'])}-->
-							<label class="lb"><input type="radio" name="jointypenew" class="pr" value="-1" $jointypeselect[-1] />{lang close}</label>
-							<p class="d">{lang group_close_notice}</p>
-							<!--{/if}-->
-						</td>
-					</tr>
-					<!--{if $_G['setting']['allowgroupdomain'] && !empty($_G['setting']['domain']['root']['group']) && $domainlength}-->
-					<tr>
-						<th>{lang subdomain}</th>
-						<td>
-							http://<input type="text" name="domain" class="px" value="$_G[forum][domain]" style="width: 100px;" />.{$_G['setting']['domain']['root']['group']}
-							<p class="d">
-								{lang group_domain_message}<br/>
-								<!--{if $_G[forum][domain] && $consume}-->{lang group_edit_domain_message}<!--{/if}-->
-							</p>
-						</td>
-					</tr>
-					<!--{/if}-->
-					<!--{if !empty($_G['group']['allowupbanner']) || $_G['adminid'] == 1}-->
-					<tr>
-						<th>{lang group_image}</th>
-						<td>
-							<input type="file" name="bannernew" id="bannernew" class="pf" size="25" />
-				<!--{if $_G['forum']['banner']}-->
-							<label><input type="checkbox" name="deletebanner" class="pc" value="1" />{lang group_no_image}</label>
-							<p class="d">{lang group_no_image_comment}</p>
-						</td>
-					</tr>
-					<tr>
 						<th>&nbsp;</th>
-						<td>
-							<img onload="thumbImg(this, 1)" _width="544" _height="400" src="$_G[forum][banner]?{TIMESTAMP}" />
-				<!--{/if}-->
-								<p class="d">
-									<!--{if $_G[setting][group_imgsizelimit]}-->
-									{lang group_image_filesize_limit} &nbsp;
-									<!--{/if}-->
-									{lang group_image_filesize_advise}
-								</p>
-							
-						</td>
-					</tr>
-					<!--{/if}-->
-					<tr>
-						<th>{lang group_icon}</th>
-						<td>
-							<input type="file" id="iconnew" class="pf vm" size="25" name="iconnew" />
-							<p class="d">
-								{lang group_icon_resize} &nbsp;
-								<!--{if $_G[setting][group_imgsizelimit]}-->
-									{lang group_image_filesize_limit}
-								<!--{/if}--></p>
-							<!--{if $_G['forum']['icon']}-->
-								<img width="48" height="48" alt="" class="vm" style="margin-right: 1em;" src="$_G[forum][icon]?{TIMESTAMP}" />
-							<!--{/if}-->
-						</td>
-					</tr>
-					<tr>
-						<th>&nbsp;</th>
-						<td><button type="submit" name="groupmanage" class="pn pnc" value="1"><strong>{lang submit}</strong></button></td>
+						<td><button type="submit" name="groupnotice" class="pn pnc" value="1"><strong>{lang submit}</strong></button></td>
 					</tr>
 				</tbody>
 			</table>
 		</form>
 	</div>
+<!-- 公会公告编辑Moxiaoyong	2012-12-20 -->
 <!--{elseif $_GET['op'] == 'checkuser'}-->
 	<!--{if $checkusers}-->
 		<p class="tbmu cl">

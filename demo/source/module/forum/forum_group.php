@@ -16,7 +16,7 @@ $_G['action']['action'] = 3;
 $_G['action']['fid'] = $_G['fid'];
 $_G['basescript'] = 'group';
 
-$actionarray = array('join', 'out', 'create', 'viewmember', 'manage', 'index', 'memberlist', 'recommend');
+$actionarray = array('join', 'out', 'create', 'viewmember', 'manage', 'index', 'memberlist', 'recommend', 'contribute', 'signing', 'check_group');
 $action = getgpc('action') && in_array($_GET['action'], $actionarray) ? $_GET['action'] : 'index';
 if(in_array($action, array('join', 'out', 'create', 'manage', 'recommend'))) {
 	if(empty($_G['uid'])) {
@@ -46,6 +46,12 @@ if($_G['fid']) {
 	$_G['forum']['posts'] = intval($_G['forum']['posts']);
 	$_G['grouptypeid'] = $_G['forum']['fup'];
 	$groupuser = C::t('forum_groupuser')->fetch_userinfo($_G['uid'], $_G['fid']);
+	
+	//调取t178公会信息
+	if($groupuser){
+		$group_member = C::t('my_group_member')->get_member_info($_G['mygroup']['groupid'], $_G['uid']);
+	}
+	
 	$onlinemember = grouponline($_G['fid'], 1);
 	$groupmanagers = $_G['forum']['moderators'];
 	$nav = get_groupnav($_G['forum']);
@@ -166,6 +172,18 @@ if($action == 'index') {
 				}
 			}
 		}
+		
+		//公会首页信息Moxiaoyong		2012-12-20
+		$group_next_tcp = C::t('forum_grouplevel')->fetch_by_credits($_G['mygroup']['tcp']);
+		$_G['mygroup']['next_level_require_tcp'] = $group_next_tcp['creditslower'] - $_G['mygroup']['tcp'];
+		$_G['mygroup']['tcp_rank'] = C::t('my_group')->get_tcp_rank($_G['fid']);
+		$_G['mygroup']['capital_rank'] = C::t('my_group')->get_capital_rank($_G['fid']);
+		$my_groupid = $_G['mygroup']['groupid'];
+		$_G['mygroup']['member_contribute_list'] = C::t('my_group_member')->get_member_contribute_list($my_groupid);
+		$_G['mygroup']['member_capital_list'] = C::t('my_group_member')->get_member_capital_list($my_groupid);
+		$_G['mygroup']['group_games'] = C::t('my_group_game')->get_group_games($my_groupid);
+		$_G['mygroup']['friend_group'] = C::t('my_group_friend')->get_friend_group($my_groupid);
+		
 	} else {
 		$newuserlist = $activityuserlist = array();
 		$newuserlist = array_slice($groupcache['newuserlist']['data'], 0, 4);
@@ -205,8 +223,8 @@ if($action == 'index') {
 	include template('diy:group/group:'.$_G['fid']);
 
 } elseif($action == 'join') {
-$jioned = DB::result_first("SELECT uid FROM ".DB::table('forum_groupuser')." WHERE uid='$_G[uid]'");
-if(!empty($jioned))showmessage('已加过公会，请退出再加入！', "forum.php?mod=group&fid=$_G[fid]");
+	$jioned = DB::result_first("SELECT uid FROM ".DB::table('forum_groupuser')." WHERE uid='$_G[uid]'");
+	if(!empty($jioned))showmessage('已加过公会，请退出再加入！', "forum.php?mod=group&fid=$_G[fid]");
 
 	$inviteuid = 0;
 	$membermaximum = $_G['current_grouplevel']['specialswitch']['membermaximum'];
@@ -235,6 +253,19 @@ if(!empty($jioned))showmessage('已加过公会，请退出再加入！', "forum
 
 		if($confirmjoin) {
 			C::t('forum_groupuser')->insert($_G['fid'], $_G['uid'], $_G['username'], $modmember, TIMESTAMP, TIMESTAMP);
+			
+			//会员加入t178公会，且不用审核Moxiaoyong		2012-12-20
+			if($modmember == 4){
+				$group_member_info = array( 'uid'		=> $_G['uid'],
+											'username'	=> $_G['username'],
+											'groupid'	=> $_G['mygroup']['groupid'] );
+				if($inviteuid){
+					$group_member_info['referrer'] = $inviteuid;
+					C::t('my_group_member') -> get_tcp( $_G['mygroup']['groupid'], $inviteuid, 10 );		//暂定邀请别人入会加TCP10 Moxiaoyong		2012-12-20
+				}
+				C::t('my_group_member') -> insert( $group_member_info );
+			}
+			
 			if($_G['forum']['jointype'] == 2 && (empty($inviteuid) || empty($groupmanagers[$inviteuid]))) {
 				foreach($groupmanagers as $manage) {
 					notification_add($manage['uid'], 'group', 'group_member_join', array('fid' => $_G['fid'], 'groupname' => $_G['forum']['name'], 'url' => $_G['siteurl'].'forum.php?mod=group&action=manage&op=checkuser&fid='.$_G['fid']), 1);
@@ -261,10 +292,13 @@ if(!empty($jioned))showmessage('已加过公会，请退出再加入！', "forum
 		showmessage('group_exit_founder');
 	}
 	$showmessage = 'group_exit_succeed';
-		C::t('forum_groupuser')->delete_by_fid($_G['fid'], $_G['uid']);
-		C::t('forum_forumfield')->update_membernum($_G['fid'], -1);
+	C::t('forum_groupuser')->delete_by_fid($_G['fid'], $_G['uid']);
+	C::t('forum_forumfield')->update_membernum($_G['fid'], -1);
 	update_groupmoderators($_G['fid']);
 	delgroupcache($_G['fid'], array('activityuser', 'newuserlist'));
+	
+	C::t('my_group_member')->leave_group($_G['uid']);			//公会会员离开t178公会Moxiaoyong		2012-10-20
+	
 	showmessage($showmessage, "forum.php?mod=forumdisplay&fid=$_G[fid]");
 
 } elseif($action == 'create') {
@@ -316,7 +350,8 @@ if(!empty($jioned))showmessage('已加过公会，请退出再加入！', "forum
 		} else {
 			$levelid = -1;
 		}
-		$newfid = C::t('forum_forum')->insert_group($fup, 'sub', $name, '3', $levelid);
+// 		$newfid = C::t('forum_forum')->insert_group($fup, 'sub', $name, '3', $levelid);
+		$newfid = C::t('forum_forum')->insert_group($fup, 'sub', $name, '3', 0);			//公会被直接创建，无需后台审核Moxiaoyong		2012-12-20
 		if($newfid) {
 			$jointype = intval($_GET['jointype']);
 			$gviewperm = intval($_GET['gviewperm']);
@@ -326,6 +361,10 @@ if(!empty($jioned))showmessage('已加过公会，请退出再加入！', "forum
 			C::t('forum_groupuser')->insert($newfid, $_G['uid'], $_G['username'], 1, TIMESTAMP);
 			require_once libfile('function/cache');
 			updatecache('grouptype');
+			
+			//t178公会表创建Moxiaoyong	2012-12-20
+			require_once libfile('function/my_group');
+			create_my_group( $newfid, $name, $_G['uid'], $_G['username'] );
 		}
 		include_once libfile('function/stat');
 		updatestat('group');
@@ -343,7 +382,7 @@ if(!empty($jioned))showmessage('已加过公会，请退出再加入！', "forum
 	}
 	$specialswitch = $_G['current_grouplevel']['specialswitch'];
 
-	$oparray = array('group', 'checkuser', 'manageuser', 'threadtype', 'demise');
+	$oparray = array('group', 'checkuser', 'manageuser', 'threadtype', 'demise', 'notice');			//添加notice的action Moxiaoyong		2012-12-20
 	$_GET['op'] = getgpc('op') && in_array($_GET['op'], $oparray) ?  $_GET['op'] : 'group';
 	if(empty($groupmanagers[$_G[uid]]) && !in_array($_GET['op'], array('group', 'threadtype', 'demise')) && $_G['adminid'] != 1) {
 		showmessage('group_admin_noallowed');
@@ -498,6 +537,13 @@ if(!empty($jioned))showmessage('已加过公会，请退出再加入！', "forum
 			if($checktype == 1) {
 				C::t('forum_groupuser')->update_for_user($checkusers, $_G['fid'], null, null, 4);
 				C::t('forum_forumfield')->update_membernum($_G['fid'], count($checkusers));
+				
+				//审核通过会员加入t178公会Moxiaoyong		2012-12-20
+				$group_member_info = array( 'uid'		=> $_G['uid'],
+											'username'	=> $_G['username'],
+											'groupid'	=> $_G['mygroup']['groupid'] );
+				C::t('my_group_member') -> insert( $group_member_info );
+				
 			} elseif($checktype == 2) {
 				C::t('forum_groupuser')->delete_by_fid($_G['fid'], $checkusers);
 			}
@@ -685,14 +731,16 @@ if(!empty($jioned))showmessage('已加过公会，请退出再加入！', "forum
 		} else {
 			showmessage('group_demise_founder_only');
 		}
-	} elseif($_GET['op'] == 'notice') {				//公会公告
+	} elseif($_GET['op'] == 'notice') {				//公会公告Moxiaoyong		2012-12-19
 		if((!empty($_G['forum']['founderuid']) && $_G['forum']['founderuid'] == $_G['uid']) || $_G['adminid'] == 1) {
-
 			if(submitcheck('groupnotice')) {
-				C::t('forum_forumfield')->update($_G['fid'], array('founderuid' => $suid, 'foundername' => $user['username']));
-				C::t('forum_groupuser')->update_for_user($suid, $_G['fid'], NULL, NULL, 1);
-				update_groupmoderators($_G['fid']);
-				//sendpm($suid, lang('group/misc', 'group_demise_message_title', array('forum' => $_G['forum']['name'])), lang('group/misc', 'group_demise_message_body', array('forum' => $_G['forum']['name'], 'siteurl' => $_G['siteurl'], 'fid' => $_G['fid'])), $_G['uid']);
+				require_once libfile('function/discuzcode');
+				$notice = discuzcode(dhtmlspecialchars(censor(trim($_GET['notice']))), 0, 0, 0, 0, 1, 1, 0, 0, 1);
+				$censormod = censormod($notice);
+				if($censormod) {
+					showmessage('group_notice_failed');
+				}
+				C::t('my_group')->update($_G['mygroup']['groupid'], array('notice' => $notice));
 				
 				showmessage('group_notice_edit_succeed', 'forum.php?mod=group&action=manage&fid='.$_G['fid']);
 			}
@@ -721,6 +769,49 @@ if(!empty($jioned))showmessage('已加过公会，请退出再加入！', "forum
 	}
 	include template('group/group_recommend');
 }
-
+//公会会员向公会捐赠TCP Moxiaoyong		2012-12-20
+elseif($action == 'contribute') {
+	if( $groupuser['uid'] ){
+		if($tcp > $group_member['tcp']){
+			showmessage('group_tcp_shortage', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+		$tcp = intval($_GET['tcp']);
+		C::t('my_group_member')->contribute_tcp( $_G['uid'], $tcp );
+		C::t('my_group')->add_tcp( $_G['fid'], $tcp );
+		require_once libfile('function/my_group');
+		check_group_level($_G['fid']);
+		showmessage('group_contribute_tcp_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
+	}
+	else{
+		showmessage('group_contribute_tcp_to_other', 'forum.php?mod=group&fid='.$_G['fid']);
+	}
+}
+//公会会员签到Moxiaoyong		2012-12-20
+elseif($action == 'signing') {
+	if( $groupuser['uid'] ){
+		if(C::t('my_group_signing')->had_signed($_G['mygroup']['groupid'], $_G['uid'])){
+			showmessage('group_had_signing', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+		$group_signing_data = array( 'groupid'			=> $_G['mygroup']['groupid'],
+										'uid'			=> $_G['uid'],
+										'signing_date'	=> strftime('%Y-%m-%d') );
+		C::t('my_group_signing')->insert($group_signing_data);
+		C::t('my_group_member')->get_tcp($_G['mygroup']['groupid'], $_G['uid'], 5);			//暂定签到获得5TCP Moxiaoyong		2012-12-21
+		showmessage('group_signing_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
+	}
+	else{
+		showmessage('group_signing_from_other', 'forum.php?mod=group&fid='.$_G['fid']);
+	}
+}
+//关于t178公会检查Moxiaoyong		2012-12-20
+elseif($action == 'check_group') {
+	$group_info_list = C::t('my_group')->get_full_groupid();
+	$group_signing_number = C::t('my_group_signing')->get_signing_number();
+	foreach ( $group_info_list as $group_info ){
+		//入驻游戏检查
+		//公会申请检查
+		//公会合法检查
+	}
+}
 
 ?>
