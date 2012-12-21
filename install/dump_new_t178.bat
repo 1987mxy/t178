@@ -1,2 +1,2 @@
-mysqldump -u root -p t178 t178_my_group t178_my_group_friend t178_my_group_game t178_my_group_member t178_my_group_store t178_my_group_work t178_my_tcp_log t178_my_group_signing>new_t178.sql
+mysqldump --opt -d t178 -u root -p t178_my_group t178_my_group_friend t178_my_group_game t178_my_group_member t178_my_group_store t178_my_group_work t178_my_tcp_log t178_my_group_signing t178_my_group_member_game>new_t178.sql
 pause

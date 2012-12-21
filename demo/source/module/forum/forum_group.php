@@ -16,7 +16,7 @@ $_G['action']['action'] = 3;
 $_G['action']['fid'] = $_G['fid'];
 $_G['basescript'] = 'group';
 
-$actionarray = array('join', 'out', 'create', 'viewmember', 'manage', 'index', 'memberlist', 'recommend', 'contribute', 'signing', 'check_group');
+$actionarray = array('join', 'out', 'create', 'viewmember', 'manage', 'index', 'memberlist', 'recommend', 'contribute', 'signing', 'group_join_game', 'group_member_join_game', 'check_group');
 $action = getgpc('action') && in_array($_GET['action'], $actionarray) ? $_GET['action'] : 'index';
 if(in_array($action, array('join', 'out', 'create', 'manage', 'recommend'))) {
 	if(empty($_G['uid'])) {
@@ -794,7 +794,7 @@ elseif($action == 'signing') {
 		}
 		$group_signing_data = array( 'groupid'			=> $_G['mygroup']['groupid'],
 										'uid'			=> $_G['uid'],
-										'signing_date'	=> strftime('%Y-%m-%d') );
+										'date'	=> strftime('%Y-%m-%d') );
 		C::t('my_group_signing')->insert($group_signing_data);
 		C::t('my_group_member')->get_tcp($_G['mygroup']['groupid'], $_G['uid'], 5);			//暂定签到获得5TCP Moxiaoyong		2012-12-21
 		showmessage('group_signing_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
@@ -803,15 +803,87 @@ elseif($action == 'signing') {
 		showmessage('group_signing_from_other', 'forum.php?mod=group&fid='.$_G['fid']);
 	}
 }
+//公会入驻游戏Moxiaoyong		2012-12-21
+elseif($action == 'group_join_game') {
+	if((!empty($_G['forum']['founderuid']) && $_G['forum']['founderuid'] == $_G['uid']) || $_G['adminid'] == 1) {
+		$had_joint = C::t('my_group_game')->had_joint( $_G['mygroup']['groupid'], $_GET['gameid'] );
+		if( $had_joint ){
+			showmessage('group_had_joint_game', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+		else{
+			C::t('my_group_game')->apply_join_game( $_G['mygroup']['groupid'], $_GET['gameid'] );
+			showmessage('group_join_game_verify', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+	}
+	else{
+		showmessage('group_join_game_founder_only', 'forum.php?mod=group&fid='.$_G['fid']);
+	}
+}
+//公会会员入驻游戏Moxiaoyong		2012-12-21
+elseif($action == 'group_member_join_game') {
+	$group_game_info = C::t('my_group_game')->get_group_game_info( $_G['mygroup']['groupid'], $_GET['gameid'] );
+	$had_joint = C::t('my_group_member_game')->had_joint( $group_game_info['group_gameid'], $_G['uid'] );
+	if( $had_joint ){
+		showmessage('group_member_had_joint_game', 'forum.php?mod=group&fid='.$_G['fid']);
+	}
+	else{
+		C::t('my_group_member_game')->apply_join_game( $_G['fid'], 
+														$group_game_info['group_gameid'], 
+														$group_game_info['groupid'], 
+														$group_game_info['gameid'] );
+		showmessage('group_member_join_game_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
+	}
+}
 //关于t178公会检查Moxiaoyong		2012-12-20
 elseif($action == 'check_group') {
-	$group_info_list = C::t('my_group')->get_full_groupid();
-	$group_signing_number = C::t('my_group_signing')->get_signing_number();
-	foreach ( $group_info_list as $group_info ){
-		//入驻游戏检查
-		//公会申请检查
-		//公会合法检查
+	$now = time();
+	$group_info_list = C::t('my_group')->get_full_group_info();
+	$group_member_number = C::t('my_group_member')->get_member_number();
+	
+	//入驻游戏检查
+	$before_7_timestamp = strtotime( '-7 day', $now );
+	$group_game_member_number = C::t('my_group_member_game')->get_group_member_game_join_number( $before_7_timestamp );
+	$verify_group_games = C::t('my_group_game')->get_verify_group_games();
+	foreach( $verify_group_games as $verify_game ){
+		$verify_group_gameid = $verify_game['group_gameid'];
+		if( $now > $before_7_timestamp ){
+			if( $group_game_member_number[$verify_group_gameid] > $group_member_number[$verify_game['groupid']] * 0.6 ){
+				C::t('my_group_game')->pass_join_application( $verify_group_gameid );
+			}
+			else{
+				C::t('my_group_game')->reject_join_application( $verify_group_gameid );
+			}
+		}
 	}
+	
+	$before_7_date = strftime( $before_7_timestamp );
+	$group_signing_number = C::t('my_group_signing')->get_signing_number( $before_7_date, strftime( '%Y-%m-%d', $now ) );
+	$before_10_timestamp = strtotime( '-10 day', $now );
+	$group_game_number_10 = C::t('my_group_game')->get_group_game_number( $before_10_timestamp, $now );
+	$before_60_timestamp = strtotime( '-60 day', $now );
+	$group_game_number_60 = C::t('my_group_game')->get_group_game_number( $before_30_timestamp, $now );
+	$clear_fids = array();
+	foreach ( $group_info_list as $group_info ){
+		if( $group_info['status'] == 1 ){			//检查申请公会（10天满30人，并成功入驻一款游戏）
+			$check_timestamp = $group_info['apply_time'] + 86400 * 10;
+			if( $group_game_number_10[$group_info['groupid']] > 0 && $group_member_number[$group_info['groupid']] > 30 ){
+				C::t('my_group')->pass_group_application( $group_info['fid'] );
+			}
+			else if( $now > $check_timestamp ){
+				$clear_fids[] = $group_info['fid'];
+			}
+		}
+		else if( $group_info['status'] == 2 ){		//检查公会合法性（7天签到20此，并60天入驻一款游戏）
+			$check_signing_timestamp = $group_info['build_time'] + 86400 * 7;
+			$check_join_game_timestamp = $group_info['build_time'] + 86400 * 60;
+			if( ( $group_signing_number[$group_info['groupid']] < 20 && $now > $check_signing_timestamp ) ||
+				( $group_game_number_30[$group_info['groupid']] < 1 && $now > $check_join_game_timestamp ) ){
+				$clear_fids[] = $group_info['fid'];
+			}
+		}
+	}
+	require_once libfile('function/my_group');
+	close_my_group( $clear_fids );
 }
 
 ?>

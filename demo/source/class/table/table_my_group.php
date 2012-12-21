@@ -25,7 +25,7 @@ class table_my_group extends discuz_table
 	 * @access	public
 	 * @return	array		已建立的公会ID列表
 	 */
-	public function get_full_groupid(){
+	public function get_full_group_info(){
 		return DB::fetch_all( "SELECT groupid, fid, `status`, build_time, apply_time FROM %t", array( $this -> _table ) );
 	}
 	
@@ -138,6 +138,21 @@ class table_my_group extends discuz_table
 			$groupid = $groupid[ 'groupid' ];
 		}
 		return $groupids;
+	}
+	
+	/**
+	 * 通过公会申请
+	 * @access	public
+	 * @param	$fid		Discuz的fid
+	 * @return	boolean		通过操作结果
+	 */
+	public function pass_group_application( $fid ){
+		if( empty( $fid ) ) return false;
+		$data = array( 'status' => 2,
+						'build_time' => time() );
+		$condition = array( 'fidd' => $fid );
+		DB::update( $this -> _table, $data, $condition );
+		return DB::affected_rows() ? true : false;
 	}
 }
 

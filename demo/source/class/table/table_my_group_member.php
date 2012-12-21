@@ -32,6 +32,23 @@ class table_my_group_member extends discuz_table
 	}
 	
 	/**
+	 * 获取公会成员数量列表
+	 * @access	public
+	 * @param	$groupids		公会ID列表
+	 * @return	array			公会成员数量列表
+	 */
+	public function get_group_member_number( $groupids = null ){
+		if( empty( $begin_date ) ) return array();
+		$condition = ( $groupids == null ? '' : DB::field( 'groupid', $groupids ) );
+		$group_member_num = DB::fetch_all( "SELECT groupid, COUNT(uid) AS member_num FROM %t WHERE " . $condition . " GROUP BY groupid", array( $this->_table ) );
+		$member_num = array();
+		foreach( $group_member_num as $group_member ){
+			$member_num[ $group_member[ 'groupid' ] ] = $group_member[ 'member_num' ];
+		}
+		return $member_num;
+	}
+	
+	/**
 	 * 获取会员信息
 	 * @access	public
 	 * @param	$groupid	公会ID

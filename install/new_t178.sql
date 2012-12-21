@@ -37,16 +37,6 @@ CREATE TABLE `t178_my_group` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t178_my_group`
---
-
-LOCK TABLES `t178_my_group` WRITE;
-/*!40000 ALTER TABLE `t178_my_group` DISABLE KEYS */;
-INSERT INTO `t178_my_group` VALUES (7,45,1,0,0,1,'测试',NULL,NULL);
-/*!40000 ALTER TABLE `t178_my_group` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t178_my_group_friend`
 --
 
@@ -61,15 +51,6 @@ CREATE TABLE `t178_my_group_friend` (
   PRIMARY KEY (`group_friendid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='友情公会表';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t178_my_group_friend`
---
-
-LOCK TABLES `t178_my_group_friend` WRITE;
-/*!40000 ALTER TABLE `t178_my_group_friend` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t178_my_group_friend` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `t178_my_group_game`
@@ -90,15 +71,6 @@ CREATE TABLE `t178_my_group_game` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t178_my_group_game`
---
-
-LOCK TABLES `t178_my_group_game` WRITE;
-/*!40000 ALTER TABLE `t178_my_group_game` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t178_my_group_game` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t178_my_group_member`
 --
 
@@ -114,20 +86,9 @@ CREATE TABLE `t178_my_group_member` (
   `capital` decimal(7,2) DEFAULT '0.00' COMMENT '财富值',
   `contributed` int(10) unsigned DEFAULT '0' COMMENT 'TCP贡献值',
   `referrer` mediumint(8) unsigned DEFAULT NULL COMMENT '推荐人ID',
-  `signin_time` int(10) unsigned DEFAULT NULL COMMENT '签到时间',
   PRIMARY KEY (`group_memberid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='公会成员表';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t178_my_group_member`
---
-
-LOCK TABLES `t178_my_group_member` WRITE;
-/*!40000 ALTER TABLE `t178_my_group_member` DISABLE KEYS */;
-INSERT INTO `t178_my_group_member` VALUES (7,47,'test01',7,0,'0.00',0,NULL,NULL);
-/*!40000 ALTER TABLE `t178_my_group_member` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `t178_my_group_store`
@@ -145,16 +106,6 @@ CREATE TABLE `t178_my_group_store` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t178_my_group_store`
---
-
-LOCK TABLES `t178_my_group_store` WRITE;
-/*!40000 ALTER TABLE `t178_my_group_store` DISABLE KEYS */;
-INSERT INTO `t178_my_group_store` VALUES (3,'测试1商城',7);
-/*!40000 ALTER TABLE `t178_my_group_store` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t178_my_group_work`
 --
 
@@ -167,16 +118,6 @@ CREATE TABLE `t178_my_group_work` (
   PRIMARY KEY (`group_workid`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='公会打工表';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t178_my_group_work`
---
-
-LOCK TABLES `t178_my_group_work` WRITE;
-/*!40000 ALTER TABLE `t178_my_group_work` DISABLE KEYS */;
-INSERT INTO `t178_my_group_work` VALUES (3,7);
-/*!40000 ALTER TABLE `t178_my_group_work` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `t178_my_tcp_log`
@@ -197,15 +138,6 @@ CREATE TABLE `t178_my_tcp_log` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t178_my_tcp_log`
---
-
-LOCK TABLES `t178_my_tcp_log` WRITE;
-/*!40000 ALTER TABLE `t178_my_tcp_log` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t178_my_tcp_log` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t178_my_group_signing`
 --
 
@@ -218,17 +150,26 @@ CREATE TABLE `t178_my_group_signing` (
   `uid` mediumint(8) unsigned NOT NULL COMMENT 'Discuz的uid',
   `date` date NOT NULL COMMENT '签到日期',
   PRIMARY KEY (`group_signingid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='公会签到表';
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='公会签到表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t178_my_group_signing`
+-- Table structure for table `t178_my_group_member_game`
 --
 
-LOCK TABLES `t178_my_group_signing` WRITE;
-/*!40000 ALTER TABLE `t178_my_group_signing` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t178_my_group_signing` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `t178_my_group_member_game`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t178_my_group_member_game` (
+  `group_member_gameid` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '公会会员游戏入驻ID',
+  `uid` mediumint(8) unsigned NOT NULL COMMENT 'Discuz的uid',
+  `group_gameid` mediumint(8) unsigned NOT NULL COMMENT '公会游戏ID',
+  `gruopid` mediumint(8) unsigned NOT NULL COMMENT '公会ID',
+  `gameid` mediumint(8) unsigned NOT NULL COMMENT '游戏ID',
+  `join_time` int(10) unsigned NOT NULL COMMENT '入驻时间',
+  PRIMARY KEY (`group_member_gameid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='公会会员游戏入驻表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -239,4 +180,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-12-21  2:58:08
+-- Dump completed on 2012-12-22  3:46:11
