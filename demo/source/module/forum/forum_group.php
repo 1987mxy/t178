@@ -47,7 +47,7 @@ if($_G['fid']) {
 	$_G['grouptypeid'] = $_G['forum']['fup'];
 	$groupuser = C::t('forum_groupuser')->fetch_userinfo($_G['uid'], $_G['fid']);
 	
-	//调取t178公会信息
+	//调取t178公会信息Moxiaoyong		2012-12-24
 	if($groupuser){
 		$group_member = C::t('my_group_member')->get_member_info($_G['mygroup']['groupid'], $_G['uid']);
 	}
@@ -297,7 +297,9 @@ if($action == 'index') {
 	update_groupmoderators($_G['fid']);
 	delgroupcache($_G['fid'], array('activityuser', 'newuserlist'));
 	
-	C::t('my_group_member')->leave_group($_G['uid']);			//公会会员离开t178公会Moxiaoyong		2012-10-20
+	//公会会员离开t178公会Moxiaoyong		2012-10-20
+	C::t('my_group_member')->leave_group($_G['uid']);
+	C::t('my_group_member_game')->clear_games($_G['uid']);
 	
 	showmessage($showmessage, "forum.php?mod=forumdisplay&fid=$_G[fid]");
 

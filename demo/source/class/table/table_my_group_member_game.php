@@ -89,6 +89,21 @@ class table_my_group_member_game extends discuz_table
 		DB::delete( $this->_table, $condition );
 		return true;
 	}
+	
+	/**
+	 * 清除入驻游戏
+	 * @access	public
+	 * @param	$uid		Discuz的uid
+	 * @return	boolean		清除入驻游戏操作结果
+	 */
+	public function clear_games( $uid ){
+		if( empty( $uid ) ) {
+			return false;
+		}
+		$condition = DB::field( 'uid', $uid );
+		DB::delete( $this->_table, $condition );
+		return DB::affected_rows() ? true : false;
+	}
 }
 
 ?>
