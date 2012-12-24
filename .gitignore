@@ -2,6 +2,9 @@
 /demo/logs
 /demo/.settings
 /demo/data
+/demo/uc_client/data
+/demo/uc_server/data
+/demo/source/plugin/bbsgame/data
 .buildpath
 .project
 *.bak
@@ -25,7 +28,3 @@ Thumbs.db
 /demo/game.php
 /demo/out.php
 /demo/pic.html
-
-/demo/uc_client/data
-/demo/uc_server/data
-/demo/source/plugin/bbsgame/data/bbsgame_config.php
