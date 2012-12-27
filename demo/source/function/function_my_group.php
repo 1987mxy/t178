@@ -67,7 +67,7 @@ function check_group_level( $fid ){
 	$group_info = C::t('my_group') -> get_group_info( $fid );
 	$group_tcp = $group_info[ 'tcp' ];
 	$group_level = C::t('forum_grouplevel') -> fetch_by_credits( $group_tcp );
-	C::t('my_group') -> update( $group_info['groupid'], array( 'level', $group_level[ 'leveltitle' ] ) );
+	C::t('my_group') -> update( $group_info['groupid'], array( 'level' => $group_level[ 'leveltitle' ] ) );
 	return $group_level[ 'leveltitle' ];
 }
 
