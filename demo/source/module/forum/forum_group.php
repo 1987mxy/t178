@@ -774,10 +774,10 @@ if($action == 'index') {
 //公会会员向公会捐赠TCP Moxiaoyong		2012-12-20
 elseif($action == 'contribute') {
 	if( $groupuser['uid'] ){
+		$tcp = intval($_GET['tcp']);
 		if($tcp > $group_member['tcp']){
 			showmessage('group_tcp_shortage', 'forum.php?mod=group&fid='.$_G['fid']);
 		}
-		$tcp = intval($_GET['tcp']);
 		C::t('my_group_member')->contribute_tcp( $_G['uid'], $tcp );
 		C::t('my_group')->add_tcp( $_G['fid'], $tcp );
 		require_once libfile('function/my_group');
