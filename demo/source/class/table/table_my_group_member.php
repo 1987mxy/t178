@@ -63,15 +63,17 @@ class table_my_group_member extends discuz_table
 	/**
 	 * 贡献TCP值给公会
 	 * @access	public
+	 * @param	$groupid	公会ID
 	 * @param	$uid		用户ID
 	 * @param	$tcp		贡献的TCP值
 	 * @return	boolean		贡献TCP操作结果
 	 */
-	public function contribute_tcp( $uid, $tcp ){
+	public function contribute_tcp( $groupid, $uid, $tcp ){
 		if( empty( $uid ) || empty( $tcp ) ) return false;
-		$member_tcp = DB::fetch_first( "SELECT tcp FROM %t WHERE " . DB::field( 'uid', $uid ), array( $this -> _table ) );
+		$condition = DB::field( 'uid', $uid ) . ' AND ' . DB::field( 'groupid', $groupid );
+		$member_tcp = DB::fetch_first( "SELECT tcp FROM %t WHERE " . $condition, array( $this -> _table ) );
 		if( $tcp > $member_tcp[ 'tcp' ] ) return false;
-		DB::query( "UPDATE %t SET tcp=tcp-%d, contributed=contributed+%d WHERE " . DB::field( 'uid', $uid ), array( $this->_table, $tcp, $tcp ) );
+		DB::query( "UPDATE %t SET tcp=tcp-%d, contributed=contributed+%d WHERE " . $condition, array( $this->_table, $tcp, $tcp ) );
 		return DB::affected_rows() ? true : false;
 	}
 	

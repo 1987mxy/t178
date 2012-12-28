@@ -34,6 +34,24 @@ class table_my_group_friend extends discuz_table
 	}
 	
 	/**
+	 * 检查该俩公会间是否存在友情公会关系
+	 * @access	public
+	 * @param	$group_id_a		友情A公会ID
+	 * @param	$group_id_b		友情B公会ID
+	 * @return	boolean			是否存在友情公会关系
+	 */
+	public function is_friend( $group_id_a, $group_id_b ){
+		if( empty( $group_id_a ) || empty( $group_id_b ) ){
+			return false;
+		}
+		$group_friendid = DB::fetch_first( "SELECT group_friendid FROM %t WHERE del_flag=0 AND " . DB::field( 'group_id_a', $group_id_a ) . " AND " . DB::field( 'group_id_b', $group_id_b ), array( $this -> _table ) );
+		if( !empty( $group_friendid ) ) return true;
+		$group_friendid = DB::fetch_first( "SELECT group_friendid FROM %t WHERE del_flag=0 AND " . DB::field( 'group_id_a', $group_id_b ) . " AND " . DB::field( 'group_id_b', $group_id_a ), array( $this -> _table ) );
+		if( !empty( $group_friendid ) ) return true;
+		return false;
+	}
+	
+	/**
 	 * 建立友情公会关系
 	 * @access	public
 	 * @param	$group_id_a		建立友情A公会ID

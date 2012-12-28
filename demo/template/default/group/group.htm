@@ -144,9 +144,13 @@
       </dl></div>
     <div class="gthumb2 gttype modelcolor1"></div>
     <!--{loop $_G['mygroup']['group_games'] $game}-->
-    <div class="gthumb1 gttype modelcolor1"><a href="http://long.37wan.com/"> <img src="{IMGDIR}/longjiang.jpg" />
-      <span>$game[game_name]</span>
-      </a></div>
+    <!-- {eval $game = $_G['mygroup']['games'][$game['gameid']];} -->
+    <div class="gthumb1 gttype modelcolor1">
+    	<a href="$game[game_website]">
+	    	<img src="{IMGDIR}/$game[game_logo]" />
+			<span>$game[game_name]</span>
+		</a>
+	</div>
     <!--{/loop}-->
     <!--<div class="gthumb1 gttype modelcolor5"><a href="http://long.37wan.com/"> <img src="{IMGDIR}/longjiang.jpg" />
       <span>龙将50服</span>

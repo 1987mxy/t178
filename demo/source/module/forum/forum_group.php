@@ -184,6 +184,9 @@ if($action == 'index') {
 		$_G['mygroup']['group_games'] = C::t('my_group_game')->get_group_games($my_groupid);
 		$_G['mygroup']['friend_group'] = C::t('my_group_friend')->get_friend_group($my_groupid);
 		
+		//获取t178游戏信息Moxiaoyong		2012-12-29
+		$_G['mygroup']['games'] = C::t('game_game')->get_all_game_info();
+		
 	} else {
 		$newuserlist = $activityuserlist = array();
 		$newuserlist = array_slice($groupcache['newuserlist']['data'], 0, 4);
@@ -304,7 +307,9 @@ if($action == 'index') {
 	showmessage($showmessage, "forum.php?mod=forumdisplay&fid=$_G[fid]");
 
 } elseif($action == 'create') {
-
+	$jioned = DB::result_first("SELECT uid FROM ".DB::table('forum_groupuser')." WHERE uid='$_G[uid]'");
+	if(!empty($jioned))showmessage('已加过公会，请退出再创建！', "forum.php?mod=group&fid=$_G[fid]");
+	
 	if(!$_G['group']['allowbuildgroup']) {
 		showmessage('group_create_usergroup_failed', "group.php");
 	}
@@ -778,7 +783,7 @@ elseif($action == 'contribute') {
 		if($tcp > $group_member['tcp']){
 			showmessage('group_tcp_shortage', 'forum.php?mod=group&fid='.$_G['fid']);
 		}
-		C::t('my_group_member')->contribute_tcp( $_G['uid'], $tcp );
+		C::t('my_group_member')->contribute_tcp( $_G['mygroup']['groupid'], $_G['uid'], $tcp );
 		C::t('my_group')->add_tcp( $_G['fid'], $tcp );
 		require_once libfile('function/my_group');
 		check_group_level($_G['fid']);
@@ -834,6 +839,18 @@ elseif($action == 'group_member_join_game') {
 														$group_game_info['groupid'], 
 														$group_game_info['gameid'] );
 		showmessage('group_member_join_game_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
+	}
+}
+//公会结盟（友情公会）Moxiaoyong		2012-12-29
+elseif($action == 'group_ally') {
+	$friendly_group_id = intval($_GET['friendly_group_id']);
+	$is_friend = C::t('my_group_friend')->is_friend( $_G['mygroup']['groupid'], $friendly_group_id );
+	if( $is_friend ){
+		showmessage('the_group_is_friend', 'forum.php?mod=group&fid='.$_G['fid']);
+	}
+	else{
+		C::t('my_group_friend')->friend_group( $_G['mygroup']['groupid'], $friendly_group_id );
+		showmessage('friend_group_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
 	}
 }
 //关于t178公会检查Moxiaoyong		2012-12-20

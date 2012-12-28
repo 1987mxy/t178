@@ -1050,8 +1050,10 @@ $lang = array (
 
   'magics_thunder_message' => '{magicname} 发布成功 ',
 
-  //t178公会文字库Moxiaoyong		2012-12-20
+  //t178公会文字库Moxiaoyong		2012-12-29
   'group_notice_edit_succeed' => '公会公告编辑成功',
+  'the_group_is_friend' => '该公会已经于贵公会建立友情关系',
+  'friend_group_succeed' => '友情公会建立成功',
   'group_notice_failed' => '{_G/setting/navs/3/navname}公告含有敏感词语',
   'group_notice_founder_only' => '抱歉，只有{_G/setting/navs/3/navname}创始人才能发布公告',
   'group_join_game_founder_only' => '抱歉，只有{_G/setting/navs/3/navname}创始人才能入驻游戏',
