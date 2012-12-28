@@ -1161,8 +1161,31 @@ i.pstatus { display: block; margin-bottom: -30px; font-size: 12px; text-align: c
 /* ----------------------------------------------------------------------- 群组相关样式 by dfox */
 /** group::index **/
 	#g_focus { width: 320px; }
-	#g_commend {}
-		#g_commend .xld { float: left; margin-right: 0.3%; width: 24.5%; height: 64px; overflow: hidden; }
+	#g_commend { font-family:"微软雅黑"!important;}
+	/*yaochangjun 12-27 修改height,width,margin-right*/
+		#g_commend .xld { float: left; margin-right: 1%; width: 32%; height: 80px; overflow: hidden;margin-bottom: 1%; }
+	/*yaochangjun 12-27 公会中心*/
+	    #g_title_btn{ width:100%; }
+		#g_btn_select{float:left;}
+		.select{	
+			position: absolute;
+			width: 158px;
+			height: 30px;
+			padding: 4px 24px 0 8px;
+			color: #000;
+			font: 12px;
+			background: url({IMGDIR}/select.png) no-repeat;
+	        overflow: hidden;}
+	    #g_commend .xld img{ margin-top:-6px!important; margin-left:6px;}
+		.modelborder1{ border:#4b8fc4 2px solid!important;}
+		.modelborder2{ border:#c0d473 2px solid!important;}
+		.modelborder3{ border:#97d3d5 2px solid!important;}
+		.modelborder4{ border:#ecc55b 2px solid!important;}
+		.modelborder5{ border:#ac1da3 2px solid!important;}
+		.modelborder6{ border:#9a94da 2px solid!important;}
+		#g_commend .xld dt a{ font-size:20px; color:#FFF; font-weight:bolder;}
+		#g_commend .xld dd.xg1 { font-size:12px; color:#FFF!important; margin-left:3px;}
+		/*end*/
 		#g_commend dt { padding-bottom: 0; }
 	#g_guide { background: url({IMGDIR}/g_guide.png) no-repeat 10px 18px; }
 		#g_guide li { border-bottom: 1px dashed {COMMONBORDER}; }
@@ -1197,7 +1220,7 @@ i.pstatus { display: block; margin-bottom: -30px; font-size: 12px; text-align: c
 
 #nv_group .flg dd em { float: left; margin-right: 1em; color: {LIGHTTEXT}; white-space: nowrap; }
 
-#nv_group {}
+#nv_group { background:url({IMGDIR}/modelBG.png) repeat!important; }
 /** end **/
 
 

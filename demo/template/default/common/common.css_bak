@@ -573,7 +573,7 @@ CSS 写作注意事项：
 		.pmfl			PM friend list (Window)
 		*/
 
-/* 通用容器，定义页面宽度 */ .wp { margin: 0 auto; width: 983px; background:url(../../images/modelBG.png) repeat;} #wp .wp { width: auto; }
+/* 通用容器，定义页面宽度 */ .wp { margin: 0 auto; width: 960px;} #wp .wp { width: auto; }
 
 /* 页头 */
 	#toptb { line-height: 24px; }
@@ -657,7 +657,7 @@ CSS 写作注意事项：
 		.ie6 #ct { height: 300px; }
 		.mn { overflow: hidden; }
 		.ct1 { border: 1px solid {WRAPBORDERCOLOR}; border-top: none; }
-		.ct2 .mn { float: left; width: 100%; margin-bottom: 1em; }
+		.ct2 .mn { float: left; width: 730px; margin-bottom: 1em; }
 		.ct2 .sd { float: right; width: 220px; overflow: hidden; _overflow-y: visible; }
 
 		.appl { float: left; overflow: hidden; margin-bottom: 10px; padding: 6px 10px; width: 117px; }
@@ -787,118 +787,12 @@ CSS 写作注意事项：
 	Explain:		标签样式
 	Last Modify:	lushnis
 */
-.nopadding{ padding:0px!important;}
-.noborder{ border:none!important; background:none!important}
 .tb { margin-top: 10px; padding-left: 5px; line-height: 30px; border-bottom: 1px solid {COMMONBORDER}; }
 	.tb li { float: left; margin: 0 3px -1px 0; }
 		.ie6 .tb .a, .ie6 .tb .current { position: relative; }
-	.tb a { display: block; background:#2675ca; padding: 0 15px;  }
+	.tb a { display: block; padding: 0 10px; border: 1px solid {COMMONBORDER}; background: {SPECIALBG}; }
 		.tb .a a, .tb .current a { border-bottom-color: {WRAPBG}; background: {WRAPBG}; font-weight: 700;}
 		.tb a:hover { text-decoration: none; }
-
-/*公会Model Start*/
-#guild{width:983px; height:400px; font-family:"微软雅黑"!important; }
-
-.constair{width:100%;}
-#guildtitle{ width:100%;}
-#titlename{ margin:20px 0px 0px 20px;}
-
-#titlename h1{font-size: 24px;color:#fff; background:none!important;}
-#guild-c{ height:463px;  width:983px;  padding-top:1px;scrollbar-base-color:#1c1b1c;}
-.gttype {  margin-right:10px; margin-bottom:8px;}
-.gthumb1{ width:105px; height:105px;float:left; background:#de9c28; text-align:center;}
-.gthumb2{ width:220px; height:105px; float:left; background:#1f569a;}
-.gthumb3{ width:293px; height:331px;float:right; background:#635bbd;  overflow:hidden; margin:0px!important;}
-.gthumb1:hover,.gthumb2:hover{ outline:1px #FFFFFF solid;}
-.gthumb1 img{ width:100%}
-.gthumb1 span{ display:block ;padding:7px 0px; text-align:center; color:#FFF; font-size:14px;}
-.gthumb1 a:hover{ text-decoration:none;}
-.guilddescribe img{ height:100%; width:100px; float:left;}
-.guilddescribe span{ display:block;  font-size:14px; color:#FFF; width:100px; float:left; margin:10px 0px 0px 10px;}
-.guildlevel{ text-align:center;  background:#9ab840;}
-.guildlevel b{ color:#FFF; font-size:48px; text-align:center;  margin-top:10px;}
-.guildlevel p{ color:#FFF; font-size:14px; line-height:15px;}
-.modelcolor1{ background:#225a9c;}/*蓝*/
-.modelcolor2{ background:#92b235;}/*绿*/
-.modelcolor3{ background:#56abae;}/*青*/
-.modelcolor4{ background:#de9d2a;}/*橙*/
-.modelcolor5{ background:#770b6b;}/*深紫*/
-.modelcolor6{ background:#6760bf;}/*淡紫*/
-.guildmaster{ text-align:center;}
-.guildmaster img{width:32px; height:32px ; margin-top:10px; }
-.guildmaster p{ color:#FFF; font-size:14px;line-height:30px;}
-.guildmaster p.jurisdiction { line-height:15px; font-size:14px; color:#FFF;}
-/*yaochangjun 12-27 将a更改为button*/
-.guildmembersign button{ background:url(/static/image/common/sign.png) no-repeat center center; width:105px; height:105px; display:block; border:none!important;-webkit-box-shadow:none!important;-moz-box-shadow:none!important;box-shadow:none!important;cursor:pointer;}
-.guildBoard .top3tr img {width: 13px;border: 2px solid #6860be;}
-.rankborder{ border-bottom:1px solid #5c54b9; height:28px;}
-.guildBoard table {width: 100%; background:#FFF; padding:3px;} 
-.guildBoard table td {
-	padding: 3px 0;
-}
-
-.guildBoard .guildrankbar a {
-	display: inline-block;
-	color: #ffffff;
-	text-align: center;
-	line-height: 32px;
-	height: 32px;
-	width: 116px;
-	background-color: #8a7edc;
-	margin-bottom: 6px;
-}
-.guildBoard .guildrankbar a.guildBoardselected {
-	background-color: #fff;
-	color: #5c54b9;
-}
-.guildrank {
-	display: inline-block;
-	width: 40px;
-	text-align: center;
-	color: #6860be;
-	font-size: 12px;
-}
-.guildmenbericon {
-	width: 40px;
-	text-align: left;
-}
-.guildmember {
-	display: inline-block;
-	width: 100px;
-	text-align: left;
-	color: #000000;
-	font-size: 12px;
-}
-.guildmengberscore {display: inline-block;width: 40px;color: #000000;
-font-size: 14px;}
-.guildchoose {position: relative;top: 6px;left: 29px;}
-.guildrankBg{ width:100%; height:281px; overflow:hidden; background:#FFF;}
-.thumdtitle{ color:#FFF; font-size:18px; padding:8px!important; border:none!important; background:none!important;}
-/*yaochangjun 12-27  增加text-align:right */
-.guildatotal span{display:block;  font-size:12px; color:#FFF;  float:left; margin:10px 0px 0px 3px; text-align:right;}
-/*yaochangjun 12-27 修改.guildatotal dl为.guildatotal table*/
-.guildatotal table{ clear:both; padding:0px!important;font-size:12px; color:#FFF; margin-left:5px; }
-/*end*/
-.relationguild dl { margin-top:5px;padding:0px!important;}
-.relationguild dl dd{display:block;  font-size:14px; color:#FFF; margin:0px!important;}
-#discuss{ width:961px; margin-left:11px; clear:both; background:#FFF;	height:100%; margin-bottom:5px;}
-#ds-c{ width:930px; margin:0 auto; padding-top:20px; }
-.join_guild button{background:url(/static/image/common/join_guild.png) no-repeat center center; width:105px; height:105px; display:block; border:none!important;-webkit-box-shadow:none!important;-moz-box-shadow:none!important;box-shadow:none!important;cursor:pointer;}
-.Broadcast{ background:#021856;  width:958px; margin:10px; padding-left:5px; float:left; height:30px; }
-.Broadcast b{ display:inline-block; width:16px; height:30px; background:url({IMGDIR}/boardcast.png) no-repeat center center; float:left; margin-left:5px;}
-.Broadcast span{ color:#FFF; font-size:14px; margin-left:20px;  height:30px; line-height:30px; display:block; float:left; }
-
-#discussBG{background:#194e94; width:100%; padding-bottom:5px;}
-#discuss #disnav ul li.selected, #discuss #disnav ul li.selected a{ background:#FFF; color:#194e94;}
-#dicusscontent{ width:100%; background:#FFF; height:100%; clear:both;}
-.dicusspost{ width:88px; height:30px; padding:10px;} 
-#discuss #dicusspost img{ margin-top:10px; margin-left:10px;}
-#discuss #guildbbs{ width:100%}
-#discuss #guildemember{ width:100%}
-#discuss #guildadmin{ width:100%}
-#discuss #guildwrok{ width:100%}
-#discuss #guildshop{ width:100%}	
-
 	.tb .y { float: right; margin-right: 0; }
 		.tb .y a { border: none; background: transparent; }
 	.tb .o { margin: 1px 4px 0 2px; border: 1px solid #235994; }
@@ -1774,4 +1668,4 @@ DIY图片幻灯片未加载时隐藏,模块标识隐藏
 	.plugin .bm_h { border-color: {COMMONBORDER}; color: {TABLETEXT}; background: {COMMONBG}; }
 /*补充添加*/
 
-#viewtid {margin-top:15px;}
+#viewtid {margin-top:25px;}
