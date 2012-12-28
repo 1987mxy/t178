@@ -70,12 +70,7 @@
     <div class="gthumb2 gttype guilddescribe modelcolor6"><img src="$_G[forum][icon]" /><span>$_G[forum][description]</span></div>
     <div class="gthumb1 gttype guildmembersign modelcolor1"><button type="button"  onclick="location.href='forum.php?mod=group&action=signing&fid=$_G[fid]'"></button></div>
     <div class="gthumb1 gttype join_guild modelcolor2"><button type="button"  onclick="location.href='forum.php?mod=group&action=join&fid=$_G[fid]'"></button></div>
-    <div class="gthumb1 gttype modelcolor5"><a href="http://long.37wan.com/"> <img src="{IMGDIR}/longjiang.jpg" />
-      <span>龙将50服</span>
-      </a></div>
-    <div class="gthumb1 gttype modelcolor2"><a href="http://long.37wan.com/"> <img src="{IMGDIR}/longjiang.jpg" />
-      <span>倾城之恋50服</span>
-      </a></div>
+   
     <div class="gthumb3 gttype">
       <div class="blackBox guildBoard modelcolor6">
         <div class="guildrankbar">
@@ -84,7 +79,7 @@
                <tbody>
                 <!--{loop $_G['mygroup']['member_contribute_list'] $contribute_rank $contribute}-->
                 <tr class="top3tr rankborder">
-                  <td class="guildrank"> $contribute_rank </td>
+                  <td class="guildrank">{eval echo $contribute_rank + 1;}</td>
                   <td class="guildmenbericon"><img src="{$_G[setting][ucenterurl]}/avatar.php?uid=$contribute[uid]&size=small" /></td>
                   <td class="guildmember"> $contribute[username] </td>
                   <td class="guildmengberscore"> $contribute[contributed] </td>
@@ -94,9 +89,9 @@
             </table>
             <table style="display:none;">
                 <!--{loop $_G['mygroup']['member_capital_list'] $capital_rank $capital}-->
-                <!--$capital_rank = $capital_rank + 1-->
+                
                 <tr class="top3tr rankborder">
-                  <td class="guildrank">$capital_rank</td>
+                  <td class="guildrank">{eval echo $capital_rank + 1;}</td>
                   <td class="guildmenbericon"><img src="{$_G[setting][ucenterurl]}/avatar.php?uid=$capital[uid]&size=small" /></td>
                   <td class="guildmember"> $capital[username] </td>
                   <td class="guildmengberscore"> $capital[capital] </td>
@@ -116,8 +111,7 @@
       <p class="jurisdiction">会长</p>
     </div>
     <div class="gthumb2 gttype guildatotal modelcolor5" >
-      <h2 class="thumdtitle fl">$_G[forum][name]</h2>
-      <span>升级需要TCP：$_G[mygroup][next_level_require_tcp]</span>
+      <h2 class="thumdtitle fl">升级需TCP：$_G[mygroup][next_level_require_tcp]</h2>
       <table width="200px">
          <tr>
             <td width="70%">公会财富值：$_G[mygroup][capital]</td>
@@ -134,9 +128,6 @@
       </table>
 
     </div>
-    <div class="gthumb1 gttype modelcolor1"></div>
-    <div class="gthumb1 gttype modelcolor3"></div>
-    <div class="gthumb2 gttype modelcolor1"></div>
     <div class="gthumb1 gttype relationguild modelcolor6">
       <h2 class="thumdtitle" style="margin-left:5px;">友情公会</h2>
       <dl>
@@ -151,8 +142,18 @@
       	<dd>小清闲公会</dd>
         <dd>2闲公会</dd>
       </dl></div>
-    <div class="gthumb1 gttype"></div>
-    <div class="gthumb1 gttype modelcolor6"></div>
+    <div class="gthumb2 gttype modelcolor1"></div>
+    <!--{loop $_G['mygroup']['group_games'] $game}-->
+    <div class="gthumb1 gttype modelcolor1"><a href="http://long.37wan.com/"> <img src="{IMGDIR}/longjiang.jpg" />
+      <span>$game[game_name]</span>
+      </a></div>
+    <!--{/loop}-->
+    <!--<div class="gthumb1 gttype modelcolor5"><a href="http://long.37wan.com/"> <img src="{IMGDIR}/longjiang.jpg" />
+      <span>龙将50服</span>
+      </a></div>
+    <div class="gthumb1 gttype modelcolor2"><a href="http://long.37wan.com/"> <img src="{IMGDIR}/longjiang.jpg" />
+      <span>倾城之恋50服</span>
+      </a></div>-->
   </div>
  
 </div>
