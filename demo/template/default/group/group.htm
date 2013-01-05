@@ -144,11 +144,11 @@
       </dl></div>
     <div class="gthumb2 gttype modelcolor1"></div>
     <!--{loop $_G['mygroup']['group_games'] $game}-->
-    <!-- {eval $game = $_G['mygroup']['games'][$game['gameid']];} -->
+    <!-- {eval $group_game = $_G['mygroup']['games'][$game['gameid']];} -->
     <div class="gthumb1 gttype modelcolor1">
-    	<a href="$game[game_website]">
-	    	<img src="{IMGDIR}/$game[game_logo]" />
-			<span>$game[game_name]</span>
+    	<a href="/game.php?action=play&game_id=$game['gameid']&server_id=$game['game_serverid']">
+	    	<img src="{IMGDIR}/$group_game[game_logo]" />
+			<span>$group_game[game_name]</span>
 		</a>
 	</div>
     <!--{/loop}-->

@@ -26,15 +26,15 @@ class table_my_group_member_game extends discuz_table
 	 * @param	$uid			Discuz的uid
 	 * @param	$group_gameid	公会游戏ID
 	 * @param	$groupid		公会ID
-	 * @param	$gameid			游戏ID
+	 * @param	$game_serverid	游戏服务器ID
 	 * @return	boolean			申请操作结果
 	 */
-	public function apply_join_game( $uid, $group_gameid, $groupid, $gameid ){
+	public function apply_join_game( $uid, $group_gameid, $groupid, $game_serverid ){
 		if( empty( $groupid ) ) return array();
 		$join_game_data = array( 'uid'				=> $uid,
 									'group_gameid'	=> $group_gameid,
 									'groupid'		=> $groupid,
-									'gameid'		=> $gameid,
+									'game_serverid'	=> $game_serverid,
 									'apply_time'	=> time() );
 		return DB::insert( $this -> _table, $join_game_data, true );
 	}

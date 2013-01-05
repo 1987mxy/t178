@@ -42,3 +42,5 @@ class table_game_game extends discuz_table
 		return $cleanup_game_info;
 	}
 }
+
+?>

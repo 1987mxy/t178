@@ -43,14 +43,14 @@ class table_my_group_game extends discuz_table
 	/**
 	 * 获取公会入驻指定游戏信息
 	 * @access	public
-	 * @param	$groupid	公会ID
-	 * @param	$gameid		游戏ID
-	 * @return	array		公会入驻游戏信息
+	 * @param	$groupid		公会ID
+	 * @param	$game_serverid	游戏服务器ID
+	 * @return	array			公会入驻游戏信息
 	 */
-	public function get_group_game_info( $groupid, $gameid ){
+	public function get_group_game_info( $groupid, $game_serverid ){
 		if( empty( $groupid ) || empty( $gameid ) ) return array();
 		return DB::fetch_first( "SELECT * FROM %t WHERE " . DB::field( 'groupid', $groupid ) . " AND " .
-															DB::field( 'gameid', $gameid ), array( $this -> _table ) );
+															DB::field( 'gameid', $game_serverid ), array( $this -> _table ) );
 	}
 	
 	/**
@@ -60,10 +60,11 @@ class table_my_group_game extends discuz_table
 	 * @param	$gameid		游戏ID
 	 * @return	boolean		申请操作结果
 	 */
-	public function apply_join_game( $groupid, $gameid ){
+	public function apply_join_game( $groupid, $gameid, $game_serverid ){
 		if( empty( $groupid ) ) return array();
 		$join_game_data = array( 'groupid'			=> $groupid,
 									'gameid'		=> $gameid,
+									'game_serverid'	=> $game_serverid,
 									'status'		=> 1,
 									'apply_time'	=> time() );
 		return DB::insert( $this -> _table, $join_game_data, true );
@@ -84,12 +85,12 @@ class table_my_group_game extends discuz_table
 						DB::field( 'join_time', $begin_time, '<' ) . ' AND ' .
 						DB::field( 'join_time', $stop_time, '>' ) . ' AND ' .
 						( $groupids == null ? '' : DB::field( 'groupid', $groupids ) );
-		$group_game_num = DB::fetch_all( "SELECT groupid, COUNT(gameid) AS game_num FROM %t WHERE " . $condition . " GROUP BY groupid", array( $this->_table ) );
-		$game_num = array();
-		foreach( $group_game_num as $group_game ){
-			$game_num[ $group_game[ 'groupid' ] ] = $group_game[ 'signing_num' ];
+		$group_game_server_num = DB::fetch_all( "SELECT groupid, COUNT(game_serverid) AS game_server_num FROM %t WHERE " . $condition . " GROUP BY groupid", array( $this->_table ) );
+		$game_server_num = array();
+		foreach( $group_game_server_num as $group_game_server ){
+			$game_server_num[ $group_game_server[ 'groupid' ] ] = $group_game_server[ 'game_server_num' ];
 		}
-		return $game_num;
+		return $game_server_num;
 	}
 	
 	/**
@@ -122,16 +123,16 @@ class table_my_group_game extends discuz_table
 	}
 	
 	/**
-	 * 查询是否已经入驻指定游戏
+	 * 查询是否已经入驻指定游戏服务器
 	 * @access	public
 	 * @param	$groupid		公会ID
-	 * @param	$gameid			游戏ID
+	 * @param	$game_serverid	游戏服务器ID
 	 * @return	boolean			是否已经入驻指定游戏
 	 */
-	public function had_joint( $groupid, $gameid ){
-		if( empty( $groupid ) || empty( $gameid ) ) return false;
+	public function had_joint( $groupid, $game_serverid ){
+		if( empty( $groupid ) || empty( $game_serverid ) ) return false;
 		$group_game_num = DB::fetch_first( "SELECT COUNT(group_gameid) AS group_game_num FROM %t WHERE " . DB::field( 'groupid', $groupid ) . " AND " .
-																											DB::field( 'gameid', $gameid ), array( $this->_table ) );
+																											DB::field( 'game_serverid', $game_serverid ), array( $this->_table ) );
 		return $group_game_num[ 'group_game_num' ] > 0;
 	}
 	

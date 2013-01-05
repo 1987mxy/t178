@@ -16,7 +16,7 @@ $_G['action']['action'] = 3;
 $_G['action']['fid'] = $_G['fid'];
 $_G['basescript'] = 'group';
 
-$actionarray = array('join', 'out', 'create', 'viewmember', 'manage', 'index', 'memberlist', 'recommend', 'contribute', 'signing', 'group_join_game', 'group_member_join_game', 'check_group');
+$actionarray = array('join', 'out', 'create', 'viewmember', 'manage', 'index', 'memberlist', 'recommend', 'contribute', 'signing', 'group_join_game', 'group_member_join_game', 'check_group', 'group_ally');
 $action = getgpc('action') && in_array($_GET['action'], $actionarray) ? $_GET['action'] : 'index';
 if(in_array($action, array('join', 'out', 'create', 'manage', 'recommend'))) {
 	if(empty($_G['uid'])) {
@@ -813,12 +813,13 @@ elseif($action == 'signing') {
 //公会入驻游戏Moxiaoyong		2012-12-21
 elseif($action == 'group_join_game') {
 	if((!empty($_G['forum']['founderuid']) && $_G['forum']['founderuid'] == $_G['uid']) || $_G['adminid'] == 1) {
-		$had_joint = C::t('my_group_game')->had_joint( $_G['mygroup']['groupid'], $_GET['gameid'] );
+		$had_joint = C::t('my_group_game')->had_joint( $_G['mygroup']['groupid'], $_GET['game_serverid'] );
 		if( $had_joint ){
 			showmessage('group_had_joint_game', 'forum.php?mod=group&fid='.$_G['fid']);
 		}
 		else{
-			C::t('my_group_game')->apply_join_game( $_G['mygroup']['groupid'], $_GET['gameid'] );
+			$game_server_info = C::t('game_server')->get_game_server_info( $_GET['game_serverid'] );
+			C::t('my_group_game')->apply_join_game( $_G['mygroup']['groupid'], $game_server_info['game_id'], $_GET['game_serverid'] );
 			showmessage('group_join_game_verify', 'forum.php?mod=group&fid='.$_G['fid']);
 		}
 	}
@@ -828,7 +829,7 @@ elseif($action == 'group_join_game') {
 }
 //公会会员入驻游戏Moxiaoyong		2012-12-21
 elseif($action == 'group_member_join_game') {
-	$group_game_info = C::t('my_group_game')->get_group_game_info( $_G['mygroup']['groupid'], $_GET['gameid'] );
+	$group_game_info = C::t('my_group_game')->get_group_game_info( $_G['mygroup']['groupid'], $_GET['game_serverid'] );
 	$had_joint = C::t('my_group_member_game')->had_joint( $group_game_info['group_gameid'], $_G['uid'] );
 	if( $had_joint ){
 		showmessage('group_member_had_joint_game', 'forum.php?mod=group&fid='.$_G['fid']);
@@ -837,7 +838,7 @@ elseif($action == 'group_member_join_game') {
 		C::t('my_group_member_game')->apply_join_game( $_G['fid'], 
 														$group_game_info['group_gameid'], 
 														$group_game_info['groupid'], 
-														$group_game_info['gameid'] );
+														$group_game_info['game_serverid'] );
 		showmessage('group_member_join_game_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
 	}
 }

@@ -9,16 +9,16 @@ http://demo.t178.com/forum.php?mod=group&action=signing&fid=[fid]
 参数：	fid	Discuz板块ID
 
 
-http://demo.t178.com/forum.php?mod=group&action=group_join_game&fid=[fid]&gameid=[gameid]
+http://demo.t178.com/forum.php?mod=group&action=group_join_game&fid=[fid]&game_serverid=[game_serverid]
 说明：公会入驻游戏请求（已测试）
-参数：	fid	Discuz板块ID
-	gameid	t178游戏ID
+参数：	fid		Discuz板块ID
+	game_serverid	t178游戏服务器ID
 
 
-http://demo.t178.com/forum.php?mod=group&action=group_member_join_game&fid=[fid]&gameid=[gameid]
+http://demo.t178.com/forum.php?mod=group&action=group_member_join_game&fid=[fid]&game_serverid=[game_serverid]
 说明：会员入驻游戏请求（未测试）
-参数：	fid	Discuz板块ID
-	gameid	t178游戏ID
+参数：	fid		Discuz板块ID
+	game_serverid	t178游戏服务器ID
 
 
 http://demo.t178.com/forum.php?mod=group&action=check_group
