@@ -132,7 +132,7 @@
       <h2 class="thumdtitle" style="margin-left:5px;">友情公会</h2>
       <dl>
         <!--{loop $_G['mygroup']['friend_group'] $group}-->
-      	<dd>$group[group_id_b]</dd>
+      	<dd><a href="/forum.php?mod=group&fid=$group[fid]" >$group[name]</a></dd>
         <!--{/loop}-->
       </dl>
     </div>
@@ -143,14 +143,22 @@
         <dd>2闲公会</dd>
       </dl></div>
     <div class="gthumb2 gttype modelcolor1"></div>
-    <!--{loop $_G['mygroup']['group_games'] $game}-->
-    <!-- {eval $group_game = $_G['mygroup']['games'][$game['gameid']];} -->
-    <div class="gthumb1 gttype modelcolor1">
+    <!--{eval $group_games = $_G['mygroup']['group_games'];}-->
+    <!--{loop str_split('012345') $game_index}-->
+    <!--{eval $styleid = $game_index+1;}-->
+    <!--{if $group_games[$game_index]}-->
+    <!--{eval $game = $group_games[$game_index];}-->
+    <!--{eval $group_game = $_G['mygroup']['games'][$game['gameid']];}-->
+    <div class="gthumb1 gttype modelcolor$styleid">
     	<a href="/game.php?action=play&game_id=$game['gameid']&server_id=$game['game_serverid']">
 	    	<img src="{IMGDIR}/$group_game[game_logo]" />
 			<span>$group_game[game_name]</span>
 		</a>
 	</div>
+	<!--{else}-->
+	<div class="gthumb1 gttype modelcolor$styleid">
+	</div>
+	<!--{/if}-->
     <!--{/loop}-->
     <!--<div class="gthumb1 gttype modelcolor5"><a href="http://long.37wan.com/"> <img src="{IMGDIR}/longjiang.jpg" />
       <span>龙将50服</span>
@@ -176,7 +184,7 @@
     <!--{if CURMODULE == 'group'}--><!--{hook/group_top}--><!--{else}--><!--{hook/forumdisplay_top}--><!--{/if}--> 
     <!--{if $status != 2 && $status != 3}-->
     <div id="discussBG">
-     <div class="Broadcast"><b></b><span>本公会已入驻龙将42服，请会员们积极签到</span></div>
+     <div class="Broadcast"><b></b><span>$_G[mygroup][notice]</span></div>
     <div class="tb cl noborder" style="width:960px; "> 
       <!--{if in_array($_G['adminid'], array(1,2))}--><span class="a bw0_all y xi2"><a href="javascript:;" onclick="showWindow('grecommend$_G[fid]', 'forum.php?mod=group&action=recommend&fid=$_G[fid]');return false;"  style=" color:#FFF">{lang group_push_to_forum}</a></span><!--{/if}-->
       <ul id="groupnav" style="margin-left:6px;">

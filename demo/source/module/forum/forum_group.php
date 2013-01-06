@@ -182,7 +182,12 @@ if($action == 'index') {
 		$_G['mygroup']['member_contribute_list'] = C::t('my_group_member')->get_member_contribute_list($my_groupid);
 		$_G['mygroup']['member_capital_list'] = C::t('my_group_member')->get_member_capital_list($my_groupid);
 		$_G['mygroup']['group_games'] = C::t('my_group_game')->get_group_games($my_groupid);
-		$_G['mygroup']['friend_group'] = C::t('my_group_friend')->get_friend_group($my_groupid);
+		$friend_groups = C::t('my_group_friend')->get_friend_group($my_groupid);
+		foreach( $friend_groups as &$group ){
+			$group = $group['group_id_b'];
+		}
+		$friend_group_fids = C::t('my_group')->groupids2fids($friend_groups);
+		$_G['mygroup']['friend_group'] = C::t('forum_forum')->fetch_all_name_by_fid($friend_group_fids);
 		
 		//获取t178游戏信息Moxiaoyong		2012-12-29
 		$_G['mygroup']['games'] = C::t('game_game')->get_all_game_info();

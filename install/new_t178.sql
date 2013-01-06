@@ -33,7 +33,7 @@ CREATE TABLE `t178_my_group` (
   `build_time` int(10) unsigned DEFAULT NULL COMMENT '建立时间',
   `apply_time` int(10) unsigned DEFAULT NULL COMMENT '申请时间',
   PRIMARY KEY (`groupid`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='公会表';
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='公会表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,7 +49,7 @@ CREATE TABLE `t178_my_group_friend` (
   `group_id_b` mediumint(8) unsigned NOT NULL COMMENT '乙公会ID',
   `del_flag` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '删除标记',
   PRIMARY KEY (`group_friendid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='友情公会表';
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='友情公会表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,11 +63,12 @@ CREATE TABLE `t178_my_group_game` (
   `group_gameid` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '公会入驻游戏ID',
   `groupid` mediumint(8) unsigned NOT NULL COMMENT '公会ID',
   `gameid` mediumint(8) unsigned NOT NULL COMMENT '游戏ID',
+  `game_serverid` int(4) unsigned NOT NULL COMMENT '游戏服务器ID',
   `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '入驻状态',
   `join_time` int(10) unsigned DEFAULT NULL COMMENT '入驻时间',
   `apply_time` int(10) unsigned NOT NULL COMMENT '入驻申请时间',
   PRIMARY KEY (`group_gameid`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=gbk ROW_FORMAT=DYNAMIC COMMENT='公会入驻游戏表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=gbk ROW_FORMAT=DYNAMIC COMMENT='公会入驻游戏表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,7 +166,7 @@ CREATE TABLE `t178_my_group_member_game` (
   `uid` mediumint(8) unsigned NOT NULL COMMENT 'Discuz的uid',
   `group_gameid` mediumint(8) unsigned NOT NULL COMMENT '公会游戏ID',
   `gruopid` mediumint(8) unsigned NOT NULL COMMENT '公会ID',
-  `gameid` mediumint(8) unsigned NOT NULL COMMENT '游戏ID',
+  `game_serverid` mediumint(8) unsigned NOT NULL COMMENT '游戏服务器ID',
   `join_time` int(10) unsigned NOT NULL COMMENT '入驻时间',
   PRIMARY KEY (`group_member_gameid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='公会会员游戏入驻表';
@@ -180,4 +181,4 @@ CREATE TABLE `t178_my_group_member_game` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-12-22  3:46:11
+-- Dump completed on 2013-01-06 23:20:16

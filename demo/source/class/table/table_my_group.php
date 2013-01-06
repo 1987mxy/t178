@@ -141,6 +141,23 @@ class table_my_group extends discuz_table
 	}
 	
 	/**
+	 * 将t178的groupids转换成Discuz的fids
+	 * @access	public
+	 * @param	$groupids	t178的公会ID列表
+	 * @return	array		Discuz的fid列表
+	 */
+	public function groupids2fids( $groupids ){
+		if( empty( $groupids ) ) {
+			return array();
+		}
+		$fids = DB::fetch_all( "SELECT fid FROM %t WHERE " . DB::field( 'groupid', $groupids ), array( $this -> _table ) );
+		foreach( $fids as &$fid ){
+			$fid = $fid[ 'fid' ];
+		}
+		return $fids;
+	}
+	
+	/**
 	 * 通过公会申请
 	 * @access	public
 	 * @param	$fid		Discuz的fid
