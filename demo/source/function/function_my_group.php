@@ -25,7 +25,7 @@ function close_my_group( $fids ){
 	if( C::t('my_group_member') -> del_group_member( $groupids ) == false ) return false;
 	if( C::t('my_group_store') -> del_group_store( $groupids ) == false ) return false;
 	if( C::t('my_group_work') -> del_group_work( $groupids ) == false ) return false;
-	if( C::t('my_group_friend') -> del_group_friend( $groupids ) == false ) return false;
+	if( C::t('my_group_relation') -> del_group_relation( $groupids ) == false ) return false;
 	if( C::t('my_group_game') -> del_group_game( $groupids ) == false ) return false;
 	if( C::t('my_group_member_game') -> del_group_member_game( $groupids ) == false ) return false;
 	return true;

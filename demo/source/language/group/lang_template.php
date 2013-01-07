@@ -208,6 +208,7 @@ $lang = array (
   //t178公会文字库Moxiaoyong		2012-12-20
   'group' => '公会',
   'group_notice' => '公告',
+  'group_no_notice' => '暂无公告',
   'group_signing' => '公会签到',
   'group_info' => '公会信息',
   'group_next_surplus_tcp' => '距下一等级需TCP',
@@ -224,6 +225,9 @@ $lang = array (
   'group_member_capital_list' => '公会财富榜',
   'group_member_status' => '成员状态',
   'group_friend_group' => '友情公会',
+  'group_enemy_group' => '敌对公会',
+  'group_no_friend_group' => '暂无友情公会',
+  'group_no_enemy_group' => '暂无敌对公会',
   'group_level' => '级公会',
 );
 

@@ -16,7 +16,7 @@ $_G['action']['action'] = 3;
 $_G['action']['fid'] = $_G['fid'];
 $_G['basescript'] = 'group';
 
-$actionarray = array('join', 'out', 'create', 'viewmember', 'manage', 'index', 'memberlist', 'recommend', 'contribute', 'signing', 'group_join_game', 'group_member_join_game', 'check_group', 'group_ally');
+$actionarray = array('join', 'out', 'create', 'viewmember', 'manage', 'index', 'memberlist', 'recommend', 'contribute', 'signing', 'group_join_game', 'group_member_join_game', 'check_group', 'group_relation');
 $action = getgpc('action') && in_array($_GET['action'], $actionarray) ? $_GET['action'] : 'index';
 if(in_array($action, array('join', 'out', 'create', 'manage', 'recommend'))) {
 	if(empty($_G['uid'])) {
@@ -182,12 +182,20 @@ if($action == 'index') {
 		$_G['mygroup']['member_contribute_list'] = C::t('my_group_member')->get_member_contribute_list($my_groupid);
 		$_G['mygroup']['member_capital_list'] = C::t('my_group_member')->get_member_capital_list($my_groupid);
 		$_G['mygroup']['group_games'] = C::t('my_group_game')->get_group_games($my_groupid);
-		$friend_groups = C::t('my_group_friend')->get_friend_group($my_groupid);
+		$friend_groups = C::t('my_group_relation')->get_friend_group($my_groupid);
 		foreach( $friend_groups as &$group ){
 			$group = $group['group_id_b'];
 		}
 		$friend_group_fids = C::t('my_group')->groupids2fids($friend_groups);
 		$_G['mygroup']['friend_group'] = C::t('forum_forum')->fetch_all_name_by_fid($friend_group_fids);
+		
+		//敌对公会逻辑Moxiaoyong		2013-01-07
+		$enemy_groups = C::t('my_group_relation')->get_enemy_group($my_groupid);
+		foreach( $enemy_groups as &$group ){
+			$group = $group['group_id_b'];
+		}
+		$enemy_group_fids = C::t('my_group')->groupids2fids($enemy_groups);
+		$_G['mygroup']['enemy_group'] = C::t('forum_forum')->fetch_all_name_by_fid($enemy_group_fids);
 		
 		//获取t178游戏信息Moxiaoyong		2012-12-29
 		$_G['mygroup']['games'] = C::t('game_game')->get_all_game_info();
@@ -847,16 +855,65 @@ elseif($action == 'group_member_join_game') {
 		showmessage('group_member_join_game_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
 	}
 }
-//公会结盟（友情公会）Moxiaoyong		2012-12-29
-elseif($action == 'group_ally') {
-	$friendly_group_id = intval($_GET['friendly_group_id']);
-	$is_friend = C::t('my_group_friend')->is_friend( $_G['mygroup']['groupid'], $friendly_group_id );
-	if( $is_friend ){
-		showmessage('the_group_is_friend', 'forum.php?mod=group&fid='.$_G['fid']);
+//公会关系Moxiaoyong		2013-01-08
+elseif($action == 'group_relation') {
+	if($_GET['op'] == 'friend') {
+		$friendly_group_id = intval($_GET['friendly_group_id']);
+		if( $_G['mygroup']['groupid'] == $friendly_group_id ){
+			showmessage('can_not_friend_self', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+		$is_friend = C::t('my_group_relation')->is_friend( $_G['mygroup']['groupid'], $friendly_group_id );
+		if( $is_friend ){
+			showmessage('the_group_is_friend', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+		else{
+			C::t('my_group_relation')->nonenemy_group( $_G['mygroup']['groupid'], $friendly_group_id );
+			C::t('my_group_relation')->friend_group( $_G['mygroup']['groupid'], $friendly_group_id );
+			showmessage('friend_group_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
 	}
-	else{
-		C::t('my_group_friend')->friend_group( $_G['mygroup']['groupid'], $friendly_group_id );
-		showmessage('friend_group_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
+	else if($_GET['op'] == 'enemy') {
+		$enemy_group_id = intval($_GET['enemy_group_id']);
+		if( $_G['mygroup']['groupid'] == $enemy_group_id ){
+			showmessage('can_not_enemy_self', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+		$is_enemy = C::t('my_group_relation')->is_enemy( $_G['mygroup']['groupid'], $enemy_group_id );
+		if( $is_enemy ){
+			showmessage('the_group_is_enemy', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+		else{
+			C::t('my_group_relation')->unfriend_group( $_G['mygroup']['groupid'], $enemy_group_id );
+			C::t('my_group_relation')->enemy_group( $_G['mygroup']['groupid'], $enemy_group_id );
+			showmessage('enemy_group_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+	}
+	else if($_GET['op'] == 'unfriend') {
+		$friendly_group_id = intval($_GET['friendly_group_id']);
+		if( $_G['mygroup']['groupid'] == $friendly_group_id ){
+			showmessage('no_unfriend_self', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+		$is_friend = C::t('my_group_relation')->is_friend( $_G['mygroup']['groupid'], $friendly_group_id );
+		if( $is_friend ){
+			C::t('my_group_relation')->unfriend_group( $_G['mygroup']['groupid'], $enemy_group_id );
+			showmessage('unfriend_group_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+		else{
+			showmessage('the_group_is_not_friend', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+	}
+	else if($_GET['op'] == 'nonenemy') {
+		$enemy_group_id = intval($_GET['enemy_group_id']);
+		if( $_G['mygroup']['groupid'] == $enemy_group_id ){
+			showmessage('no_nonenemy_self', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+		$is_enemy = C::t('my_group_relation')->is_enemy( $_G['mygroup']['groupid'], $enemy_group_id );
+		if( $is_enemy ){
+			C::t('my_group_relation')->nonenemy_group( $_G['mygroup']['groupid'], $friendly_group_id );
+			showmessage('nonenemy_group_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+		else{
+			showmessage('the_group_is_not_enemy', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
 	}
 }
 //关于t178公会检查Moxiaoyong		2012-12-20

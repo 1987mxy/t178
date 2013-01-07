@@ -77,7 +77,7 @@
   
   <div id="guild-c" style="padding-left:1px; clear:both">
   <div class="BroadBG">
-  <div class="Broadcast"><b></b><span>$_G[mygroup][notice]</span></div></div>
+  <div class="Broadcast"><b></b><span><!-- {if $_G[mygroup][notice] == ''} -->{lang group_no_notice}<!-- {else} -->$_G[mygroup][notice]<!-- {/if} --></span></div></div>
   <br clear="all" />
     <div class="gthumb2 gttype guilddescribe modelcolor6" ><img src="$_G[forum][icon]" /><span>$_G[forum][description]</span></div>
     <div class="gthumb1 gttype guildmembersign modelcolor1"><button type="button"  onclick="location.href='forum.php?mod=group&action=signing&fid=$_G[fid]'"></button></div>
@@ -142,19 +142,28 @@
     </div>
    
     <div class="gthumb2 gttype relationguild modelcolor1">
-      <h2 class="thumdtitle" style="margin-left:5px;">敌对公会</h2>
-      <button type="button"  onclick="location.href=''"></button>
+      <h2 class="thumdtitle" style="margin-left:5px;">{lang group_enemy_group}</h2>
+      <button type="button"  onclick="location.href='forum.php?mod=group&action=group_relation&op=enemy&fid=$_G[fid]&enemy_group_id=$_G[groupid]'" title="添加成为敌对公会"></button>
       <dl>
-      	<dd>小清闲公会</dd>
-        <dd>2闲公会</dd>
+      	<!--{if $_G['mygroup']['enemy_group']}-->
+      	<!--{loop $_G['mygroup']['enemy_group'] $group}-->
+      	<dd><a href="/forum.php?mod=group&fid=$group[fid]" >$group[name]</a></dd>
+        <!--{/loop}-->
+        <!--{else}-->
+        <dd>{lang group_no_enemy_group}</dd>
+        <!--{/if}-->
       </dl></div>
     <div class="gthumb2 gttype relationguild modelcolor6">
-    <h2 class="thumdtitle" style="margin-left:5px;">友情公会</h2>
-    <button type="button"  onclick="location.href='forum.php?mod=group&action=group_ally&fid=$_G[fid]&friendly_group_id=$_G[groupid]'" title="添加成为友情公会"></button>
+    <h2 class="thumdtitle" style="margin-left:5px;">{lang group_friend_group}</h2>
+    <button type="button"  onclick="location.href='forum.php?mod=group&action=group_relation&op=friend&fid=$_G[fid]&friendly_group_id=$_G[groupid]'" title="添加成为友情公会"></button>
       <dl>
+      	<!--{if $_G['mygroup']['friend_group']}-->
         <!--{loop $_G['mygroup']['friend_group'] $group}-->
       	<dd><a href="/forum.php?mod=group&fid=$group[fid]" >$group[name]</a></dd>
         <!--{/loop}-->
+        <!--{else}-->
+        <dd>{lang group_no_friend_group}</dd>
+        <!--{/if}-->
       </dl></div>
     
     <div class="gthumb2 gttype modelcolor3 g_dz_home gchidden">

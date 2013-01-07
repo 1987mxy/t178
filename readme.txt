@@ -26,7 +26,12 @@ http://demo.t178.com/forum.php?mod=group&action=check_group
 
 
 
-http://demo.t178.com/forum.php?mod=group&action=group_ally&fid=[fid]&friendly_group_id=[groupid]
-说明：友情公会关系建立请求
-参数：	fid	Discuz板块ID
-	groupid	建立友情公会的对象公会ID
+http://demo.t178.com/forum.php?mod=group&action=group_relation&op=[op]&fid=[fid]&(friendly/enemy)_group_id=[groupid]
+说明：操作公会关系
+参数：	op	操作命令
+		friend		建立友情公会(第三个参数为friendly_group_id)
+		unfriend	解除友情公会(第三个参数为friendly_group_id)
+		enemy		建立敌对公会(第三个参数为enemy_group_id)
+		nonenemy	解除敌对公会(第三个参数为enemy_group_id)
+	fid	Discuz板块ID
+	groupid	建立公会关系的对象公会ID
