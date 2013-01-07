@@ -1,6 +1,7 @@
 <!--{template common/header}-->
 
 <!--{ad/text/wp a_t}-->
+
 <style id="diy_style" type="text/css"></style>
 <div class="wp"> 
   <!--[diy=diy1]-->
@@ -66,8 +67,19 @@
     </div>
     <br clear="all" />
   </div>
-  <div id="guild-c" style="padding-left:1px;">
-    <div class="gthumb2 gttype guilddescribe modelcolor6"><img src="$_G[forum][icon]" /><span>$_G[forum][description]</span></div>
+  
+  <div id="exit_g">
+     <!--{if $groupuser['uid']}-->
+     <a href="forum.php?mod=group&action=out&fid=$_G[fid]
+">[退出公会]</a>
+	 <!--{/if}-->
+  </div>
+  
+  <div id="guild-c" style="padding-left:1px; clear:both">
+  <div class="BroadBG">
+  <div class="Broadcast"><b></b><span>$_G[mygroup][notice]</span></div></div>
+  <br clear="all" />
+    <div class="gthumb2 gttype guilddescribe modelcolor6" ><img src="$_G[forum][icon]" /><span>$_G[forum][description]</span></div>
     <div class="gthumb1 gttype guildmembersign modelcolor1"><button type="button"  onclick="location.href='forum.php?mod=group&action=signing&fid=$_G[fid]'"></button></div>
     <div class="gthumb1 gttype join_guild modelcolor2"><button type="button"  onclick="location.href='forum.php?mod=group&action=join&fid=$_G[fid]'"></button></div>
    
@@ -110,7 +122,7 @@
       <p><!--{eval $i = 1;}--><!--{loop $groupmanagers $manage}--><!--{if $i <= 0}-->, <!--{/if}--><!--{eval $i--;}-->$manage[username]<!--{/loop}--></p>
       <p class="jurisdiction">会长</p>
     </div>
-    <div class="gthumb2 gttype guildatotal modelcolor5" >
+    <div class="gthumb2 gttype guildatotal modelcolor4" >
       <h2 class="thumdtitle fl">升级需TCP：$_G[mygroup][next_level_require_tcp]</h2>
       <table width="200px">
          <tr>
@@ -128,44 +140,50 @@
       </table>
 
     </div>
-    <div class="gthumb1 gttype relationguild modelcolor6">
-      <h2 class="thumdtitle" style="margin-left:5px;">友情公会</h2>
-      <dl>
-        <!--{loop $_G['mygroup']['friend_group'] $group}-->
-      	<dd><a href="/forum.php?mod=group&fid=$group[fid]" >$group[name]</a></dd>
-        <!--{/loop}-->
-      </dl>
-    </div>
-    <div class="gthumb1 gttype relationguild modelcolor1">
+   
+    <div class="gthumb2 gttype relationguild modelcolor1">
       <h2 class="thumdtitle" style="margin-left:5px;">敌对公会</h2>
+      <button type="button"  onclick="location.href=''"></button>
       <dl>
       	<dd>小清闲公会</dd>
         <dd>2闲公会</dd>
       </dl></div>
-    <div class="gthumb2 gttype modelcolor1"></div>
-    <!--{eval $group_games = $_G['mygroup']['group_games'];}-->
+    <div class="gthumb2 gttype relationguild modelcolor6">
+    <h2 class="thumdtitle" style="margin-left:5px;">友情公会</h2>
+    <button type="button"  onclick="location.href='forum.php?mod=group&action=group_ally&fid=$_G[fid]&friendly_group_id=$_G[groupid]'" title="添加成为友情公会"></button>
+      <dl>
+        <!--{loop $_G['mygroup']['friend_group'] $group}-->
+      	<dd><a href="/forum.php?mod=group&fid=$group[fid]" >$group[name]</a></dd>
+        <!--{/loop}-->
+      </dl></div>
+    
+    <div class="gthumb2 gttype modelcolor3 g_dz_home gchidden">
+     <li {if $action == 'index'}class="a"{/if} style="list-style:none"><a href="forum.php?mod=group&fid=$_G[fid]#groupnav" title=""></a></li></div>
+    <div class="gthumb2 gttype modelcolor4 g_dz_dicuss gchidden"><li {if $action == 'list'}class="a"{/if} style="list-style:none"><a href="forum.php?mod=forumdisplay&action=list&fid=$_G[fid]#groupnav" title=""></a></li></div>
+    <div class="gthumb2 gttype modelcolor5 g_dz_member gchidden" > <li {if $action == 'memberlist' || $action == 'invite'}class="a"{/if} style="list-style:none">
+        <a href="forum.php?mod=group&action=memberlist&fid=$_G[fid]#groupnav" title=""></a>
+        </li></div>
+       <!--{eval $group_games = $_G['mygroup']['group_games'];}-->
     <!--{loop str_split('012345') $game_index}-->
     <!--{eval $styleid = $game_index+1;}-->
     <!--{if $group_games[$game_index]}-->
     <!--{eval $game = $group_games[$game_index];}-->
     <!--{eval $group_game = $_G['mygroup']['games'][$game['gameid']];}-->
     <div class="gthumb1 gttype modelcolor$styleid">
-    	<a href="/game.php?action=play&game_id=$game['gameid']&server_id=$game['game_serverid']">
-	    	<img src="/game/admin/uploads/$group_game[game_logo]" />
+
+    	   	<a href="/game.php?action=play&game_id=$game['gameid']&server_id=$game['game_serverid']">
+	    	<img src="{IMGDIR}/$group_game[game_logo]"  width="101px" height="70px"/>
 			<span>$group_game[game_name]</span>
+
 		</a>
 	</div>
-	<!--{else}-->
+    	<!--{else}-->
 	<div class="gthumb1 gttype modelcolor$styleid">
 	</div>
 	<!--{/if}-->
+
     <!--{/loop}-->
-    <!--<div class="gthumb1 gttype modelcolor5"><a href="http://long.37wan.com/"> <img src="{IMGDIR}/longjiang.jpg" />
-      <span>龙将50服</span>
-      </a></div>
-    <div class="gthumb1 gttype modelcolor2"><a href="http://long.37wan.com/"> <img src="{IMGDIR}/longjiang.jpg" />
-      <span>倾城之恋50服</span>
-      </a></div>-->
+    
   </div>
  
 </div>
@@ -184,7 +202,7 @@
     <!--{if CURMODULE == 'group'}--><!--{hook/group_top}--><!--{else}--><!--{hook/forumdisplay_top}--><!--{/if}--> 
     <!--{if $status != 2 && $status != 3}-->
     <div id="discussBG">
-     <div class="Broadcast"><b></b><span>$_G[mygroup][notice]</span></div>
+
     <div class="tb cl noborder" style="width:960px; "> 
       <!--{if in_array($_G['adminid'], array(1,2))}--><span class="a bw0_all y xi2"><a href="javascript:;" onclick="showWindow('grecommend$_G[fid]', 'forum.php?mod=group&action=recommend&fid=$_G[fid]');return false;"  style=" color:#FFF">{lang group_push_to_forum}</a></span><!--{/if}-->
       <ul id="groupnav" style="margin-left:6px;">
@@ -201,6 +219,7 @@
     </div>
     <!--{/if}--> 
     <!--{/if}--> 
+    
     <div id="discuss"><div id="ds-c" >
     
     <!--{if $action == 'index' && $status != 2 && $status != 3}--> 
@@ -231,7 +250,6 @@
 </div>
 
 <script  type="text/javascript">
-var jQuery = jQuery.noConflict();
 jQuery(document).ready(function(){
 	    jQuery('.guildBoard a').hover(function(){
 		jQuery(this).parent().children('a').removeClass('guildBoardselected');
@@ -240,6 +258,13 @@ jQuery(document).ready(function(){
 		jQuery('.guildBoard table').hide().eq(index).show();
 	});
 });
-
-	
+/*jQuery(document).ready(function(e) {
+	 jQuery("#guild-c").css('display','block');
+    jQuery("#discussBG").css('display','none');
+	jQuery('.gchidden').click(function(e){
+		jQuery("#guild-c").css('display','none');
+		   jQuery("#discussBG").css('display','block');
+		   
+		})
+});*/
 </script>

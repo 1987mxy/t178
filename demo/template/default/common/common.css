@@ -1,4 +1,4 @@
-/* ----------------------------------
+﻿/* ----------------------------------
 
 Main CSS file for Discuz! X
 (C) Comsenz Inc.
@@ -700,20 +700,23 @@ CSS 写作注意事项：
 			.bm_c { padding: 10px; }
 		.drag {}
 		.bm_h .o { float: right; width: 30px; }
-			.bm_h .o img { float: right; margin-top: 11px; cursor: pointer; }
+			.bm_h .o img { float: right; margin-top: 6px; cursor: pointer; }
 		.bm_h .i { padding-left: 10px; }
 		.bm_h .pn { margin-top: 4px; }
 		.bm_h { padding: 0 10px; height: 31px; border-top: 1px solid #FFF; border-bottom: 1px solid {CONTENTSEPARATE}; background: {COMMONBG}; line-height: 31px; white-space: nowrap; overflow: hidden; }
 		.bmw { border: 1px solid {COMMONBORDER}; }
 			.bmw .bm_h { border-top-color: {WRAPBG}; border-right: 1px solid {WRAPBG}; border-bottom-color: {CONTENTSEPARATE}; border-left: 1px solid {WRAPBG}; background: {SPECIALBG}; }
-				.bmw .bm_h a { color: {HIGHLIGHTLINK}; }
+				.bmw .bm_h a { color: {HIGHLIGHTLINK}; color: white;}
 		.bml .bm_h { padding-top: 5px; border: none; background: transparent; }
 		.bml .bm_c { padding-top: 0; }
 		.bmn { padding: 7px 10px; border-color: {SPECIALBORDER}; background: {SPECIALBG}; }
 
 		.fl { border: 1px solid {COMMONBORDER}; border-top: none; background: {WRAPBG}; }
 			.fl .bm { margin-bottom: 0; border: none; }
-				.fl .bm_h { border-width: 1px 0; border-color: {SPECIALBORDER}; {TITLEBGCODE}; }
+				.fl .bm_h { border-width: 1px 0; border-color: {SPECIALBORDER}; {TITLEBGCODE};
+				border-width: 1px 0;
+border-color: #194E94;
+background: #194E94; }
 		.fl .bm_c, #online .bm_c, .lk .bm_c { padding-top: 0; padding-bottom: 0; }
 	.bm2 .bm2_b { float: left; width: 49%; border: 1px solid {COMMONBORDER}; }
 		.bm2 .bm2_b_y { float: right; }
@@ -728,11 +731,12 @@ CSS 写作注意事项：
 	Explain:		面包屑导航
 	Last Modify:	lushnis
 */
-	#pt { margin: 2px 0; height: 29px; border:none; background: transparent; line-height: 29px; }
+	#pt { margin: 2px 0; height: 29px; border:none; background: transparent; line-height: 29px; font-size:16px;font-family: 黑体;color:#666666;}
 		#pt .z { padding-right: 10px; }
 		#pt .z a, #pt .z em, #pt .z span { float: left; height: 29px; }
-		#pt .z em { width: 20px; background: url({IMGDIR}/pt_item.png) no-repeat 3px 10px; line-height: 200px; overflow: hidden; }
-		.nvhm { width: 16px; background: url({IMGDIR}/search.png) no-repeat -8px -119px; line-height: 200px; overflow: hidden; }
+		#pt .z a{color:#666666;font-size:16px;font-family: 微软雅黑;}
+		#pt .z em { width: 24px; background: url({IMGDIR}/youjiantou.png) no-repeat center 2px ; line-height: 200px; overflow: hidden; }
+		.nvhm { width: 24px; background: url({IMGDIR}/home.png) no-repeat center 5px; line-height: 200px; overflow: hidden; font-size: 16px;font-family: 微软雅黑;}
 			/* XP 或 Windows 7，IE 最高版本为 8 或 9，这几种组合情况对字体的渲染存在差异，所以需要对背景进行微调，以适应更多情况 by Pony 11050511 */
 			.ie_all #pt .z em { background-position: 3px 9px; }
 			.ie_all .nvhm { background-position: -8px -120px; }
@@ -797,18 +801,19 @@ CSS 写作注意事项：
 		.tb a:hover { text-decoration: none; }
 
 /*公会Model Start*/
-#guild{width:983px; height:400px; font-family:"微软雅黑"!important; }
+#guild{width:983px; font-family:"微软雅黑"!important; }
 
 .constair{width:100%;}
-#guildtitle{ width:100%;}
+#guildtitle{ width:80%; float:left;}
 #titlename{ margin:20px 0px 0px 20px;}
 
 #titlename h1{font-size: 24px;color:#fff; background:none!important;}
-#guild-c{ height:463px;  width:983px;  padding-top:1px;scrollbar-base-color:#1c1b1c;}
+#guild-c{   width:983px;  padding-top:1px;scrollbar-base-color:#1c1b1c;}
+#guild-c img{ }
 .gttype {  margin-right:10px; margin-bottom:8px;}
 .gthumb1{ width:105px; height:105px;float:left; background:#de9c28; text-align:center;}
 .gthumb2{ width:220px; height:105px; float:left; background:#1f569a;}
-.gthumb3{ width:293px; height:331px;float:right; background:#635bbd;  overflow:hidden; margin:0px!important;}
+.gthumb3{ width:293px; height:494px;float:right; background:#635bbd;  overflow:hidden; margin:-50.5px 0px 8px 0px!important;}
 .gthumb1:hover,.gthumb2:hover{ outline:1px #FFFFFF solid;}
 .gthumb1 img{ width:100%}
 .gthumb1 span{ display:block ;padding:7px 0px; text-align:center; color:#FFF; font-size:14px;}
@@ -879,16 +884,25 @@ font-size: 14px;}
 /*yaochangjun 12-27 修改.guildatotal dl为.guildatotal table*/
 .guildatotal table{ clear:both; padding:0px!important;font-size:12px; color:#FFF; margin-left:5px; }
 /*end*/
-.relationguild dl { margin-top:5px;padding:0px!important;}
-.relationguild dl dd{display:block;  font-size:14px; color:#FFF; margin:0px!important;}
+.relationguild button{ float:right; background:url({IMGDIR}/addreleation1.png) no-repeat center center;display:block; border:none!important;-webkit-box-shadow:none!important;-moz-box-shadow:none!important;box-shadow:none!important;cursor:pointer; width:21px; height:21px;margin-top: 10px;margin-right: 10px;}
+.relationguild button:hover{ background:url({IMGDIR}/addreleation2.png) no-repeat center center;}
+.relationguild dl { margin-top:5px;padding:0px!important; clear:both}
+.relationguild dl dd{display:inline-block;  font-size:14px; color:#FFF; margin: 0px 0px 0px 12px!important;}
+.relationguild dl dd a{font-size:14px; color:#FFF;}
 #discuss{ width:961px; margin-left:11px; clear:both; background:#FFF;	height:100%; margin-bottom:5px;}
 #ds-c{ width:930px; margin:0 auto; padding-top:20px; }
 .join_guild button{background:url(/static/image/common/join_guild.png) no-repeat center center; width:105px; height:105px; display:block; border:none!important;-webkit-box-shadow:none!important;-moz-box-shadow:none!important;box-shadow:none!important;cursor:pointer;}
-.Broadcast{ background:#021856;  width:958px; margin:10px; padding-left:5px; float:left; height:30px; }
+#exit_g{ float:right;margin-top: 40px;}
+#exit_g a{ color:#666666}
+.g_dz_home a{ display:block;width:220px; height:105px; background: url({IMGDIR}/gdzhome.png) no-repeat center center;}
+.g_dz_dicuss a{display:block; width:220px; height:105px; background: url({IMGDIR}/gdzdiscuss.png) no-repeat center center;}
+.g_dz_member a{ display:block;width:220px; height:105px; background: url({IMGDIR}/gdzmember.png) no-repeat center center;}
+.BroadBG{ background:#194e94; float:left; width:680px; margin-bottom:8px;}
+.Broadcast{ background:#021856;  width:663px; margin:6px; padding-left:5px; float:left; height:30px; }
 .Broadcast b{ display:inline-block; width:16px; height:30px; background:url({IMGDIR}/boardcast.png) no-repeat center center; float:left; margin-left:5px;}
 .Broadcast span{ color:#FFF; font-size:14px; margin-left:20px;  height:30px; line-height:30px; display:block; float:left; }
 
-#discussBG{background:#194e94; width:100%; padding-bottom:5px;}
+#discussBG{background:#194e94; width:100%; padding-bottom:5px;padding-top:5px;}
 #discuss #disnav ul li.selected, #discuss #disnav ul li.selected a{ background:#FFF; color:#194e94;}
 #dicusscontent{ width:100%; background:#FFF; height:100%; clear:both;}
 .dicusspost{ width:88px; height:30px; padding:10px;} 
@@ -1775,3 +1789,11 @@ DIY图片幻灯片未加载时隐藏,模块标识隐藏
 /*补充添加*/
 
 #viewtid {margin-top:15px;}
+
+/*字体*/
+
+ @font-face {  
+      font-family: "yahei";  
+      src: url( {IMGDIR}/yahei.eot ); /* IE */  
+      src: local(" real FontName "), url( {IMGDIR}/yahei.ttf ) format("truetype"); /* 非IE */  
+}  

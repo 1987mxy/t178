@@ -1,33 +1,35 @@
 <!--{subtemplate common/header}-->
+<script type="text/javascript" src="fontjs/cufon-yui.js"></script>
+    <script type="text/javascript" src="fontjs/Microsoft_YaHei_400.font.js"></script>
+	<script type="text/javascript">
+    Cufon.replace(".fontjs");
+	Cufon.set("color","white");
+    </script>
 
-<div id="pt" class="bm cl">
-	<div class="z"><a href="./" class="nvhm" title="{lang home}">$_G[setting][bbname]</a><em>&rsaquo;</em><a href="group.php">$_G[setting][navs][3][navname]</a>$groupnav</div>
-</div>
+
 
 <!--{ad/text/wp a_t}-->
 <style id="diy_style" type="text/css"></style>
 <div class="wp">
 	<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
 </div>
-<div id="ct" class="ct2 wp cl">
+<div id="ct" class="ct2 wp cl" style=" width:1000px;">
 	<div class="mn">
 		<!--[diy=diycontenttop]--><div id="diycontenttop" class="area"></div><!--[/diy]-->
-		<div class="bm fl cl">
-			<div class="bm_h">
-				<h1 class="xs2">$curtype[name]</h1>
-			</div>
+		<div class="bm fl cl noborder" style="width:940px">
+	
 			<!--{if $typelist}-->
 				<div class="bm_c pbm ptm bbs">
 					<p><!--{loop $typelist $fid $type}--><a href="group.php?sgid=$fid">$type[name]</a><!--{if $type[groupnum]}--><span class="xg1">($type[groupnum])</span><!--{/if}--> &nbsp; <!--{/loop}--></p>
 				</div>
 			<!--{else}-->
-				<div class="bbs"></div>
+				<div class="bbs noborder"></div>
 			<!--{/if}-->
 			<!--{hook/index_top}-->
 			<!--{if $list}-->
-				<div class="tbmu cl bw0">
+				<div class="tbmu cl bw0" style="color:#FFF; margin-left:10px; padding-bottom:0px!important; font-size:12px;">
 					<span class="y">
-					<select title="{lang orderby}" onchange="location.href=this.value" class="ps">
+					<select title="{lang orderby}" onchange="location.href=this.value" class="ps" style="margin-right:20px;">
 						<option value="$url" $selectorder[default]>{lang orderby_default}</option>
 						<option value="$url&orderby=thread" $selectorder[thread]>{lang stats_main_threads_count}</option>
 						<option value="$url&orderby=membernum" $selectorder[membernum]>{lang group_member_count}</option>
@@ -38,6 +40,17 @@
 					{lang group_total_numbers}
 				</div>
 				<!--{if $curtype['forumcolumns'] > 1}-->
+                    <div id="g_commend" class="bm noborder">
+				<div class="bm_c cl" style="padding:0px!important; margin-top:10px;!important">
+					<!--{loop $list $fid $val}-->
+					<dl class="xld">
+						<dd class="m"><a href="forum.php?mod=group&fid=$val[fid]" target="_parent"><img src="$val[icon]" alt="$val[name]" width="74" height="74" /></a></dd>
+						<dt><a href="forum.php?mod=group&fid=$val[fid]">$val[name]</a></dt>
+						<dd class="xg1">$val[description]</dd>
+					</dl>
+					<!--{/loop}-->
+				</div>
+			</div>
 					<div class="bm_c">
 						<table cellspacing="0" cellpadding="0" class="fl_tb">
 							<tr class="fl_row">
@@ -47,7 +60,7 @@
 							<tr class="fl_row">
 								<!--{/if}-->
 								<td class="fl_g" style="width: $curtype[forumcolwidth]">
-									<div class="fl_icn_g"><a href="forum.php?mod=group&fid=$fid" title="$val[name]"><img width="48" height="48" src="$val[icon]" alt="$val[name]" /></a></div>
+									<div class="fl_icn_g"><a href="forum.php?mod=group&fid=$fid" title="$val[name]"  target="_parent"><img width="48" height="48" src="$val[icon]" alt="$val[name]" /></a></div>
 									<dl>
 										<dt><a href="forum.php?mod=group&fid=$fid" title="$val[name]">$val[name]</a></dt>
 										<dd>{lang group_total_members_threads}</dd>
@@ -61,22 +74,18 @@
 					</div>
 				<!--{else}-->
 					<div class="bm_c">
-						<table cellspacing="0" cellpadding="0" class="fl_tb">
-						<!--{loop $list $fid $val}-->
-							<tr class="fl_row">
-								<td class="fl_icn"><a href="forum.php?mod=group&fid=$fid" title="$val[name]"><img width="48" height="48" src="$val[icon]" alt="$val[name]" /></a></td>
-								<td>
-									<!--{hook/index_grouplist $fid}-->
-									<strong><a href="forum.php?mod=group&fid=$fid" title="$val[name]">$val[name]</a></strong>
-									<p class="xg1">$val[description]</p>
-								</td>
-								<td class="fl_i">
-									<span class="i_z z"><strong>$val[membernum]</strong><em class="xg1">{lang group_member}</em></span>
-									<span class="i_y z"><strong>$val[threads]</strong><em class="xg1">{lang threads}</em></span>
-								</td>
-							</tr>
-						<!--{/loop}-->
-						</table>
+                    <div id="g_commend" class="bm noborder">
+				<div class="bm_c cl" style="padding:0px!important; margin-top:10px;!important">
+					<!--{loop $list $fid $val}-->
+					<dl class="xld">
+						<dd class="m"><a href="forum.php?mod=group&fid=$val[fid]" target="_parent"><img src="$val[icon]" alt="$val[name]" width="74" height="74" /></a></dd>
+						<dt><a href="forum.php?mod=group&fid=$val[fid]"  target="_parent">$val[name]</a></dt>
+						<dd class="xg1">$val[description]</dd>
+					</dl>
+					<!--{/loop}-->
+				</div>
+			</div>
+						
 					</div>
 				<!--{/if}-->
 				<!--{hook/index_bottom}-->
@@ -88,10 +97,7 @@
 			<!--{/if}-->
 		</div>
 		<!--{if $list}-->
-			<div class="pgs cl">
-				$multipage
-				<span class="pgb y"><a href="group.php">{lang return_index}</a></span>
-			</div>
+			
 		<!--{/if}-->
 		<!--[diy=diycontentbottom]--><div id="diycontentbottom" class="area"></div><!--[/diy]-->
 	</div>
@@ -120,25 +126,14 @@
 			<!--{else}-->
 				<div class="bm bw0">
 					<div class="bm_c">
-						<a href="forum.php?mod=group&action=create&fupid=$fup&groupid=$sgid" id="create_group_btn"><img src="{IMGDIR}/create_group.png" alt="{lang group_create}" /></a>
+						
 					</div>
 				</div>
 			<!--{/if}-->
 		<!--{/if}-->
 		<!--[diy=diytopgrouptop]--><div id="diytopgrouptop" class="area"></div><!--[/diy]-->
 		<!--{if $topgrouplist}-->
-			<div id="g_top" class="bm">
-				<div class="bm_h cl">
-					<h2>{lang group_hot}</h2>
-				</div>
-				<div class="bm_c">
-					<ol class="xl">
-						<!--{loop $topgrouplist $fid $group}-->
-						<li class="top1"><span class="y xi2 xg1"> $group[commoncredits]</span><a href="forum.php?mod=group&fid=$group[fid]" title="$group[name]">$group[name]</a></li>
-						<!--{/loop}-->
-					</ol>
-				</div>
-			</div>
+			
 		<!--{/if}-->
 		<div class="drag">
 			<!--[diy=diy4]--><div id="diy4" class="area"></div><!--[/diy]-->
@@ -150,5 +145,14 @@
 <div class="wp mtn">
 	<!--[diy=diy4]--><div id="diy4" class="area"></div><!--[/diy]-->
 </div>
-
-<!--{subtemplate common/footer}-->
+<script type="text/jscript">
+jQuery('#g_commend .xld').ready(function(e) {
+    var colorStyle = ['modelcolor1','modelcolor2','modelcolor3','modelcolor4','modelcolor5','modelcolor6'];
+	var borderStyle = ['modelborder1','modelborder2','modelborder3','modelborder4','modelborder5','modelborder6'];
+	var rand; 
+	jQuery('#g_commend .xld').each(function(e){
+		   rand = parseInt(Math.random() * 5 + 0);
+		   jQuery(this).addClass(colorStyle[rand]).find('img').addClass(borderStyle[rand]);
+		})
+});
+</script>

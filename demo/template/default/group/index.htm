@@ -2,29 +2,55 @@
 	
 	<!--{ad/text/wp a_t}-->
 	<style id="diy_style" type="text/css"></style>
-	<div class="wp">
+	<div class="wp" >
 		<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
 	</div>
-	<div id="ct" class="ct2 wp cl">
+	<div id="ct" class="ct2 wp cl" style="width:930px; margin-top:30px;">
 		<div class="mn">
 			<!--[diy=diycontenttop]--><div id="diycontenttop" class="area"></div><!--[/diy]-->
-			<div class="bm bmw">
-				<div class="bm_h cl">
-					<span class="y xw1"><a href="group.php?mod=my">{lang my_group} &rsaquo;</a></span>
-					<h2>{lang group_focus}</h2>
-				</div>
-				<!--[diy=diy5]--><div id="diy5" class="area"></div><!--[/diy]-->
-			</div>
+			
 			<!--[diy=diycommendtop]--><div id="diycommendtop" class="area"></div><!--[/diy]-->
 			<!--{hook/index_header}-->
-			<div id="g_commend" class="bm">
-				<div class="bm_h cl">
-					<h2>{lang recommend_group}</h2>
-				</div>
-				<div class="bm_c cl">
-					<!--{loop dunserialize($_G['setting']['group_recommend']) $val}-->
+            <div #="g_title_btn">
+               <div id="g_btn_select">
+                   <select class="styled" name="d">
+                      <!--{loop $first $groupid $group}-->
+                      <option value ="group.php?gid=$groupid" >$group[name]</option>
+                      <!--{/loop}-->
+					</select>
+                    <script type="text/javascript">
+					jQuery('select').ready(function(e) {
+                        jQuery('#g_btn_select select').change(function(e){
+							    jQuery('#g_show').attr('src',jQuery(this).val())
+							})
+                    });
+					</script>
+               </div>
+               <div id="g_btn_create" style="float:right; width:160px; height:40px;">
+                 <!--{if helper_access::check_module('group')}-->
+				<!--{if empty($gid) && empty($sgid)}-->
+					
+							<!--{if helper_access::check_module('group')}-->
+							<a href="forum.php?mod=group&action=create" id="create_group_btn"><img src="{IMGDIR}/create_group.png" alt="{lang group_create}" /></a>
+							<!--{/if}-->
+						
+				<!--{else}-->
+				
+							<a href="forum.php?mod=group&action=create&fupid=$fup&groupid=$sgid" id="create_group_btn"><img src="{IMGDIR}/create_group.png" alt="{lang group_create}" /></a>
+					
+	
+				<!--{/if}-->
+			<!--{/if}-->
+               </div>
+               <br clear="all" />
+            </div>
+			<iframe name="g_show" id="g_show" src="group.php?gid=3" width="99.2%"  scrolling="no" style=" border:none; margin-top:5px; background:none!important;" onload="dynIframeAutoSize('g_show','height')"></iframe>
+            
+            <div id="g_commend" class="bm noborder">
+				<div class="bm_c cl" style="padding:0px!important; margin-top:10px;!important">
+					<!--{loop $list $fid $val}-->
 					<dl class="xld">
-						<dd class="m"><a href="forum.php?mod=group&fid=$val[fid]"><img src="$val[icon]" alt="$val[name]" width="48" height="48" /></a></dd>
+						<dd class="m"><a href="forum.php?mod=group&fid=$val[fid]"><img src="$val[icon]" alt="$val[name]" width="74" height="74" /></a></dd>
 						<dt><a href="forum.php?mod=group&fid=$val[fid]">$val[name]</a></dt>
 						<dd class="xg1">$val[description]</dd>
 					</dl>
@@ -34,26 +60,6 @@
 
 			<!--[diy=diycategorytop]--><div id="diycategorytop" class="area"></div><!--[/diy]-->
 			<!--{hook/index_top}-->
-			<div class="bm">
-				<div class="bm_h cl">
-					<h2>{lang group_categories}</h2>
-				</div>
-				<div class="bm_c">
-					<!--{loop $first $groupid $group}-->
-							<dl class="mbm pbm bbda">
-								<dt class="pbn">
-									<span class="y xi2"><!--{loop $group['secondlist'] $fid}--><a href="group.php?sgid=$fid">$second[$fid][name]</a> <!--{/loop}--><a href="group.php?gid=$groupid">{lang more} &rsaquo;</a></span>
-									<strong class="xs2"><a href="group.php?gid=$groupid">$group[name]</a></strong><!--{if $group[groupnum]}--><span class="xg1">($group[groupnum])</span><!--{/if}-->
-								</dt>
-								<dd>
-									<!--{loop $lastupdategroup[$groupid] $val}-->
-										<a href="forum.php?mod=group&fid=$val[fid]">$val[name]</a> &nbsp;&nbsp;
-									<!--{/loop}-->
-								</dd>
-							</dl>
-					<!--{/loop}-->
-				</div>
-			</div>
 			<!--[diy=diycontentbottom]--><div id="diycontentbottom" class="area"></div><!--[/diy]-->
 			<!--{hook/index_bottom}-->
 		</div>
@@ -65,22 +71,7 @@
 			<!--{hook/index_side_top}-->
 			<!--{if helper_access::check_module('group')}-->
 				<!--{if empty($gid) && empty($sgid)}-->
-					<div class="bm">
-						<div class="bm_h cl">
-							<h2>{lang create_group_step}</h2>
-						</div>
-						<div class="bm_c">
-							<ul id="g_guide" class="mbm">
-								<li><label><strong class="xi1">创建公会</strong><span class="xg1">创建自己的游戏公会</span></label></li>
-								<li><label><strong class="xi1">{lang personality_setting}</strong><span class="xg1">打造与众不同的公会风采</span></label></li>
-								<li><label><strong class="xi1">{lang invite_friend}</strong><span class="xg1">邀请战友一同加入</span></label></li>
-								<li><label><strong class="xi1">公会进阶</strong><span class="xg1">升级公会享受更多福利</span></label></li>
-							</ul>
-							<!--{if helper_access::check_module('group')}-->
-							<a href="forum.php?mod=group&action=create" id="create_group_btn"><img src="{IMGDIR}/create_group.png" alt="{lang group_create}" /></a>
-							<!--{/if}-->
-						</div>
-					</div>
+					
 				<!--{else}-->
 					<div class="bm bw0">
 						<div class="bm_c">
@@ -92,20 +83,7 @@
 			<div class="drag">
 				<!--[diy=diysidemiddle]--><div id="diysidemiddle" class="area"></div><!--[/diy]-->
 			</div>
-			<!--{if $topgrouplist}-->
-				<div id="g_top" class="bm">
-					<div class="bm_h cl">
-						<h2>{lang group_hot}</h2>
-					</div>
-					<div class="bm_c">
-						<ol class="xl">
-							<!--{loop $topgrouplist $fid $group}-->
-							<li class="top1"><span class="y xi2 xg1"> $group[commoncredits]</span><a href="forum.php?mod=group&fid=$group[fid]" title="$group[name]">$group[name]</a></li>
-							<!--{/loop}-->
-						</ol>
-					</div>
-				</div>
-			<!--{/if}-->
+			
 			<div class="drag">
 				<!--[diy=diysidebottom]--><div id="diysidebottom" class="area"></div><!--[/diy]-->
 			</div>
@@ -117,4 +95,6 @@
 	<!--[diy=diy4]--><div id="diy4" class="area"></div><!--[/diy]-->
 </div>
 
-<!--{subtemplate common/footer}-->
+<script type="text/jscript">
+
+</script>
