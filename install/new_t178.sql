@@ -37,19 +37,20 @@ CREATE TABLE `t178_my_group` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `t178_my_group_friend`
+-- Table structure for table `t178_my_group_relation`
 --
 
-DROP TABLE IF EXISTS `t178_my_group_friend`;
+DROP TABLE IF EXISTS `t178_my_group_relation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t178_my_group_friend` (
-  `group_friendid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '公会友情ID',
+CREATE TABLE `t178_my_group_relation` (
+  `group_relationid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '公会关系ID',
   `group_id_a` mediumint(8) unsigned NOT NULL COMMENT '甲公会ID',
   `group_id_b` mediumint(8) unsigned NOT NULL COMMENT '乙公会ID',
+  `relation` tinyint(1) unsigned NOT NULL COMMENT '公会关系',
   `del_flag` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '删除标记',
-  PRIMARY KEY (`group_friendid`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='友情公会表';
+  PRIMARY KEY (`group_relationid`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='公会关系表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,4 +182,4 @@ CREATE TABLE `t178_my_group_member_game` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-01-06 23:20:16
+-- Dump completed on 2013-01-08 23:19:34
