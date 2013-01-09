@@ -16,7 +16,7 @@ $_G['action']['action'] = 3;
 $_G['action']['fid'] = $_G['fid'];
 $_G['basescript'] = 'group';
 
-$actionarray = array('join', 'out', 'create', 'viewmember', 'manage', 'index', 'memberlist', 'recommend', 'contribute', 'signing', 'group_join_game', 'group_member_join_game', 'check_group', 'group_relation');
+$actionarray = array('join', 'out', 'create', 'viewmember', 'manage', 'index', 'memberlist', 'recommend', 'contribute', 'signing', 'group_join_game', 'group_member_join_game', 'check_group', 'group_relation', 'my_manage');
 $action = getgpc('action') && in_array($_GET['action'], $actionarray) ? $_GET['action'] : 'index';
 if(in_array($action, array('join', 'out', 'create', 'manage', 'recommend'))) {
 	if(empty($_G['uid'])) {
@@ -236,7 +236,7 @@ if($action == 'index') {
 		}
 	}
 
-	include template('diy:group/group:'.$_G['fid']);
+	include template('diy:group/my_group_manage:'.$_G['fid']);
 
 } elseif($action == 'join') {
 	$jioned = DB::result_first("SELECT uid FROM ".DB::table('forum_groupuser')." WHERE uid='$_G[uid]'");
@@ -770,7 +770,7 @@ if($action == 'index') {
 	} else {
 		showmessage('undefined_action');
 	}
-	include template('diy:group/group:'.$_G['fid']);
+	include template('diy:group/my_group_manage:'.$_G['fid']);
 
 } elseif($action == 'recommend') {
 	if(!$_G['forum']['ismoderator'] || !in_array($_G['adminid'], array(1,2))) {
@@ -966,6 +966,10 @@ elseif($action == 'check_group') {
 	}
 	require_once libfile('function/my_group');
 	close_my_group( $clear_fids );
+}
+//独立管理页面Moxiaoyong		2013-01-09
+elseif($action == 'my_manage') {
+	include template('diy:group/my_group_manage:'.$_G['fid']);
 }
 
 ?>

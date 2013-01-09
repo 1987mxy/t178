@@ -861,7 +861,7 @@ if(!empty($_G['forum']['threadsorts']['templatelist']) && $_G['forum']['status']
 } elseif($_G['forum']['status'] == 3) {
 	$groupviewed_list = get_viewedgroup();
 	write_groupviewed($_G['fid']);
-	$template = 'diy:group/group:'.$_G['fid'];
+	$template = 'diy:group/my_group_manage:'.$_G['fid'];
 }
 
 if(!defined('IN_ARCHIVER')) {

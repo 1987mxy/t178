@@ -1,0 +1,45 @@
+<!--{template common/header}-->
+<!--{if CURMODULE == 'group'}--><!--{hook/group_top}--><!--{else}--><!--{hook/forumdisplay_top}--><!--{/if}--> 
+<div id="discussBG">
+	<div class="tb cl noborder" style="width:960px; "> 
+		<!--{if in_array($_G['adminid'], array(1,2))}-->
+			<span class="a bw0_all y xi2">
+				<a href="javascript:;" onclick="showWindow('grecommend$_G[fid]', 'forum.php?mod=group&action=recommend&fid=$_G[fid]');return false;"	style=" color:#FFF">
+					{lang group_push_to_forum}
+				</a>
+			</span>
+		<!--{/if}-->
+		<ul id="groupnav" style="margin-left:6px;">
+			<li {if $action == 'my_manage'}class="a"{/if}><a href="forum.php?mod=group&action=my_manage&fid=$_G[fid]#groupnav" title="">{lang home}</a></li>
+			<li {if $action == 'list'}class="a"{/if}><a href="forum.php?mod=forumdisplay&action=list&fid=$_G[fid]#groupnav" title="">{lang group_discuss_area}</a></li>
+			<li {if $action == 'memberlist' || $action == 'invite'}class="a"{/if}>
+			<a href="forum.php?mod=group&action=memberlist&fid=$_G[fid]#groupnav" title="">{lang group_member_list}</a>
+			</li>
+			<!--{if $_G['forum']['ismoderator']}-->
+				<li {if $action == 'manage'}class="a"{/if}><a href="forum.php?mod=group&action=manage&fid=$_G[fid]#groupnav">{lang group_admin}</a></li>
+			<!--{/if}--> 
+			<!--{if CURMODULE == 'group'}-->
+				<!--{hook/group_nav_extra}-->
+			<!--{else}-->
+				<!--{hook/forumdisplay_nav_extra}-->
+			<!--{/if}-->
+		</ul>
+	</div>
+	
+	<div id="discuss"><div id="ds-c" >
+	
+	<!--{if $action == 'my_manage'}--> 
+	<!--{subtemplate group/group_index}--> 
+	<!--{elseif $action == 'list'}--> 
+	<!--{subtemplate group/group_list}--> 
+	<!--{elseif $action == 'memberlist'}--> 
+	<!--{subtemplate group/group_memberlist}--> 
+	<!--{elseif $action == 'create'}--> 
+	<!--{subtemplate group/group_create}--> 
+	<!--{elseif $action == 'invite'}--> 
+	<!--{subtemplate group/group_invite}--> 
+	<!--{elseif $action == 'manage'}--> 
+	<!--{subtemplate group/group_manage}--> 
+	<!--{/if}--> </div></div>
+	<!--{if CURMODULE == 'group'}--><!--{hook/group_bottom}--><!--{else}--><!--{hook/forumdisplay_bottom}--><!--{/if}--> 
+</div>
