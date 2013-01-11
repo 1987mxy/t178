@@ -738,8 +738,8 @@ background: #194E94; }
 		#pt .z em { width: 24px; background: url({IMGDIR}/youjiantou.png) no-repeat center 2px ; line-height: 200px; overflow: hidden; }
 		.nvhm { width: 24px; background: url({IMGDIR}/home.png) no-repeat center 5px; line-height: 200px; overflow: hidden; font-size: 16px;font-family: 微软雅黑;}
 			/* XP 或 Windows 7，IE 最高版本为 8 或 9，这几种组合情况对字体的渲染存在差异，所以需要对背景进行微调，以适应更多情况 by Pony 11050511 */
-			.ie_all #pt .z em { background-position: 3px 9px; }
-			.ie_all .nvhm { background-position: -8px -120px; }
+			.ie_all #pt .z em { background-position: 5px 2px; }
+			.ie_all .nvhm { background-position: 0px 5px; }
 /*
 	Name:			mod_userheader
 	Level:			Global
@@ -801,19 +801,19 @@ background: #194E94; }
 		.tb a:hover { text-decoration: none; }
 
 /*公会Model Start*/
-#guild{width:983px; font-family:"微软雅黑"!important; }
+#guild{width:970px; font-family:"微软雅黑"!important; }
 
 .constair{width:100%;}
 #guildtitle{ width:80%; float:left;}
-#titlename{ margin:20px 0px 0px 20px;}
+#titlename{ margin:20px 0px 0px 0px;}
 
 #titlename h1{font-size: 24px;color:#fff; background:none!important;}
-#guild-c{   width:983px;  padding-top:1px;scrollbar-base-color:#1c1b1c;}
+#guild-c{   width:960px;  padding-top:1px;scrollbar-base-color:#1c1b1c;}
 #guild-c img{ }
 .gttype {  margin-right:10px; margin-bottom:8px;}
 .gthumb1{ width:105px; height:105px;float:left; background:#de9c28; text-align:center;}
 .gthumb2{ width:220px; height:105px; float:left; background:#1f569a;}
-.gthumb3{ width:293px; height:494px;float:right; background:#635bbd;  overflow:hidden; margin:-50.5px 0px 8px 0px!important;}
+.gthumb3{ width:270px; height:494px;float:right; background:#635bbd;  overflow:hidden; margin:-50.5px 0px 8px 0px!important;}
 .gthumb1:hover,.gthumb2:hover{ outline:1px #FFFFFF solid;}
 .gthumb1 img{ width:100%}
 .gthumb1 span{ display:block ;padding:7px 0px; text-align:center; color:#FFF; font-size:14px;}
@@ -876,25 +876,37 @@ background: #194E94; }
 }
 .guildmengberscore {display: inline-block;width: 40px;color: #000000;
 font-size: 14px;}
-.guildchoose {position: relative;top: 6px;left: 29px;}
+.guildchoose {position: relative;top: 6px;left: 20px;}
 .guildrankBg{ width:100%; height:281px; overflow:hidden; background:#FFF;}
-.thumdtitle{ color:#FFF; font-size:18px; padding:8px!important; border:none!important; background:none!important;}
+.thumdtitle{ color:#FFF; font-size:18px; padding:8px!important; border:none!important; background:none!important; float:left}
 /*yaochangjun 12-27  增加text-align:right */
 .guildatotal span{display:block;  font-size:12px; color:#FFF;  float:left; margin:10px 0px 0px 3px; text-align:right;}
 /*yaochangjun 12-27 修改.guildatotal dl为.guildatotal table*/
 .guildatotal table{ clear:both; padding:0px!important;font-size:12px; color:#FFF; margin-left:5px; }
 /*end*/
-.relationguild button{ float:right; background:url({IMGDIR}/addreleation1.png) no-repeat center center;display:block; border:none!important;-webkit-box-shadow:none!important;-moz-box-shadow:none!important;box-shadow:none!important;cursor:pointer; width:21px; height:21px;margin-top: 10px;margin-right: 10px;}
+.relationguild button{ float:right; background:url({IMGDIR}/addreleation1.png) no-repeat center center;display:block; border:none!important;-webkit-box-shadow:none!important;-moz-box-shadow:none!important;box-shadow:none!important;cursor:pointer; width:25px; height:25px;margin-top: 10px;margin-right: 10px;}
 .relationguild button:hover{ background:url({IMGDIR}/addreleation2.png) no-repeat center center;}
 .relationguild dl { margin-top:5px;padding:0px!important; clear:both}
 .relationguild dl dd{display:inline-block;  font-size:14px; color:#FFF; margin: 0px 0px 0px 12px!important;}
 .relationguild dl dd a{font-size:14px; color:#FFF;}
-#discuss{ width:961px; margin-left:11px; clear:both; background:#FFF;	height:100%; margin-bottom:5px;}
-#ds-c{ width:930px; margin:0 auto; padding-top:20px; }
+.relationguild dl dd a.del_rel{margin-left:5px; display:inline_block;}
+.relationguild dl dd a.del_rel:hove{ text-decoration:none;}
+#discuss{ width:939px; margin-left:11px; clear:both; background:#FFF;	height:100%; margin-bottom:5px;}
+#ds-c{ width:906px; margin:0 auto; padding-top:20px;margin-top: 1px; }
 .join_guild button{background:url(/static/image/common/join_guild.png) no-repeat center center; width:105px; height:105px; display:block; border:none!important;-webkit-box-shadow:none!important;-moz-box-shadow:none!important;box-shadow:none!important;cursor:pointer;}
 #exit_g{ float:right;margin-top: 40px;}
 #exit_g a{ color:#666666}
-.g_dz_home a{ display:block;width:220px; height:105px; background: url({IMGDIR}/gdzhome.png) no-repeat center center;}
+.overlay { background:transparent url(images/overlay.png) repeat top left; position:fixed; top:0px; bottom:0px; left:0px; right:0px; z-index:100; }
+.box { position:fixed; top:-200px; left:30%; right:30%; background-color:#fff; color:#7F7F7F; padding:20px; border:2px solid #ccc; -moz-box-shadow: 0 1px 5px #333; -webkit-box-shadow: 0 1px 5px #333; z-index:101; }
+.box h1 { border-bottom: 1px dashed #7F7F7F; margin:-20px -20px 0px -20px; padding:4px; background-color:#FFEFEF; color:#EF7777;  }
+.tcpinputdiv{margin-left: -17px!important;margin-top: 10px;}
+.tcpinputdiv input[name="tcpinput"]{}
+.tcpinputdiv input[name="posttcp"]{ height:26px;}
+a.boxclose { float:right; width:26px; height:26px; background:transparent url({IMGDIR}/cancel.png) no-repeat center center; margin-top:-30px; margin-right:-30px; cursor:pointer; }
+.g_dz_home li{ list-style:none}
+.g_dz_home li a{ display:block; width:105px; height:105px; background:url({IMGDIR}/g_dz_home.png) no-repeat center center;}
+.g_dz_contcp a{ display:block; width:105px; height:105px; background: url({IMGDIR}/contcp.png) no-repeat center center; }
+
 .g_dz_dicuss a{display:block; width:220px; height:105px; background: url({IMGDIR}/gdzdiscuss.png) no-repeat center center;}
 .g_dz_member a{ display:block;width:220px; height:105px; background: url({IMGDIR}/gdzmember.png) no-repeat center center;}
 .BroadBG{ background:#194e94; float:left; width:680px; margin-bottom:8px;}
@@ -902,7 +914,7 @@ font-size: 14px;}
 .Broadcast b{ display:inline-block; width:16px; height:30px; background:url({IMGDIR}/boardcast.png) no-repeat center center; float:left; margin-left:5px;}
 .Broadcast span{ color:#FFF; font-size:14px; margin-left:20px;  height:30px; line-height:30px; display:block; float:left; }
 
-#discussBG{background:#194e94; width:100%; padding-bottom:5px;padding-top:5px;}
+#discussBG{background:#194e94; width:97.8%; padding-bottom:5px;padding-top:5px; margin-top: 20px;}
 #discuss #disnav ul li.selected, #discuss #disnav ul li.selected a{ background:#FFF; color:#194e94;}
 #dicusscontent{ width:100%; background:#FFF; height:100%; clear:both;}
 .dicusspost{ width:88px; height:30px; padding:10px;} 

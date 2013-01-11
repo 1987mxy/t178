@@ -15,7 +15,7 @@
                <div id="g_btn_select">
                    <select class="styled" name="d">
                       <!--{loop $first $groupid $group}-->
-                      <option value ="group.php?gid=$groupid" >$group[name]</option>
+                      <option value ="group.php?gid=$groupid" class='g_select_class' >$group[name]</option>
                       <!--{/loop}-->
 					</select>
                     <script type="text/javascript">
@@ -44,7 +44,8 @@
                </div>
                <br clear="all" />
             </div>
-			<iframe name="g_show" id="g_show" src="group.php?gid=3" width="99.2%"  scrolling="no" style=" border:none; margin-top:5px; background:none!important;" onload="dynIframeAutoSize('g_show','height')"></iframe>
+            
+			<iframe name="g_show" id="g_show" src="group.php?gid=3" width="99.2%"  frameborder="0" scrolling="no" style=" border:none; margin-top:5px; background:none!important;" onload="dynIframeAutoSize('g_show','height')"></iframe>
             
             <div id="g_commend" class="bm noborder">
 				<div class="bm_c cl" style="padding:0px!important; margin-top:10px;!important">
@@ -95,6 +96,8 @@
 	<!--[diy=diy4]--><div id="diy4" class="area"></div><!--[/diy]-->
 </div>
 
-<script type="text/jscript">
-
+<script type="text/javascript">
+jQuery(window.frames['g_show'].document).ready(function(e) {
+    jQuery(window.frames['g_show'].document).find('#nv_group').css('background','none')
+});
 </script>

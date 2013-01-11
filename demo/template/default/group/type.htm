@@ -8,6 +8,7 @@
 
 
 
+
 <!--{ad/text/wp a_t}-->
 <style id="diy_style" type="text/css"></style>
 <div class="wp">
@@ -29,7 +30,7 @@
 			<!--{if $list}-->
 				<div class="tbmu cl bw0" style="color:#FFF; margin-left:10px; padding-bottom:0px!important; font-size:12px;">
 					<span class="y">
-					<select title="{lang orderby}" onchange="location.href=this.value" class="ps" style="margin-right:20px;">
+					<select title="{lang orderby}" onchange="location.href=this.value" class="ps" style="margin-right:9px;">
 						<option value="$url" $selectorder[default]>{lang orderby_default}</option>
 						<option value="$url&orderby=thread" $selectorder[thread]>{lang stats_main_threads_count}</option>
 						<option value="$url&orderby=membernum" $selectorder[membernum]>{lang group_member_count}</option>
@@ -51,7 +52,7 @@
 					<!--{/loop}-->
 				</div>
 			</div>
-					<div class="bm_c">
+					<div class="bm_c" style="padding:0px!important">
 						<table cellspacing="0" cellpadding="0" class="fl_tb">
 							<tr class="fl_row">
 								<!--{loop $list $fid $val}-->
@@ -73,7 +74,7 @@
 						</table>
 					</div>
 				<!--{else}-->
-					<div class="bm_c">
+					<div class="bm_c" style="padding:0px!important">
                     <div id="g_commend" class="bm noborder">
 				<div class="bm_c cl" style="padding:0px!important; margin-top:10px;!important">
 					<!--{loop $list $fid $val}-->
@@ -156,3 +157,19 @@ jQuery('#g_commend .xld').ready(function(e) {
 		})
 });
 </script>
+
+
+<script type="text/javascript">
+var jq = jQuery.noConflict();
+jq('#nv_group').ready(function(e) {
+    jq('#nv_group').css('background','none');
+});
+</script>
+<!--[if lt IE 9 ]>
+<script type="text/javascript">
+var jq = jQuery.noConflict();
+jq('#nv_group').ready(function(e) {
+    jq('#nv_group').css('background','url(../../static/image/common/modelBG.png) repeat!important');
+});
+</script>
+<![endif]-->
