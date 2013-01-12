@@ -64,7 +64,7 @@ class table_my_group_member extends discuz_table
 	 * 贡献TCP值给公会
 	 * @access	public
 	 * @param	$groupid	公会ID
-	 * @param	$uid		用户ID
+	 * @param	$uid		Discuz的uid
 	 * @param	$tcp		贡献的TCP值
 	 * @return	boolean		贡献TCP操作结果
 	 */
@@ -81,7 +81,7 @@ class table_my_group_member extends discuz_table
 	 * 获得TCP值奖励
 	 * @access	public
 	 * @param	$groupid	公会ID（因为有邀请加入的时间差存在，所以需要存入公会ID）
-	 * @param	$uid		用户ID
+	 * @param	$uid		Discuz的uid
 	 * @param	$tcp		贡献的TCP值
 	 * @return	boolean		获得TCP操作结果
 	 */
@@ -100,7 +100,7 @@ class table_my_group_member extends discuz_table
 	 */
 	public function get_member_contribute_list( $groupid, $number = 10 ){
 		if( empty( $groupid ) ) return array();
-		return DB::fetch_all( "SELECT uid, username, contributed FROM %t WHERE " . DB::field( 'groupid', $groupid ) . " ORDER BY " . DB::order( 'contributed', 'DESC' ) . DB::limit( 0, $number ), array( $this -> _table, $number ) );
+		return DB::fetch_all( "SELECT uid, username, contributed FROM %t WHERE " . DB::field( 'groupid', $groupid ) . " ORDER BY " . DB::order( 'contributed', 'DESC' ) . DB::limit( 0, $number ), array( $this -> _table ) );
 	}
 	
 	/**
@@ -112,7 +112,18 @@ class table_my_group_member extends discuz_table
 	 */
 	public function get_member_capital_list( $groupid, $number = 10 ){
 		if( empty( $groupid ) ) return array();
-		return DB::fetch_all( "SELECT uid, username, capital FROM %t WHERE " . DB::field( 'groupid', $groupid ) . " ORDER BY " . DB::order( 'capital', 'DESC' ) . DB::limit( 0, $number ), array( $this -> _table, $number ) );
+		return DB::fetch_all( "SELECT uid, username, capital FROM %t WHERE " . DB::field( 'groupid', $groupid ) . " ORDER BY " . DB::order( 'capital', 'DESC' ) . DB::limit( 0, $number ), array( $this -> _table ) );
+	}
+	
+	/**
+	 * 获取指定用户的公会ID
+	 * @access	public
+	 * @param	$uid	Discuz的uid
+	 * @return	int		指定用户的公会ID
+	 */
+	public function get_user_groupid( $uid ){
+		if( empty( $uid ) ) return false;
+		return DB::fetch_first( "SELECT groupid FROM %t WHERE " . DB::field( 'uid', $uid ), array( $this -> _table ) );
 	}
 	
 	/**

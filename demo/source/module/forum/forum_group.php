@@ -189,6 +189,11 @@ if($action == 'index') {
 		$friend_group_fids = C::t('my_group')->groupids2fids($friend_groups);
 		$_G['mygroup']['friend_group'] = C::t('forum_forum')->fetch_all_name_by_fid($friend_group_fids);
 		
+		//获取当前用户的fid Moxiaoyong	2013-01-12
+		$user_groupid = C::t('my_group_member')->get_user_groupid($_G['uid']);
+		$user_fids = C::t('my_group')->groupids2fids($user_groupid);
+		$_G['usergroup']['fid'] = $user_fids[0];
+		
 		//敌对公会逻辑Moxiaoyong		2013-01-07
 		$enemy_groups = C::t('my_group_relation')->get_enemy_group($my_groupid);
 		foreach( $enemy_groups as &$group ){
@@ -321,7 +326,7 @@ if($action == 'index') {
 
 } elseif($action == 'create') {
 	$jioned = DB::result_first("SELECT uid FROM ".DB::table('forum_groupuser')." WHERE uid='$_G[uid]'");
-	if(!empty($jioned))showmessage('已加过公会，请退出再创建！', "forum.php?mod=group&fid=$_G[fid]");
+	/* if(!empty($jioned))showmessage('已加过公会，请退出再创建！', "forum.php?mod=group&fid=$_G[fid]"); */
 	
 	if(!$_G['group']['allowbuildgroup']) {
 		showmessage('group_create_usergroup_failed', "group.php");
@@ -394,7 +399,7 @@ if($action == 'index') {
 		showmessage('group_create_succeed', "forum.php?mod=group&action=manage&fid=$newfid", array(), array('showdialog' => 1, 'showmsg' => true, 'locationtime' => true));
 	}
 
-	include template('diy:group/group:'.$_G['fid']);
+	include template('diy:group/my_group_manage:'.$_G['fid']);
 
 } elseif($action == 'manage'){
 	if(!$_G['forum']['ismoderator']) {
@@ -842,17 +847,22 @@ elseif($action == 'group_join_game') {
 }
 //公会会员入驻游戏Moxiaoyong		2012-12-21
 elseif($action == 'group_member_join_game') {
-	$group_game_info = C::t('my_group_game')->get_group_game_info( $_G['mygroup']['groupid'], $_GET['game_serverid'] );
-	$had_joint = C::t('my_group_member_game')->had_joint( $group_game_info['group_gameid'], $_G['uid'] );
-	if( $had_joint ){
-		showmessage('group_member_had_joint_game', 'forum.php?mod=group&fid='.$_G['fid']);
+	if( $groupuser['uid'] ){
+		$group_game_info = C::t('my_group_game')->get_group_game_info( $_G['mygroup']['groupid'], $_GET['game_serverid'] );
+		$had_joint = C::t('my_group_member_game')->had_joint( $group_game_info['group_gameid'], $_G['uid'] );
+		if( $had_joint ){
+			showmessage('group_member_had_joint_game', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
+		else{
+			C::t('my_group_member_game')->apply_join_game( $_G['fid'], 
+															$group_game_info['group_gameid'], 
+															$group_game_info['groupid'], 
+															$group_game_info['game_serverid'] );
+			showmessage('group_member_join_game_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
 	}
 	else{
-		C::t('my_group_member_game')->apply_join_game( $_G['fid'], 
-														$group_game_info['group_gameid'], 
-														$group_game_info['groupid'], 
-														$group_game_info['game_serverid'] );
-		showmessage('group_member_join_game_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
+		showmessage('group_member_join_game_from_other', 'forum.php?mod=group&fid='.$_G['fid']);
 	}
 }
 //公会关系Moxiaoyong		2013-01-08

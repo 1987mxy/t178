@@ -1070,6 +1070,7 @@ $lang = array (
   'group_had_joint_game' => '公会已经入驻这款游戏',
   'group_member_had_joint_game' => '公会成员已经入驻这款游戏',
   'group_member_join_game_succeed' => '公会成员入驻游戏成功',
+  'group_member_join_game_from_other' => '您无法在其他公会入驻游戏',
   'group_join_game_verify' => '{_G/setting/navs/3/navname}入驻游戏申请成功！<br>请在7日内，使公会60%用户入驻游戏',
   'group_contribute_tcp_succeed' => '谢谢您为{_G/setting/navs/3/navname}公会捐献的TCP',
   'group_tcp_shortage' => '您的TCP不足',

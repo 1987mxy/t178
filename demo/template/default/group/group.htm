@@ -14,9 +14,50 @@
     <div id="diycontenttop" class="area"></div>
     <!--[/diy]--> 
     <!--{if $action != 'create'}--> 
-    
-    
-    
+    <!--{if $_G['forum']['banner']}-->
+    <div id="gh"> <img src="$_G[forum][banner]" alt="" />
+      <div class="bm bmw bw0">
+        <div class="bm_h bw0 cl">
+          <h1 class="xs2">$_G[forum][name]</h1>
+        </div>
+        <div class="bm_c " > 
+          <!--{if $_G['forum']['description']}-->
+          <div class="pbn">$_G['forum']['description']</div>
+          <!--{/if}-->
+          <div> <a href="home.php?mod=spacecp&ac=favorite&type=group&id={$_G[forum][fid]}&handlekey=sharealbumhk_{$_G[forum][fid]}" id="a_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" title="{lang favorite}" class="fa_fav">{lang favorite}</a><span class="pipe">|</span><!--{if $_G[setting][rssstatus] && !$_GET['archiveid']}--><a href="forum.php?mod=rss&fid=$_G[fid]&auth=$rssauth" target="_blank" title="RSS" class="fa_rss">RSS</a><!--{/if}--><!--{if $status == 'isgroupuser' && helper_access::check_module('group')}--><span class="pipe">|</span><a href="javascript:;" onclick="showWindow('invite','misc.php?mod=invite&action=group&id=$_G[fid]')" class="fa_ivt"><strong class="xi2">{lang my_buddylist_invite}</strong></a><!--{/if}--> 
+            <span class="pipe">|</span><!--{if $_G['current_grouplevel']['icon']}--><img src="$_G[current_grouplevel][icon]" title="{lang group_level}: $_G[current_grouplevel][leveltitle]" class="vm"> <!--{/if}-->{lang credits}: $_G[forum][commoncredits]<span class="pipe">|</span>{lang group_moderator_title}: <!--{eval $i = 1;}--><!--{loop $groupmanagers $manage}--><!--{if $i <= 0}-->, <!--{/if}--><!--{eval $i--;}--><a href="home.php?mod=space&uid=$manage[uid]" target="_blank" class="xi2">$manage[username]</a><!--{/loop}--> 
+          </div>
+          <!--{if $status != 2 && $status != 3 && $status != 5}--> 
+          <!--{if helper_access::check_module('group') && $status != 'isgroupuser'}-->
+          <div class="ptm pbn">
+            <button type="button" class="pn" onclick="location.href='forum.php?mod=group&action=join&fid=$_G[fid]'"><em>{lang group_join_group}</em></button>
+          </div>
+          <!--{/if}--> 
+          <!--{if CURMODULE == 'group'}--><!--{hook/group_navlink}--><!--{else}--><!--{hook/forumdisplay_navlink}--><!--{/if}--> 
+          <!--{/if}--> 
+          
+          <!--{if $action == 'index' && ($status == 2 || $status == 3 || $status == 5)}-->
+          <p class="mtm"> {lang group_join_type}: 
+            <!--{if $_G['forum']['jointype'] == 1}--> 
+            <strong>{lang group_join_type_invite}</strong> 
+            <!--{elseif $_G['forum']['jointype'] == 2}--> 
+            <strong>{lang group_join_type_moderate}</strong> 
+            <!--{else}--> 
+            <strong>{lang group_join_type_free}</strong> 
+            <!--{/if}--> 
+            {lang group_perm_visit}: <strong><!--{if $_G['forum']['gviewperm'] == 0}-->{lang group_perm_member_only}<!--{else}-->{lang group_perm_all_user}<!--{/if}--></strong> </p>
+          <p class="mtm xi1"> 
+            <!--{if $status == 3 || $status == 5}--> 
+            {lang group_has_joined} 
+            <!--{elseif helper_access::check_module('group')}-->
+            <button type="button" class="pn" onclick="location.href='forum.php?mod=group&action=join&fid=$_G[fid]'"><em>{lang group_join_group}</em></button>
+            <!--{/if}--> 
+          </p>
+          <!--{/if}--> 
+        </div>
+      </div>
+    </div>
+    <!--{else}-->
     <div class=" noborder" style="background:none!important">
       <div class="bm_c xld xlda cl nopadding">
       <div id="guild">
@@ -30,7 +71,7 @@
   <div id="exit_g">
      <!--{if $groupuser['uid']}-->
      <a href="forum.php?mod=group&action=out&fid=$_G[fid]
-">[退出公会]</a>
+">[{lang group_exit}]</a>
 	 <!--{/if}-->
   </div>
   
@@ -45,7 +86,7 @@
     <div class="gthumb3 gttype">
       <div class="blackBox guildBoard modelcolor6">
         <div class="guildrankbar">
-          <div class="guildchoose"><a class="guildBoardselected" href="#">TCP贡献榜</a><a href="#" class="">财富榜</a></div>
+          <div class="guildchoose"><a class="guildBoardselected" href="#">{lang group_member_tcp_contribute_list}</a><a href="#" class="">{lang group_member_capital_list}</a></div>
             <table style="display:table;" >
                <tbody>
                 <!--{loop $_G['mygroup']['member_contribute_list'] $contribute_rank $contribute}-->
@@ -73,27 +114,34 @@
         </div>
       </div>
     </div>
-    <div class="gthumb1 gttype guildlevel modelcolor2"><b>01</b>
-      <p>公会等级</p>
+    <div class="gthumb1 gttype guildlevel modelcolor2">
+	  <b>{eval echo str_pad( $_G['mygroup']['level']+1, 2, '0', STR_PAD_LEFT );}</b>
+      <p>{lang group_level}</p>
     </div>
     <div class="gthumb1 gttype modelcolor3 guildmaster"><img src="{$_G[setting][ucenterurl]}/avatar.php?uid=$_G['forum']['founderuid']
 &size=normal" />
-      <p><!--{eval $i = 1;}--><!--{loop $groupmanagers $manage}--><!--{if $i <= 0}-->, <!--{/if}--><!--{eval $i--;}-->$manage[username]<!--{/loop}--></p>
-      <p class="jurisdiction">会长</p>
+      <p>
+      	<!--{eval $i = 1;}-->
+      	<!--{loop $groupmanagers $manage}-->
+      		<!--{if $i <= 0}-->, <!--{/if}-->
+      		<!--{eval $i--;}-->$manage[username]
+      	<!--{/loop}-->
+      </p>
+      <p class="jurisdiction">{lang group_founder}</p>
     </div>
     <div class="gthumb2 gttype guildatotal modelcolor4" >
-      <h2 class="thumdtitle fl">升级需TCP：$_G[mygroup][next_level_require_tcp]</h2>
+      <h2 class="thumdtitle fl">{lang group_next_surplus_tcp}：$_G[mygroup][next_level_require_tcp]</h2>
       <table width="200px">
          <tr>
-            <td width="70%">公会财富值：$_G[mygroup][capital]</td>
-            <td>排名：$_G[mygroup][capital_rank]</td>
+            <td width="70%">{lang group_capital}：$_G[mygroup][capital]</td>
+            <td>{lang group_capital_rank}：$_G[mygroup][capital_rank]</td>
          </tr>
          <tr>
-            <td width="70%">公 会 TCP：$_G[mygroup][tcp]</td>
-            <td>排名：$_G[mygroup][tcp_rank]</td>
+            <td width="70%">{lang group_tcp}：$_G[mygroup][tcp]</td>
+            <td>{lang group_tcp_rank}：$_G[mygroup][tcp_rank]</td>
          </tr>
          <tr>
-            <td>充值提升率：未做</td>
+            <td>{lang group_coupon}：{lang building}</td>
          </tr>
          
       </table>
@@ -102,11 +150,13 @@
    
     <div class="gthumb2 gttype relationguild modelcolor1">
       <h2 class="thumdtitle" style="margin-left:5px;">{lang group_enemy_group}</h2>
-      <button type="button"  onclick="location.href='forum.php?mod=group&action=group_relation&op=enemy&fid=$_G[fid]&enemy_group_id=$_G[groupid]'" title="添加成为敌对公会"></button>
+      <!--{if $_G['usergroup']['fid'] != $_G['fid']}-->
+      <button type="button"  onclick="location.href='forum.php?mod=group&action=group_relation&op=enemy&fid=$_G['usergroup']['fid']&enemy_group_id=$_G['mygroup']['groupid']'" title="添加成为敌对公会"></button>
+      <!--{/if}-->
       <dl>
       	<!--{if $_G['mygroup']['enemy_group']}-->
       	<!--{loop $_G['mygroup']['enemy_group'] $group}-->
-      	<dd><a href="/forum.php?mod=group&fid=$group[fid]" >$group[name]</a><a class="del_rel" href="/forum.php?mod=group&action=group_relation&op=nonenemy&fid=$_G[fid]&friendly_group_id=$_G[groupid]" title="删除公会">删除</a></dd>
+      	<dd><a href="/forum.php?mod=group&fid=$group[fid]" >$group[name]</a></dd>
         <!--{/loop}-->
         <!--{else}-->
         <dd>{lang group_no_enemy_group}</dd>
@@ -114,26 +164,22 @@
       </dl></div>
     <div class="gthumb2 gttype relationguild modelcolor6">
     <h2 class="thumdtitle" style="margin-left:5px;">{lang group_friend_group}</h2>
-    <button type="button"  onclick="location.href='forum.php?mod=group&action=group_relation&op=friend&fid=$_G[fid]&friendly_group_id=$_G[groupid]'" title="添加成为友情公会"></button>
+      <!--{if $_G['usergroup']['fid'] != $_G['fid']}-->
+      <button type="button"  onclick="location.href='forum.php?mod=group&action=group_relation&op=friend&fid=$_G['usergroup']['fid']&friendly_group_id=$_G['mygroup']['groupid']'" title="添加成为友情公会"></button>
+      <!--{/if}-->
       <dl>
       	<!--{if $_G['mygroup']['friend_group']}-->
         <!--{loop $_G['mygroup']['friend_group'] $group}-->
-      	<dd><a href="/forum.php?mod=group&fid=$group[fid]" >$group[name]</a><a class="del_rel" href="/forum.php?mod=group&action=group_relation&op=unfriend&fid=$_G[fid]&friendly_group_id=$_G[groupid]" title="删除公会">删除</a></dd>
+      	<dd><a href="/forum.php?mod=group&fid=$group[fid]" >$group[name]</a></dd>
         <!--{/loop}-->
         <!--{else}-->
         <dd>{lang group_no_friend_group}</dd>
         <!--{/if}-->
       </dl></div>
-     <div class="gthumb1 gttype modelcolor3 g_dz_contcp ">
-         <a id="activator" class="activator" href="javascript:void(0)"></a>
-    </div>
     
-    <div class="gthumb1 gttype modelcolor1 g_dz_home ">
-         <li {if $action == 'index'}class="a"{/if}><a href="forum.php?mod=group&fid=$_G[fid]#groupnav" title=""></a></li>
-    </div>
-     
-     
-    <div class="gthumb2 gttype modelcolor4 g_dz_dicuss "><li {if $action == 'list'}class="a"{/if} style="list-style:none"><a href="forum.php?mod=forumdisplay&action=list&fid=$_G[fid]#groupnav" title=""></a></li></div>
+    <div class="gthumb2 gttype modelcolor3 g_dz_home gchidden">
+     <li {if $action == 'index'}class="a"{/if} style="list-style:none"><a href="forum.php?mod=group&fid=$_G[fid]#groupnav" title=""></a></li></div>
+    <div class="gthumb2 gttype modelcolor4 g_dz_dicuss gchidden"><li {if $action == 'list'}class="a"{/if} style="list-style:none"><a href="forum.php?mod=forumdisplay&action=list&fid=$_G[fid]#groupnav" title=""></a></li></div>
     <div class="gthumb2 gttype modelcolor5 g_dz_member gchidden" > <li {if $action == 'memberlist' || $action == 'invite'}class="a"{/if} style="list-style:none">
         <a href="forum.php?mod=group&action=memberlist&fid=$_G[fid]#groupnav" title=""></a>
         </li></div>
@@ -174,61 +220,12 @@
     <div id="diycontentmiddle" class="area"></div>
     <!--[/diy]--> 
     <!--{if CURMODULE == 'group'}--><!--{hook/group_top}--><!--{else}--><!--{hook/forumdisplay_top}--><!--{/if}--> 
-    <!--{if $status != 2 && $status != 3}-->
-    <div id="discussBG">
-
-    <div class="tb cl noborder" style="width:960px; "> 
-      <!--{if in_array($_G['adminid'], array(1,2))}--><span class="a bw0_all y xi2"><a href="javascript:;" onclick="showWindow('grecommend$_G[fid]', 'forum.php?mod=group&action=recommend&fid=$_G[fid]');return false;"  style=" color:#FFF">{lang group_push_to_forum}</a></span><!--{/if}-->
-      <ul id="groupnav" style="margin-left:6px;">
-        <li {if $action == 'index'}class="a"{/if}><a href="forum.php?mod=group&fid=$_G[fid]#groupnav" title="">{lang home}</a></li>
-        <li {if $action == 'list'}class="a"{/if}><a href="forum.php?mod=forumdisplay&action=list&fid=$_G[fid]#groupnav" title="">{lang group_discuss_area}</a></li>
-        <li {if $action == 'memberlist' || $action == 'invite'}class="a"{/if}>
-        <a href="forum.php?mod=group&action=memberlist&fid=$_G[fid]#groupnav" title="">{lang group_member_list}</a>
-        </li>
-        <!--{if $_G['forum']['ismoderator']}-->
-        <li {if $action == 'manage'}class="a"{/if}><a href="forum.php?mod=group&action=manage&fid=$_G[fid]#groupnav">{lang group_admin}</a></li>
-        <!--{/if}--> 
-        <!--{if CURMODULE == 'group'}--><!--{hook/group_nav_extra}--><!--{else}--><!--{hook/forumdisplay_nav_extra}--><!--{/if}-->
-      </ul>
-    </div>
     <!--{/if}--> 
-   
-    
-    <div id="discuss"><div id="ds-c" >
-    
-    <!--{if $action == 'index' && $status != 2 && $status != 3}--> 
-    <!--{subtemplate group/group_index}--> 
-    <!--{elseif $action == 'list'}--> 
-    <!--{subtemplate group/group_list}--> 
-    <!--{elseif $action == 'memberlist'}--> 
-    <!--{subtemplate group/group_memberlist}--> 
-    <!--{elseif $action == 'create'}--> 
-    <!--{subtemplate group/group_create}--> 
-    <!--{elseif $action == 'invite'}--> 
-    <!--{subtemplate group/group_invite}--> 
-    <!--{elseif $action == 'manage'}--> 
-    <!--{subtemplate group/group_manage}--> 
-    <!--{/if}--> </div></div>
-    <!--{if CURMODULE == 'group'}--><!--{hook/group_bottom}--><!--{else}--><!--{hook/forumdisplay_bottom}--><!--{/if}--> 
-    <!--[diy=diycontentbottom]-->
- 
-    <div id="diycontentbottom" class="area"></div>
-    <!--[/diy]--> 
-  </div>
-
 </div>
 <div class="wp mtn"> 
   <!--[diy=diy3]-->
   <div id="diy3" class="area"></div>
   <!--[/diy]--> 
-</div>
-<div class="overlay" id="overlay" style="display:none;"></div>
-<div class="box" id="box"> <a class="boxclose" id="boxclose"></a>
-  <h1>请输入贡献的TCP额度</h1>
-     <div class="tcpinputdiv">
-  		<input id="tcpinput" name="tcpinput"  type="text"/>
-        <input id="posttcp" name="posttcp"  type="submit"/>
-     </div>
 </div>
 
 <script  type="text/javascript">
@@ -249,31 +246,4 @@ jQuery(document).ready(function(){
 		   
 		})
 });*/
-
-jQuery(document).ready(function(e) {
-       jQuery('input[name="posttcp"]').click(function(e){
-			var tcp = jQuery('input[name="tcpinput"]').val();
-			url = "forum.php?mod=group&amp;action=contribute&amp;fid=$_G[fid]&amp;tcp="+tcp;
-			window.location.href = url.replace(/&amp;/ig, "&");  
-		})
-});
-
-  
 </script>
-
-<script type="text/javascript">
-            jQuery(function() {
-                jQuery('#activator').click(function(){
-                    jQuery('#overlay').fadeIn('fast',function(){
-                        jQuery('#box').animate({'top':'160px'},500);
-                    });
-                });
-                jQuery('#boxclose').click(function(){
-                    jQuery('#box').animate({'top':'-200px'},500,function(){
-                        jQuery('#overlay').fadeOut('fast');
-                    });
-                });
-
-            });
-        </script>
-</body>
