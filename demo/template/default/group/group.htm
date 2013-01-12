@@ -156,7 +156,12 @@
       <dl>
       	<!--{if $_G['mygroup']['enemy_group']}-->
       	<!--{loop $_G['mygroup']['enemy_group'] $group}-->
-      	<dd><a href="/forum.php?mod=group&fid=$group[fid]" >$group[name]</a></dd>
+	      	<dd>
+	      		<a href="/forum.php?mod=group&fid=$group[fid]" >$group[name]</a>
+	      		<!--{if !empty($_G['forum']['founderuid']) && $_G['forum']['founderuid']==$_G['uid']}-->
+	      		<a title="删除公会" href="/forum.php?mod=group&action=group_relation&op=nonenemy&fid=$group[fid]&enemy_group_id=$_G[mygroup][groupid]" class="del_rel">删除</a>
+	      		<!--{/if}-->
+	      	</dd>
         <!--{/loop}-->
         <!--{else}-->
         <dd>{lang group_no_enemy_group}</dd>
@@ -170,7 +175,12 @@
       <dl>
       	<!--{if $_G['mygroup']['friend_group']}-->
         <!--{loop $_G['mygroup']['friend_group'] $group}-->
-      	<dd><a href="/forum.php?mod=group&fid=$group[fid]" >$group[name]</a></dd>
+      	<dd>
+      		<a href="/forum.php?mod=group&fid=$group[fid]" >$group[name]</a>
+      		<!--{if !empty($_G['forum']['founderuid']) && $_G['forum']['founderuid']==$_G['uid']}-->
+      		<a title="删除公会" href="/forum.php?mod=group&action=group_relation&op=unfriend&fid=$group[fid]&friendly_group_id=$_G[mygroup][groupid]" class="del_rel">删除</a>
+      		<!--{/if}-->
+      	</dd>
         <!--{/loop}-->
         <!--{else}-->
         <dd>{lang group_no_friend_group}</dd>

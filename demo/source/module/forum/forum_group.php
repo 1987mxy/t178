@@ -904,7 +904,7 @@ elseif($action == 'group_relation') {
 		}
 		$is_friend = C::t('my_group_relation')->is_friend( $_G['mygroup']['groupid'], $friendly_group_id );
 		if( $is_friend ){
-			C::t('my_group_relation')->unfriend_group( $_G['mygroup']['groupid'], $enemy_group_id );
+			C::t('my_group_relation')->unfriend_group( $_G['mygroup']['groupid'], $friendly_group_id );
 			showmessage('unfriend_group_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
 		}
 		else{
@@ -918,7 +918,7 @@ elseif($action == 'group_relation') {
 		}
 		$is_enemy = C::t('my_group_relation')->is_enemy( $_G['mygroup']['groupid'], $enemy_group_id );
 		if( $is_enemy ){
-			C::t('my_group_relation')->nonenemy_group( $_G['mygroup']['groupid'], $friendly_group_id );
+			C::t('my_group_relation')->nonenemy_group( $_G['mygroup']['groupid'], $enemy_group_id );
 			showmessage('nonenemy_group_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
 		}
 		else{
