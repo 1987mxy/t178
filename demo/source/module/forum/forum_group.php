@@ -798,6 +798,9 @@ if($action == 'index') {
 elseif($action == 'contribute') {
 	if( $groupuser['uid'] ){
 		$tcp = intval($_GET['tcp']);
+		if($tcp <= 0){
+			showmessage('group_natural', 'forum.php?mod=group&fid='.$_G['fid']);
+		}
 		if($tcp > $group_member['tcp']){
 			showmessage('group_tcp_shortage', 'forum.php?mod=group&fid='.$_G['fid']);
 		}

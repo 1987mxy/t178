@@ -1074,6 +1074,7 @@ $lang = array (
   'group_join_game_verify' => '{_G/setting/navs/3/navname}入驻游戏申请成功！<br>请在7日内，使公会60%用户入驻游戏',
   'group_contribute_tcp_succeed' => '谢谢您为{_G/setting/navs/3/navname}公会捐献的TCP',
   'group_tcp_shortage' => '您的TCP不足',
+  'group_natural' => '您捐献的TCP必须是自然数',
   'group_contribute_tcp_to_other' => '您不能为其他公会捐献TCP',
   'group_signing_from_other' => '您无法在其他公会签到',
   'group_had_signing' => '今天已签到',
