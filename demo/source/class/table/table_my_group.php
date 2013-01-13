@@ -71,7 +71,7 @@ class table_my_group extends discuz_table
 		$rank = 0;
 		foreach( $group_fids as $group_fid ){
 			$rank += 1;
-			if( $group_fid == $fid ) break;
+			if( $group_fid['fid'] == $fid ) break;
 		}
 		return count( $group_fids ) < $rank ? 0 : $rank;
 	}
@@ -90,7 +90,7 @@ class table_my_group extends discuz_table
 		$rank = 0;
 		foreach( $group_fids as $group_fid ){
 			$rank += 1;
-			if( $group_fid == $fid ) break;
+			if( $group_fid['fid'] == $fid ) break;
 		}
 		return count( $group_fids ) < $rank ? 0 : $rank;
 	}
