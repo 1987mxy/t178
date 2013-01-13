@@ -24,11 +24,14 @@ class table_my_group_game extends discuz_table
 	 * 获取公会入驻游戏
 	 * @access	public
 	 * @param	$groupid	公会ID
+	 * @param	$number		显示数量
 	 * @return	array		公会信息
 	 */
-	public function get_group_games( $groupid ){
+	public function get_group_games( $groupid, $number = 10 ){
 		if( empty( $groupid ) ) return array();
-		return DB::fetch_all( "SELECT * FROM %t WHERE " . DB::field( 'groupid', $groupid ), array( $this -> _table ) );
+		$sql = "SELECT * FROM %t WHERE " . DB::field( 'groupid', $groupid );
+		$sql .= $number ? DB::limit( 0, $number ) : '';
+		return DB::fetch_all( $sql, array( $this -> _table ) );
 	}
 	
 	/**

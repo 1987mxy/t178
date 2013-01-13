@@ -24,16 +24,16 @@ class table_my_group_relation extends discuz_table
 	 * 获取友情公会列表
 	 * @access	public
 	 * @param	$groupid	公会ID
+	 * @param	$number		显示数量
 	 * @return	array		友情公会列表
 	 */
-	public function get_friend_group( $groupid ){
-		if( empty( $groupid ) ) {
-			return array();
-		}
-		return DB::fetch_all( "SELECT * FROM %t WHERE " . DB::field( 'group_id_a', $groupid ) . " AND " . 
-															DB::field( 'del_flag', 0 ) . " AND " . 
-															DB::field( 'relation', 1 ), 
-								array( $this -> _table ) );
+	public function get_friend_group( $groupid, $number = 10 ){
+		if( empty( $groupid ) ) return array();
+		$sql = "SELECT * FROM %t WHERE " . DB::field( 'group_id_a', $groupid ) . " AND " . 
+											DB::field( 'del_flag', 0 ) . " AND " . 
+											DB::field( 'relation', 1 );
+		$sql .= $number ? DB::limit( 0, $number ) : '';
+		return DB::fetch_all( $sql, array( $this -> _table ) );
 	}
 	
 	/**
@@ -101,16 +101,16 @@ class table_my_group_relation extends discuz_table
 	 * 获取敌对公会列表
 	 * @access	public
 	 * @param	$groupid	公会ID
+	 * @param	$number		显示数量
 	 * @return	array		敌对公会列表
 	 */
-	public function get_enemy_group( $groupid ){
-		if( empty( $groupid ) ) {
-			return array();
-		}
-		return DB::fetch_all( "SELECT * FROM %t WHERE " . DB::field( 'group_id_a', $groupid ) . " AND " . 
-															DB::field( 'del_flag', 0 ) . " AND " . 
-															DB::field( 'relation', 2 ), 
-								array( $this -> _table ) );
+	public function get_enemy_group( $groupid, $number = 10 ){
+		if( empty( $groupid ) ) return array();
+		$sql = "SELECT * FROM %t WHERE " . DB::field( 'group_id_a', $groupid ) . " AND " . 
+											DB::field( 'del_flag', 0 ) . " AND " . 
+											DB::field( 'relation', 2 );
+		$sql .= $number ? DB::limit( 0, $number ) : '';
+		return DB::fetch_all( $sql, array( $this -> _table ) );
 	}
 	
 	/**

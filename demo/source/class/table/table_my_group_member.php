@@ -100,7 +100,9 @@ class table_my_group_member extends discuz_table
 	 */
 	public function get_member_contribute_list( $groupid, $number = 10 ){
 		if( empty( $groupid ) ) return array();
-		return DB::fetch_all( "SELECT uid, username, contributed FROM %t WHERE " . DB::field( 'groupid', $groupid ) . " ORDER BY " . DB::order( 'contributed', 'DESC' ) . DB::limit( 0, $number ), array( $this -> _table ) );
+		$sql = "SELECT uid, username, contributed FROM %t WHERE " . DB::field( 'groupid', $groupid ) . " ORDER BY " . DB::order( 'contributed', 'DESC' );
+		$sql .= $number ? DB::limit( 0, $number ) : '';
+		return DB::fetch_all( $sql, array( $this -> _table ) );
 	}
 	
 	/**
@@ -112,7 +114,9 @@ class table_my_group_member extends discuz_table
 	 */
 	public function get_member_capital_list( $groupid, $number = 10 ){
 		if( empty( $groupid ) ) return array();
-		return DB::fetch_all( "SELECT uid, username, capital FROM %t WHERE " . DB::field( 'groupid', $groupid ) . " ORDER BY " . DB::order( 'capital', 'DESC' ) . DB::limit( 0, $number ), array( $this -> _table ) );
+		$sql = "SELECT uid, username, capital FROM %t WHERE " . DB::field( 'groupid', $groupid ) . " ORDER BY " . DB::order( 'capital', 'DESC' );
+		$sql .= $number ? DB::limit( 0, $number ) : '';
+		return DB::fetch_all( $sql, array( $this -> _table ) );
 	}
 	
 	/**

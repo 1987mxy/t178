@@ -179,10 +179,10 @@ if($action == 'index') {
 		$_G['mygroup']['tcp_rank'] = C::t('my_group')->get_tcp_rank($_G['fid']);
 		$_G['mygroup']['capital_rank'] = C::t('my_group')->get_capital_rank($_G['fid']);
 		$my_groupid = $_G['mygroup']['groupid'];
-		$_G['mygroup']['member_contribute_list'] = C::t('my_group_member')->get_member_contribute_list($my_groupid);
-		$_G['mygroup']['member_capital_list'] = C::t('my_group_member')->get_member_capital_list($my_groupid);
-		$_G['mygroup']['group_games'] = C::t('my_group_game')->get_group_games($my_groupid);
-		$friend_groups = C::t('my_group_relation')->get_friend_group($my_groupid);
+		$_G['mygroup']['member_contribute_list'] = C::t('my_group_member')->get_member_contribute_list($my_groupid, 16);
+		$_G['mygroup']['member_capital_list'] = C::t('my_group_member')->get_member_capital_list($my_groupid, 16);
+		$_G['mygroup']['group_games'] = C::t('my_group_game')->get_group_games($my_groupid, 6);
+		$friend_groups = C::t('my_group_relation')->get_friend_group($my_groupid, 3);
 		foreach( $friend_groups as &$group ){
 			$group = $group['group_id_b'];
 		}
@@ -195,7 +195,7 @@ if($action == 'index') {
 		$_G['usergroup']['fid'] = $user_fids[0];
 		
 		//敌对公会逻辑Moxiaoyong		2013-01-07
-		$enemy_groups = C::t('my_group_relation')->get_enemy_group($my_groupid);
+		$enemy_groups = C::t('my_group_relation')->get_enemy_group($my_groupid, 3);
 		foreach( $enemy_groups as &$group ){
 			$group = $group['group_id_b'];
 		}
