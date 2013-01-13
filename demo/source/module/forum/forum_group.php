@@ -799,19 +799,19 @@ elseif($action == 'contribute') {
 	if( $groupuser['uid'] ){
 		$tcp = intval($_GET['tcp']);
 		if($tcp <= 0){
-			showmessage('group_natural', 'forum.php?mod=group&fid='.$_G['fid']);
+			showmessage('group_member_contribute_tcp_need_natural_number', 'forum.php?mod=group&fid='.$_G['fid']);
 		}
 		if($tcp > $group_member['tcp']){
-			showmessage('group_tcp_shortage', 'forum.php?mod=group&fid='.$_G['fid']);
+			showmessage('group_member_tcp_shortage', 'forum.php?mod=group&fid='.$_G['fid']);
 		}
 		C::t('my_group_member')->contribute_tcp( $_G['mygroup']['groupid'], $_G['uid'], $tcp );
 		C::t('my_group')->add_tcp( $_G['fid'], $tcp );
 		require_once libfile('function/my_group');
 		check_group_level($_G['fid']);
-		showmessage('group_contribute_tcp_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
+		showmessage('group_member_contribute_tcp_succeed', 'forum.php?mod=group&fid='.$_G['fid']);
 	}
 	else{
-		showmessage('group_contribute_tcp_to_other', 'forum.php?mod=group&fid='.$_G['fid']);
+		showmessage('group_member_contribute_tcp_to_other', 'forum.php?mod=group&fid='.$_G['fid']);
 	}
 }
 //公会会员签到Moxiaoyong		2012-12-20
