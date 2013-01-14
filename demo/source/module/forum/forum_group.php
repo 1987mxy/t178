@@ -16,6 +16,16 @@ $_G['action']['action'] = 3;
 $_G['action']['fid'] = $_G['fid'];
 $_G['basescript'] = 'group';
 
+
+$groupresult = DB::fetch_first("SELECT * FROM ".DB::table(forum_groupuser)." WHERE uid='$_G[uid]'");
+$groupmat=0;
+if($groupresult[level]==1&&$groupresult[fid]!=$_G[fid]){
+$groupmat=1;
+}else{
+$groupmat=0;
+}
+
+
 $actionarray = array('join', 'out', 'create', 'viewmember', 'manage', 'index', 'memberlist', 'recommend', 'contribute', 'signing', 'group_join_game', 'group_member_join_game', 'check_group', 'group_relation', 'my_manage');
 $action = getgpc('action') && in_array($_GET['action'], $actionarray) ? $_GET['action'] : 'index';
 if(in_array($action, array('join', 'out', 'create', 'manage', 'recommend'))) {
