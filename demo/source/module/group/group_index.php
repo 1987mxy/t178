@@ -142,6 +142,11 @@ if(!$metakeywords) {
 if(!$metadescription) {
 	$metadescription = $_G['setting']['navs'][3]['navname'];
 }
+
+//工会中心显示TCP排行榜和当日签到排行榜Moxiaoyong		2013-01-19
+$G['tcp_group_rank_list'] = C::t('my_group')->get_tcp_group_rank_list();
+$G['signing_group_rank_list'] = C::t('my_group_signing')->get_signing_group_rank_list();
+
 if(empty($curtype)) {
 	include template('diy:group/index');
 } else {

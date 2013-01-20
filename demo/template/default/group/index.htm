@@ -42,6 +42,13 @@
 				<!--{/if}-->
 			<!--{/if}-->
                </div>
+				<!--{loop $G['tcp_group_rank_list'] $tcp_group_rank}-->
+				<img src="data/attachment/group/$tcp_group_rank['icon']" ><a href="forum.php?mod=group&fid=$tcp_group_rank['fid']" >$tcp_group_rank['name']</a>&nbsp;&nbsp;$tcp_group_rank['tcp']
+				<!--{/loop}-->
+				
+				<!--{loop $G['signing_group_rank_list'] $signing_group_rank}-->
+				<img src="data/attachment/group/$signing_group_rank['icon']" ><a href="forum.php?mod=group&fid=$signing_group_rank['fid']" >$signing_group_rank['name']</a>&nbsp;&nbsp;$signing_group_rank['signing_num']
+				<!--{/loop}-->
                <br clear="all" />
             </div>
             

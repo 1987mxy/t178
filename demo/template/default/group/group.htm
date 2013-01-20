@@ -28,8 +28,7 @@
   <div id="exit_g">
       
      <!--{if $groupuser['uid']}-->
-     <a href="forum.php?mod=group&action=out&fid=$_G[fid]
-">[{lang group_leave}]</a>
+     <a href="forum.php?mod=group&action=out&fid=$_G[fid]">[{lang group_leave}]</a>
 	 <!--{/if}-->
      <a href="group.php">    [{lang return_group_center}]</a>
      <!--{if $_G['forum']['ismoderator']}-->
@@ -42,7 +41,7 @@
   <div class="Broadcast"><b></b><span><!-- {if $_G[mygroup][notice] == ''} -->{lang group_no_notice}<!-- {else} -->$_G[mygroup][notice]<!-- {/if} --></span></div></div>
   <br clear="all" />
     <div class="gthumb2 gttype guilddescribe modelcolor6" ><img src="$_G[forum][icon]" /><span>$_G[forum][description]</span></div>
-    <div class="gthumb1 gttype guildmembersign modelcolor1"><button type="button"  onclick="location.href='forum.php?mod=group&action=signing&fid=$_G[fid]'"></button></div>
+    <div class="gthumb1 gttype guildmembersign modelcolor1"><button type="button"  onclick="location.href='forum.php?mod=group&action=signing&fid=$_G[fid]'">{lang group_today_sign}$_G[mygroup][sign_number]<br/>{lang group_today_sign_rank}$_G[mygroup][sign_rank]</button></div>
     <div class="gthumb1 gttype join_guild modelcolor2"><button type="button"  onclick="location.href='forum.php?mod=group&action=join&fid=$_G[fid]'"></button></div>
    
     <div class="gthumb3 gttype">
@@ -96,11 +95,11 @@
       <table width="200px">
          <tr>
             <td width="70%">{lang group_capital}：$_G[mygroup][capital]</td>
-            <td>{lang group_capital_rank}：$_G[mygroup][capital_rank]</td>
+            <td>{if $_G[mygroup][capital_rank]==1}金牌{elseif $_G[mygroup][capital_rank]==2}银牌{elseif $_G[mygroup][capital_rank]==3}铜牌{/if}{lang group_capital_rank}：$_G[mygroup][capital_rank]</td>
          </tr>
          <tr>
             <td width="70%">{lang group_tcp}：$_G[mygroup][tcp]</td>
-            <td>{lang group_tcp_rank}：$_G[mygroup][tcp_rank]</td>
+            <td>{if $_G[mygroup][tcp_rank]==1}金牌{elseif $_G[mygroup][tcp_rank]==2}银牌{elseif $_G[mygroup][tcp_rank]==3}铜牌{/if}{lang group_tcp_rank}：$_G[mygroup][tcp_rank]</td>
          </tr>
          <tr>
             <td>{lang group_coupon}：{lang building}$_G['usergroup']['fid']</td>

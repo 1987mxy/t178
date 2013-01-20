@@ -67,7 +67,7 @@ class table_my_group extends discuz_table
 		if( empty( $fid ) ) {
 			return 0;
 		}
-		$group_fids = DB::fetch_all( "SELECT fid FROM %t ORDER BY " . DB::order( 'tcp', 'DESC' ), array( $this -> _table ) );
+		$group_fids = DB::fetch_all( "SELECT fid FROM %t ORDER BY " . DB::order( 'tcp', 'DESC' ) . ", " . DB::order( 'groupid' ), array( $this -> _table ) );
 		$rank = 0;
 		foreach( $group_fids as $group_fid ){
 			$rank += 1;
@@ -86,13 +86,38 @@ class table_my_group extends discuz_table
 		if( empty( $fid ) ) {
 			return 0;
 		}
-		$group_fids = DB::fetch_all( "SELECT fid FROM %t ORDER BY " . DB::order( 'capital', 'DESC' ), array( $this -> _table ) );
+		$group_fids = DB::fetch_all( "SELECT fid FROM %t ORDER BY " . DB::order( 'capital', 'DESC' ) . ", " . DB::order( 'groupid' ), array( $this -> _table ) );
 		$rank = 0;
 		foreach( $group_fids as $group_fid ){
 			$rank += 1;
 			if( $group_fid['fid'] == $fid ) break;
 		}
 		return count( $group_fids ) < $rank ? 0 : $rank;
+	}
+	
+	/**
+	 * 获取TCP的排名公会列表
+	 * @access	public
+	 * @param	$where		SQL条件语句
+	 * @param	$number		获取排名条目数
+	 * @return	array		TCP的排名公会列表
+	 */
+	public function get_tcp_group_rank_list( $where='', $number = 3 ){
+		$condition = DB::field( 'tcp', 0, '>' ) . ( $where ? ' AND ' . $where : '' );
+		$limit = $number == 0 ? '' : DB::limit( 0, $number );
+		$sql = "SELECT forum.name AS name,
+						my_group.tcp AS tcp,
+						my_group.groupid AS groupid,
+						my_group.fid AS fid,
+						forumfield.icon AS icon 
+				FROM %t AS my_group 
+				LEFT JOIN " . DB::table( 'forum_forum' ) . " AS forum ON my_group.fid=forum.fid 
+				LEFT JOIN " . DB::table( 'forum_forumfield' ) . " AS forumfield ON my_group.fid=forumfield.fid 
+				WHERE " . $condition . " 
+				ORDER BY " . DB::order( 'tcp', 'DESC' ) . ", " . DB::order( 'groupid' ) . 
+				$limit;
+		$tcp_group_rank_list = DB::fetch_all( $sql, array( $this -> _table ) );
+		return $tcp_group_rank_list;
 	}
 	
 	/**

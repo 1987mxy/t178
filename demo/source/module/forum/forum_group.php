@@ -199,6 +199,11 @@ if($action == 'index') {
 		$friend_group_fids = C::t('my_group')->groupids2fids($friend_groups);
 		$_G['mygroup']['friend_group'] = C::t('forum_forum')->fetch_all_name_by_fid($friend_group_fids);
 		
+		//获取当天公会签到数Moxiaoyong	2013-01-19
+		$today = strftime( '%Y-%m-%d' );
+		$_G['mygroup']['sign_number'] = C::t('my_group_signing')->get_signing_number( $today, $today, $my_groupid );
+		$_G['mygroup']['sign_rank'] = C::t('my_group_signing')->get_signing_rank( $my_groupid );
+		
 		//获取当前用户的fid Moxiaoyong	2013-01-12
 		$user_groupid = C::t('my_group_member')->get_user_groupid($_G['uid']);
 		$user_fids = C::t('my_group')->groupids2fids($user_groupid);
