@@ -84,7 +84,6 @@ class table_my_group_signing extends discuz_table
 	 */
 	public function get_signing_group_rank_list( $date = null, $number = 10 ){
 		$date = $date == null ? strftime( "%Y-%m-%d" ) : $date;
-		$limit = $number == 0 ? '' : DB::limit( 0, $number );
 		$condition = DB::field( 'date', $date );
 		$sql = "SELECT forum.name AS name,
 						my_group.groupid AS groupid,
@@ -98,7 +97,7 @@ class table_my_group_signing extends discuz_table
 				WHERE " . $condition . " 
 				GROUP BY groupid 
 				ORDER BY " . DB::order( 'signing_num', 'DESC' ) . ", " . DB::order( 'groupid' ) . 
-				$limit;
+				DB::limit( 0, $number );
 		$signing_group_rank_list = DB::fetch_all( $sql, array( $this->_table ) );
 		return $signing_group_rank_list;
 	}

@@ -103,8 +103,7 @@ class table_my_group extends discuz_table
 	 * @return	array		TCP的排名公会列表
 	 */
 	public function get_tcp_group_rank_list( $where='', $number = 3 ){
-		$condition = $where ? $where : '';
-		$limit = $number == 0 ? '' : DB::limit( 0, $number );
+		$condition = $where ? ' WHERE ' . $where : '';
 		$sql = "SELECT forum.name AS name,
 						my_group.tcp AS tcp,
 						my_group.groupid AS groupid,
@@ -112,10 +111,10 @@ class table_my_group extends discuz_table
 						forumfield.icon AS icon 
 				FROM %t AS my_group 
 				LEFT JOIN " . DB::table( 'forum_forum' ) . " AS forum ON my_group.fid=forum.fid 
-				LEFT JOIN " . DB::table( 'forum_forumfield' ) . " AS forumfield ON my_group.fid=forumfield.fid 
-				WHERE " . $condition . " 
-				ORDER BY " . DB::order( 'tcp', 'DESC' ) . ", " . DB::order( 'groupid' ) . 
-				$limit;
+				LEFT JOIN " . DB::table( 'forum_forumfield' ) . " AS forumfield ON my_group.fid=forumfield.fid" . 
+				$condition . 
+				" ORDER BY " . DB::order( 'tcp', 'DESC' ) . ", " . DB::order( 'groupid' ) . 
+				DB::limit( 0, $number );
 		$tcp_group_rank_list = DB::fetch_all( $sql, array( $this -> _table ) );
 		return $tcp_group_rank_list;
 	}
