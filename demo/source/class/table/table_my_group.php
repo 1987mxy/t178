@@ -102,7 +102,7 @@ class table_my_group extends discuz_table
 	 * @param	$number		获取排名条目数
 	 * @return	array		TCP的排名公会列表
 	 */
-	public function get_tcp_group_rank_list( $where='', $number = 3 ){
+	public function get_tcp_group_rank_list( $where='', $number = 0 ){
 		$condition = $where ? ' WHERE ' . $where : '';
 		$sql = "SELECT forum.name AS name,
 						my_group.tcp AS tcp,

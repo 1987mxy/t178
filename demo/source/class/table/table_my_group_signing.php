@@ -82,7 +82,7 @@ class table_my_group_signing extends discuz_table
 	 * @param	$number		获取排名条目数
 	 * @return	array		签到排名列表
 	 */
-	public function get_signing_group_rank_list( $date = null, $number = 10 ){
+	public function get_signing_group_rank_list( $date = null, $number = 0 ){
 		$date = $date == null ? strftime( "%Y-%m-%d" ) : $date;
 		$condition = DB::field( 'date', $date );
 		$sql = "SELECT forum.name AS name,
