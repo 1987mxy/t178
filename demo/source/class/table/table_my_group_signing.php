@@ -89,6 +89,7 @@ class table_my_group_signing extends discuz_table
 						my_group.groupid AS groupid,
 						my_group.fid AS fid,
 						forumfield.icon AS icon,
+						forumfield.description AS description,
 						COUNT(my_group_signing.uid) AS signing_num 
 				FROM %t AS my_group_signing 
 				LEFT JOIN " . DB::table( 'my_group' ) . " AS my_group ON my_group_signing.groupid=my_group.groupid 

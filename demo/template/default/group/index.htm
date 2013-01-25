@@ -42,12 +42,14 @@
 				<!--{/if}-->
 			<!--{/if}-->
                </div>
-				<!--{loop $G['tcp_group_rank_list'] $tcp_group_rank}-->
-				<img src="<!--{if $tcp_group_rank['icon']}-->data/attachment/group/$tcp_group_rank['icon']<!--{else}-->static/image/common/groupicon.gif<!--{/if}-->" ><a href="forum.php?mod=group&fid=$tcp_group_rank['fid']" >$tcp_group_rank['name']</a>&nbsp;&nbsp;$tcp_group_rank['tcp']
+				<!--{loop $G['tcp_group_rank_list'] $tcp_ranking $tcp_group_rank}-->
+				<!--{if $tcp_ranking==0}--><b class="champion"></b><!--{elseif $tcp_ranking==1}--><b class="runup"></b><!--{elseif $tcp_ranking==2}--><b class="thirdplace"></b><!--{/if}-->
+				<img src="<!--{if $tcp_group_rank['icon']}-->data/attachment/group/$tcp_group_rank['icon']<!--{else}-->static/image/common/groupicon.gif<!--{/if}-->" ><a href="forum.php?mod=group&fid=$tcp_group_rank['fid']" >$tcp_group_rank['name']</a>&nbsp;&nbsp;$tcp_group_rank['tcp']&nbsp;&nbsp;$tcp_group_rank['description']
 				<!--{/loop}-->
 				
-				<!--{loop $G['signing_group_rank_list'] $signing_group_rank}-->
-				<img src="<!--{if $signing_group_rank['icon']}-->data/attachment/group/$signing_group_rank['icon']<!--{else}-->static/image/common/groupicon.gif<!--{/if}-->" ><a href="forum.php?mod=group&fid=$signing_group_rank['fid']" >$signing_group_rank['name']</a>&nbsp;&nbsp;$signing_group_rank['signing_num']
+				<!--{loop $G['signing_group_rank_list'] $signing_ranking $signing_group_rank}-->
+				<!--{if $signing_ranking==0}--><b class="champion"></b><!--{elseif $signing_ranking==1}--><b class="runup"></b><!--{elseif $signing_ranking==2}--><b class="thirdplace"></b><!--{/if}-->
+				<img src="<!--{if $signing_group_rank['icon']}-->data/attachment/group/$signing_group_rank['icon']<!--{else}-->static/image/common/groupicon.gif<!--{/if}-->" ><a href="forum.php?mod=group&fid=$signing_group_rank['fid']" >$signing_group_rank['name']</a>&nbsp;&nbsp;$signing_group_rank['signing_num']&nbsp;&nbsp;$tcp_group_rank['description']
 				<!--{/loop}-->
                <br clear="all" />
             </div>

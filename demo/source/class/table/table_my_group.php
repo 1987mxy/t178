@@ -108,7 +108,8 @@ class table_my_group extends discuz_table
 						my_group.tcp AS tcp,
 						my_group.groupid AS groupid,
 						my_group.fid AS fid,
-						forumfield.icon AS icon 
+						forumfield.icon AS icon, 
+						forumfield.description AS description 
 				FROM %t AS my_group 
 				LEFT JOIN " . DB::table( 'forum_forum' ) . " AS forum ON my_group.fid=forum.fid 
 				LEFT JOIN " . DB::table( 'forum_forumfield' ) . " AS forumfield ON my_group.fid=forumfield.fid" . 
