@@ -1,6 +1,6 @@
 <?php
 
-/**
+/**果然可以直接改啊～还带代码编辑功能，牛逼！
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
  *
